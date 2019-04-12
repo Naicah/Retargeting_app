@@ -19,7 +19,6 @@ module.exports = ({ jobsRouter }) => {
           city: res.body.jobs[0].location.city
 
         }
-        console.log('object', jobObject)
         ctx.body = [jobObject]
       })
 
