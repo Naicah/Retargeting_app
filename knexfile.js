@@ -1,9 +1,10 @@
+require('dotenv').config();
 const pg = require('pg')
 pg.defaults.ssl = true
   module.exports = {
     development: {
       client: 'pg',
-      connection: 'postgresql://upanmcxpnhjccb:f65b486e3811955de2f4340815841e545bef22c345549223de2861e6b6332c6b@ec2-79-125-2-142.eu-west-1.compute.amazonaws.com/d5ic3hi5l3kgqv'
+      connection:process.env.CONNECTION
       ,migrations: {
         directory: __dirname + '/knex/migrations',
       },
@@ -17,7 +18,7 @@ pg.defaults.ssl = true
 
     production: {
       client: 'pg',
-      connection: 'postgresql://upanmcxpnhjccb:f65b486e3811955de2f4340815841e545bef22c345549223de2861e6b6332c6b@ec2-79-125-2-142.eu-west-1.compute.amazonaws.com/d5ic3hi5l3kgqv',
+      connection:process.env.CONNECTION ,
 
       pool: {
         min: 2,
