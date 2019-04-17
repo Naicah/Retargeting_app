@@ -3,6 +3,9 @@ const knex = require("../knex/knex");
 
 const feed = "https://api.workbuster.com/jobs/feed/kyhdemo?format=json";
 
+let allJobs = [];
+let allNewJobs = [];
+
 module.exports = ({ router }) => {
   router.get("/jobslength", async (ctx, next) => {
     await request.get(feed).then(res => {
@@ -10,7 +13,10 @@ module.exports = ({ router }) => {
       ctx.body = "joblength: " + jobs.length; // REMOVE LATER ON
       var i;
       for (i = 0; i < jobs.length; i++) {
-        ctx.body += " i: " + i; // REMOVE LATER ON
+        let id = jobs[i].id;
+        let job = { i, id };
+        allJobs.push(job);
+        ctx.body += " jobIndex: " + allJobs[i].i + " jobID: " + allJobs[i].id; // REMOVE LATER ON
       }
     });
   });
