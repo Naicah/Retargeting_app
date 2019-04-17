@@ -3,7 +3,7 @@ const Router = require("koa-router");
 const app = new Koa();
 
 const knex = require("./knex/knex.js");
-const sqlDb = require("./database/queries");
+const queries = require("./database/queries");
 
 const PORT = process.env.PORT || 3000;
 
@@ -34,11 +34,11 @@ app.use(async (ctx, next) => {
 // const basicRoutes = require('./routes/basic');basicRoutes({router});
 // just without instantiating a variable
 
-const jobsRouter = new Router();
-require("./feed/jobs")({ jobsRouter });
-jobsRouter.get("/ads", sqlDb.getAds);
-app.use(jobsRouter.routes());
-app.use(jobsRouter.allowedMethods());
+const router = new Router();
+require("./feed/jobs")({ router });
+router.get("/ads", queries.getAllAds);
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 // ====================================================================================================== //
 //                                              DATABASE                                                  //

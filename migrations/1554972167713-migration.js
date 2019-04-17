@@ -14,7 +14,7 @@ module.exports.up = (knex, Promise) => {
     table.string("apply_url").notNullable();
     table.string("image").notNullable();
     table.string("company").notNullable();
-    table.string("city").notNullable();
+    table.string("city");
     table
       .integer("views")
       .notNullable()
