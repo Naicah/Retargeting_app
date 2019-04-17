@@ -7,7 +7,7 @@ const Campaign = bizSdk.Campaign;
 const access_token = 'EAAgSjZC0XzacBAH5LvD8lErqAbW57pKOkKZA9OWbXZCbBxxvwoWRvpJZBXyOsdQwVuLqYuBA4eE4ZCDTdQmXp8WiO2W7Fm32CqouknwZAVhzPRzOKODr0sHeDrMZATIByIxylZCHpcQEL51NFgVZA3eOfdRn0hgEkUAFAmlOfkzxZBFu5V6wW37LAyAXgxXwXDm2QZD';
 const app_secret = '2696e47e54e4f6f25248900e99f12fd3';
 const app_id = '2272209449504167';
-const id = 'act_1897009923766808';
+const id = 'act_2268066353434439';
 const api = bizSdk.FacebookAdsApi.init(access_token);
 const showDebugingInfo = true; // Setting this to true shows more debugging info.
 if (showDebugingInfo) {
@@ -27,7 +27,7 @@ let fields, params;
 fields = [
 ];
 params = {
-  'name' : 'My SDK campaign',
+  'name' : 'My first campaign',
   'objective' : 'LINK_CLICKS',
   'status' : 'PAUSED',
 };
