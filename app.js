@@ -37,6 +37,7 @@ app.use(async (ctx, next) => {
 const router = new Router();
 require("./feed/jobs")({ router });
 router.get("/ads", queries.getAllAds);
+router.get("/ID", queries.getAllAdsID);
 app.use(router.routes());
 app.use(router.allowedMethods());
 

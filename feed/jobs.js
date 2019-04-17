@@ -1,11 +1,13 @@
 const request = require("superagent");
 const knex = require("../knex/knex");
+const queries = require("../database/queries");
 
 const feed = "https://api.workbuster.com/jobs/feed/kyhdemo?format=json";
 
 let allJobs = [];
 let allNewJobs = [];
 
+// GET INDEX AND ID OF EACH JOB IN FEED, SAVE TO ARRAY allJobs
 module.exports = ({ router }) => {
   router.get("/jobslength", async (ctx, next) => {
     await request.get(feed).then(res => {
@@ -20,6 +22,10 @@ module.exports = ({ router }) => {
       }
     });
   });
+
+  // CREATE ARRAY OF INDEX OF UNSAVED JOBS (exists in feed but not in database)
+
+  router.get("/adsID", queries.getAllAds);
 
   // GET JOBS FROM FEED AND SAVE TO DB
   router.get("/", async (ctx, next) => {
