@@ -1,15 +1,27 @@
 const request = require("superagent");
 const knex = require("../knex/knex");
 
-// GET JOBS FROM FEED AND SAVE TO DB
+const feed = "https://api.workbuster.com/jobs/feed/kyhdemo?format=json";
+
 module.exports = ({ router }) => {
+  router.get("/jobslength", async (ctx, next) => {
+    await request.get(feed).then(res => {
+      const jobs = res.body.jobs;
+      ctx.body = "joblength: " + jobs.length; // REMOVE LATER ON
+      var i;
+      for (i = 0; i < jobs.length; i++) {
+        ctx.body += " i: " + i; // REMOVE LATER ON
+      }
+    });
+  });
+
+  // GET JOBS FROM FEED AND SAVE TO DB
   router.get("/", async (ctx, next) => {
     await request
-      .get("https://api.workbuster.com/jobs/feed/kyhdemo?format=json")
+      .get(feed)
       .then(res => {
-        const jobs = res.body.jobs;
-
         // GET JOB DATA FROM FEED
+        const jobs = res.body.jobs;
         const jobObject = {
           id: jobs[0].id,
           title: jobs[0].title,
@@ -20,7 +32,7 @@ module.exports = ({ router }) => {
           apply_url: jobs[0].apply_url,
           image: jobs[0].image,
           company: jobs[0].company.name,
-          city: jobs[0].company.city,
+          city: jobs[0].company.city || "Ospecificerad stad",
           views: 0,
           clicks: 0,
           applies: 0
