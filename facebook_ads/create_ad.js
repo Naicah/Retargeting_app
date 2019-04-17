@@ -4,7 +4,7 @@ const bizSdk = require('facebook-nodejs-business-sdk');
 const AdAccount = bizSdk.AdAccount;
 const Campaign = bizSdk.Campaign;
 
-const access_token = 'EAAgSjZC0XzacBAH5LvD8lErqAbW57pKOkKZA9OWbXZCbBxxvwoWRvpJZBXyOsdQwVuLqYuBA4eE4ZCDTdQmXp8WiO2W7Fm32CqouknwZAVhzPRzOKODr0sHeDrMZATIByIxylZCHpcQEL51NFgVZA3eOfdRn0hgEkUAFAmlOfkzxZBFu5V6wW37LAyAXgxXwXDm2QZD';
+const access_token = 'EAAgSjZC0XzacBAChsNn9QFmCta44IgUsOkuZCiIfjrKfvKCOblLvX0HDqQPIgNqNw2TvsSNDdABSw5pwg2GonpZArH9PP846LAGxLY7k4wdCLW9jUu9KmA4IVP1qETSg2zYFxSLHwj1FbU4KlavijqRegcs3ZB28mi4ZAI0GkgPIb4IZBH2S0yDyl5uwvUyA0ZD';
 const app_secret = '2696e47e54e4f6f25248900e99f12fd3';
 const app_id = '2272209449504167';
 const id = 'act_2268066353434439';
