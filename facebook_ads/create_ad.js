@@ -17,7 +17,7 @@ if (showDebugingInfo) {
 // todo: document everything
 
 const logApiCallResult = (apiCallName, data) => {
-  console.log(apiCallName);
+  console.log('test', apiCallName);
   if (showDebugingInfo) {
     console.log('Data:' + JSON.stringify(data));
   }

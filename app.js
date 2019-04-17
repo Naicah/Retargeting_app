@@ -5,7 +5,7 @@ const app = new Koa();
 const knex = require("./knex/knex.js");
 const sqlDb = require("./database/queries");
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 const server = app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);

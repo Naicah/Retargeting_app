@@ -29,7 +29,6 @@ module.exports = ({ jobsRouter }) => {
         // return knex("ads").insert(jobObject)
       })
 
-
       .catch(err => {
         return ctx.throw(400, "no data to get the api,");
       });
