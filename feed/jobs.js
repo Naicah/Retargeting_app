@@ -19,16 +19,14 @@ module.exports = ({ router }) => {
     await request.get(feed).then(res => {
       const jobs = res.body.jobs;
 
-      ctx.body = " allJobsID: "; // REMOVE LATER ON
-      ctx.body += "joblength: " + jobs.length + ","; // REMOVE LATER ON
-
       var i;
       for (i = 0; i < jobs.length; i++) {
+        let index = i;
         let id = jobs[i].id;
-        let job = { i, id };
+        let job = { index, id };
         allJobsID.push(job);
-        ctx.body +=
-          " jobIndex: " + allJobsID[i].i + " jobID: " + allJobsID[i].id + ","; // REMOVE LATER ON
+
+        ctx.body = allJobsID; // REMOVE LATER ON
       }
     });
   });
