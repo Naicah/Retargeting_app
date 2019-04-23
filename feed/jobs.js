@@ -76,14 +76,13 @@ module.exports = ({ router }) => {
     ctx.body = allNewJobsIndex; // REMOVE LATER ON
     ctx.body = allResults; // REMOVE LATER ON
 
-    // ================================ //
-    //    GET NEW JOBS AND SAVE TO DB   // GET DATA FROM FEED FOR EACH JOB IN FEED THAT IS NOT SAVED IN DATABASE (based in allNewJobsIndex)
-    // ================================ // AND SAVE OBJECT IN DATABASE
+    // =========================== //
+    //    GET EACH NEW JOBS DATA    // GET DATA FROM FEED FOR EACH JOB IN FEED THAT IS NOT SAVED IN DATABASE (based in allNewJobsIndex)
+    // =========================== //
 
     await request
       .get(feed)
       .then(res => {
-        // GET JOB DATA FROM FEED, for indexes saved in allNewJobsIndex
         const jobs = res.body.jobs;
         let jobObject;
 
@@ -104,7 +103,10 @@ module.exports = ({ router }) => {
             applies: 0
           };
 
-          // ADD JOB DATA TO DATABASE
+          // ================================== //
+          //    ADD ALL NEW JOBS TO DATABASE    // SAVE EACH JOB OBJECT TO DATABASE
+          // ================================== //
+
           knex("ads")
             .insert(jobObject)
             .then(function(result) {
