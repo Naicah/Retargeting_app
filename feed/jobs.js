@@ -77,49 +77,58 @@ module.exports = ({ router }) => {
     ctx.body = allResults; // REMOVE LATER ON
 
     // =========================== //
-    //    GET EACH NEW JOBS DATA    // GET DATA FROM FEED FOR EACH JOB IN FEED THAT IS NOT SAVED IN DATABASE (based in allNewJobsIndex)
+    //    IF THERE ARE NEW JOBS    //
     // =========================== //
 
-    await request
-      .get(feed)
-      .then(res => {
-        const jobs = res.body.jobs;
-        let jobObject;
+    if (!allNewJobsIndex) {
+      // =========================== //
+      //    GET EACH NEW JOBS DATA   // GET DATA FROM FEED FOR EACH JOB IN FEED THAT IS NOT SAVED IN DATABASE (based in allNewJobsIndex)
+      // =========================== //
 
-        allNewJobsIndex.forEach(function(index) {
-          jobObject = {
-            id: jobs[index].id,
-            title: jobs[index].title,
-            description_short: jobs[index].description_short,
-            last_application_timestamp: jobs[index].last_application_timestamp,
-            published_first_date: jobs[index].published_first_date,
-            updated_timestamp: jobs[index].updated_timestamp,
-            apply_url: jobs[index].apply_url,
-            image: jobs[index].image,
-            company: jobs[index].company.name,
-            city: jobs[index].company.city || "Ospecificerad stad",
-            views: 0,
-            clicks: 0,
-            applies: 0
-          };
+      await request
+        .get(feed)
+        .then(res => {
+          const jobs = res.body.jobs;
+          let jobObject;
 
-          // ================================== //
-          //    ADD ALL NEW JOBS TO DATABASE    // SAVE EACH JOB OBJECT TO DATABASE
-          // ================================== //
+          allNewJobsIndex.forEach(function(index) {
+            jobObject = {
+              id: jobs[index].id,
+              title: jobs[index].title,
+              description_short: jobs[index].description_short,
+              last_application_timestamp:
+                jobs[index].last_application_timestamp,
+              published_first_date: jobs[index].published_first_date,
+              updated_timestamp: jobs[index].updated_timestamp,
+              apply_url: jobs[index].apply_url,
+              image: jobs[index].image,
+              company: jobs[index].company.name,
+              city: jobs[index].company.city || "Ospecificerad stad",
+              views: 0,
+              clicks: 0,
+              applies: 0
+            };
 
-          knex("ads")
-            .insert(jobObject)
-            .then(function(result) {
-              // .then required so that promise is executed
-              res.json({ success: true, message: "ok" }); // respond back to request
-            });
+            // ================================== //
+            //    ADD ALL NEW JOBS TO DATABASE    // SAVE EACH JOB OBJECT TO DATABASE
+            // ================================== //
 
-          ctx.body = [jobObject]; // REMOVE LATER ON
+            knex("ads")
+              .insert(jobObject)
+              .then(function(result) {
+                // .then required so that promise is executed
+                res.json({ success: true, message: "ok" }); // respond back to request
+              });
+
+            ctx.body = [jobObject]; // REMOVE LATER ON
+          });
+        })
+
+        .catch(err => {
+          return ctx.throw(400, "no data to get the api,");
         });
-      })
-
-      .catch(err => {
-        return ctx.throw(400, "no data to get the api,");
-      });
+    } else {
+      ctx.body = "There are no new jobs in the feed"; // REMOVE LATER ON
+    }
   });
 };
