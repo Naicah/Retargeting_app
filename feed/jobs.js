@@ -4,28 +4,86 @@ const queries = require("../database/queries");
 
 const feed = "https://api.workbuster.com/jobs/feed/kyhdemo?format=json";
 
-let allJobs = [];
-let allNewJobs = [];
+// JOBS = ALL OBJECTS IN FEED
+// ADS = ALL OBJECTS IN DATABASE = DATA OF BOTH JOB OBJECT AND AD INFO
 
-// GET INDEX AND ID OF EACH JOB IN FEED, SAVE TO ARRAY allJobs
+let allJobsID = []; // ID's and index of all jobs in feed
+let allNewJobsIndex = []; // All jobs that are in feed but not in database
+let allAds = []; // Object of each ad in database
+let allAdsID = []; // ID's of all ads in database
+
 module.exports = ({ router }) => {
+  // --- GET ALL JOBS ID --- //
+  // GET INDEX AND ID OF EACH JOB IN FEED, SAVE TO ARRAY allJobsID
   router.get("/jobslength", async (ctx, next) => {
     await request.get(feed).then(res => {
       const jobs = res.body.jobs;
-      ctx.body = "joblength: " + jobs.length; // REMOVE LATER ON
+
+      ctx.body = " allJobsID: "; // REMOVE LATER ON
+      ctx.body += "joblength: " + jobs.length + ","; // REMOVE LATER ON
+
       var i;
       for (i = 0; i < jobs.length; i++) {
         let id = jobs[i].id;
         let job = { i, id };
-        allJobs.push(job);
-        ctx.body += " jobIndex: " + allJobs[i].i + " jobID: " + allJobs[i].id; // REMOVE LATER ON
+        allJobsID.push(job);
+        ctx.body +=
+          " jobIndex: " + allJobsID[i].i + " jobID: " + allJobsID[i].id + ","; // REMOVE LATER ON
       }
     });
   });
 
-  // CREATE ARRAY OF INDEX OF UNSAVED JOBS (exists in feed but not in database)
+  // --- GET ALL ADS --- //
+  // GET OBJECT OF EACH AD IN DATABASE, SAVE TO ARRAY allAds
+  router.get("/ads", async (ctx, next) => {
+    allAds = await knex("ads");
+    ctx.body = allAds; // REMOVE LATER ON
+  });
 
-  router.get("/adsID", queries.getAllAds);
+  // --- GET ALL ADS ID --- //
+  // GET ID OF EACH AD IN DATABASE, SAVE TO ARRAY allAdsID
+  router.get("/ID", async (ctx, next) => {
+    allAdsID = await knex.select("id").from("ads");
+    ctx.body = allAdsID; // REMOVE LATER ON
+  });
+
+  // --- GET ALL NEW JOBS INDEX--- //
+  // GET INDEX OF UNSAVED JOBS (exists in feed but not in database), SAVE TO ARRAY allNewJobsIndex
+
+  // compare allAdsID and allJobsID
+  // remove all dublicates
+  // save index of each remaining ID
+
+  //
+  //
+  //
+  //
+  //
+  //
+
+  //
+  //
+  //
+  //
+  //
+
+  //
+  //
+  //
+  //
+  //
+
+  //
+  //
+  //
+  //
+  //
+
+  //
+  //
+  //
+  //
+  //
 
   // GET JOBS FROM FEED AND SAVE TO DB
   router.get("/", async (ctx, next) => {
