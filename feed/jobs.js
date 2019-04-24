@@ -10,7 +10,7 @@ module.exports = ({ router }) => {
         const jobs = res.body.jobs;
 
         // GET JOB DATA FROM FEED
-        const jobObject = {
+         jobObject = {
           id: jobs[0].id,
           title: jobs[0].title,
           description_short: jobs[0].description_short,
@@ -20,20 +20,16 @@ module.exports = ({ router }) => {
           apply_url: jobs[0].apply_url,
           image: jobs[0].image,
           company: jobs[0].company.name,
-          city: jobs[0].company.city,
+          city: jobs[0].company.city || 'Ankeborg (default city)',
           views: 0,
           clicks: 0,
           applies: 0
         };
 
-        console.log("object", jobObject); // REMOVE LATER ON
-
         // ADD JOB DATA TO DATABASE
-        knex("ads")
-          .insert(jobObject)
-          .then(function(result) {
+        knex("ads").insert(jobObject).then(function(result) {
             // .then required so that promise is executed
-            res.json({ success: true, message: "ok" }); // respond back to request
+            console.log({ success: true, message: "ok" }); // respond back to request
           });
 
         ctx.body = [jobObject]; // REMOVE LATER ON
@@ -44,3 +40,4 @@ module.exports = ({ router }) => {
       });
   });
 };
+

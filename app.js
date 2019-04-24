@@ -5,7 +5,9 @@ const app = new Koa();
 const knex = require("./knex/knex.js");
 const queries = require("./database/queries");
 
+
 const PORT = process.env.PORT || 3000;
+// export {default as jobObject} from './feed/jobs';
 
 const server = app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
