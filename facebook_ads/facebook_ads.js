@@ -10,18 +10,35 @@ const accountId = 'act_1897009923766808' // sandbox
 
 const FacebookAdsApi = bizSdk.FacebookAdsApi.init(accessToken)
 const AdAccount = bizSdk.AdAccount
-const Campaign = bizSdk.Campaign
+const AdCreative = bizSdk.AdCreative;
 
-const account = new AdAccount(accountId)
-var campaigns
+const Campaign = bizSdk.Campaign;
+
+const account = new AdAccount(accountId);
+var campaigns;
+
+const create = new AdCreative(accountId)
+const Create = bizSdk.AdSet
 
 account
   .read([AdAccount.Fields.name])
   .then(account => {
-    return account.getCampaigns([Campaign.Fields.name], { limit: 10 }) // fields array and params
+    return account.getCampaigns([Campaign.Fields.name], { limit: 10 }); // fields array and params
   })
   .then(result => {
-    campaigns = result
-    campaigns.forEach(campaign => console.log(campaign.name))
+    campaigns = result;
+    campaigns.forEach(campaign => console.log(campaign.name));
   })
-  .catch(console.error)
+  .catch(console.error);
+
+  create
+  .read([AdCreative.Fields.name])
+  .then(create => {
+    return create.getAdCreatives([Create.Fields.name], { limit: 10 }); // fields array and params)
+  })
+  .then(result => {
+    create = result;
+    create.forEach(create => console.log(create.name));
+  })
+  .catch(console.error);
+

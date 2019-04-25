@@ -7,6 +7,9 @@ const queries = require("../database/queries");
 
 const bizSdk = require('facebook-nodejs-business-sdk');
 const AdAccount = bizSdk.AdAccount;
+const AdCreative = bizSdk.AdCreative;
+
+
 const Campaign = bizSdk.Campaign;
 
 const access_token = 'EAAgSjZC0XzacBAChsNn9QFmCta44IgUsOkuZCiIfjrKfvKCOblLvX0HDqQPIgNqNw2TvsSNDdABSw5pwg2GonpZArH9PP846LAGxLY7k4wdCLW9jUu9KmA4IVP1qETSg2zYFxSLHwj1FbU4KlavijqRegcs3ZB28mi4ZAI0GkgPIb4IZBH2S0yDyl5uwvUyA0ZD';
@@ -22,14 +25,11 @@ if (showDebugingInfo) {
 
 // todo: document everything
 
-// const logApiCallResult = (apiCallName, data) => {
-//   console.log('test', apiCallName);
-//   if (showDebugingInfo) {
-//     console.log('Data:' + JSON.stringify(data));
-//   }
-// };
-
-
+const logApiCallResult = (apiCallName, data) => {
+  if (showDebugingInfo) {
+    console.log('Data:' + JSON.stringify(data));
+  }
+};
 
 
 let fields, params;
@@ -40,8 +40,22 @@ params = {
   'objective' : 'LINK_CLICKS',
   'status' : 'PAUSED',
 };
-const campaigns = (new AdAccount(id)).createCampaign(
-  fields,
-  params
-);
+// const campaigns = (new AdAccount(id)).createCampaign(
+//   fields,
+//   params
+// );
 
+
+let adFields, adParams
+adFields = [
+  'asset_feed_spec',
+]
+adParams = {
+  'create_ad':' This is and ad'
+}
+
+const adCode = (new AdCreative(id)).get(
+  adFields,
+  adParams
+)
+logApiCallResult('campaigns api call complete.', adCode);
