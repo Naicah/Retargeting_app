@@ -31,14 +31,14 @@ account
   })
   .catch(console.error);
 
-  create
-  .read([AdCreative.Fields.name])
-  .then(create => {
-    return create.getAdCreatives([Create.Fields.name], { limit: 10 }); // fields array and params)
-  })
-  .then(result => {
-    create = result;
-    create.forEach(create => console.log(create.name));
-  })
-  .catch(console.error);
+  // create
+  // .read([AdCreative.Fields.name])
+  // .then(create => {
+  //   return create.getAdCreatives([Create.Fields.name], { limit: 10 }); // fields array and params)
+  // })
+  // .then(result => {
+  //   create = result;
+  //   create.forEach(create => console.log(create.name));
+  // })
+  // .catch(console.error);
 

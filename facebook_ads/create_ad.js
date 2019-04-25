@@ -8,6 +8,7 @@ const queries = require("../database/queries");
 const bizSdk = require('facebook-nodejs-business-sdk');
 const AdAccount = bizSdk.AdAccount;
 const AdCreative = bizSdk.AdCreative;
+const Ad = bizSdk.Ad;
 
 
 const Campaign = bizSdk.Campaign;
@@ -31,31 +32,19 @@ const logApiCallResult = (apiCallName, data) => {
   }
 };
 
-
 let fields, params;
 fields = [
 ];
 params = {
-  'name' : 'My SDK campaign',
-  'objective' : 'LINK_CLICKS',
+  'name' : 'My Ad',
+  'adset_id' : '23843579956060340',
+  'creative' : {'creative_id':'23843579956060340'},
   'status' : 'PAUSED',
 };
-// const campaigns = (new AdAccount(id)).createCampaign(
-//   fields,
-//   params
-// );
+const ads = (new AdAccount(id)).createAd(
+  fields,
+  params
+);
+console.log('params', ads)
 
-
-let adFields, adParams
-adFields = [
-  'asset_feed_spec',
-]
-adParams = {
-  'create_ad':' This is and ad'
-}
-
-const adCode = (new AdCreative(id)).get(
-  adFields,
-  adParams
-)
-logApiCallResult('campaigns api call complete.', adCode);
+logApiCallResult('ads api call complete.', ads);
