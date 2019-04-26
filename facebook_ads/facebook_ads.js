@@ -6,7 +6,7 @@ const bizSdk = require('facebook-nodejs-business-sdk')
 
 // const accountId = "act_2294603300601736"; // OLD
 //const accountId = "act_2272209449504167"; // real
-const accountId = 'act_1897009923766808' // sandbox
+const accountId = 'act_2268066353434439' // sandbox
 
 const FacebookAdsApi = bizSdk.FacebookAdsApi.init(accessToken)
 const AdAccount = bizSdk.AdAccount
