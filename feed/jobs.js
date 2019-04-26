@@ -2,7 +2,7 @@ const request = require("superagent");
 const knex = require("../knex/knex");
 
 const AsyncPolling = require("async-polling");
-const checkNewJobsInterval = 3000; //3000 = 3s
+const checkNewJobsInterval = 60000; //60 000 = 1m
 const feed = "https://api.workbuster.com/jobs/feed/kyhdemo?format=json";
 
 // ===========================================================================//
@@ -25,13 +25,14 @@ let pollingRuns = 0; // REMOVE LATER ON
 
 AsyncPolling(function(end) {
   pollingRuns++; // REMOVE LATER ON
-  // console.log( pollingRuns ); // REMOVE LATER ON
+  console.log(pollingRuns); // REMOVE LATER ON
   module.exports = ({ router }) => {
+    allResults = [];
     router.get("/", async (ctx, next) => {
       // ======================= //
       //     GET ALL JOBS ID     // GET ID OF EACH JOB IN FEED, SAVE TO ARRAY allJobsID
       // ======================= //
-
+      allJobsID = [];
       await request
         .get(feed)
         .then(res => {
@@ -39,9 +40,8 @@ AsyncPolling(function(end) {
 
           var i;
           for (i = 0; i < jobs.length; i++) {
-            let id = jobs[i].id;
-            let job = id;
-            allJobsID.push(job);
+            let jobId = jobs[i].id;
+            allJobsID.push(jobId);
           }
           allResults.push(allJobsID); // REMOVE LATER ON
           ctx.body = allJobsID; // REMOVE LATER ON
@@ -66,7 +66,6 @@ AsyncPolling(function(end) {
       allAdsID = []; // Epmty array to get a fresh one
       for (i = 0; i < allAds.length; i++) {
         let adID = allAds[i].id;
-
         allAdsID.push(adID);
       }
       allResults.push(allAdsID); // REMOVE LATER ON
@@ -93,7 +92,7 @@ AsyncPolling(function(end) {
       //    IF THERE ARE NEW JOBS    //
       // =========================== //
 
-      if (!allNewJobsIndex) {
+      if (allNewJobsIndex.length >= 1) {
         // =========================== //
         //    GET EACH NEW JOBS DATA   // GET DATA FROM FEED FOR EACH JOB IN FEED THAT IS NOT SAVED IN DATABASE (based in allNewJobsIndex)
         // =========================== //
@@ -101,22 +100,21 @@ AsyncPolling(function(end) {
         await request
           .get(feed)
           .then(res => {
-            const jobs = res.body.jobs;
             let jobObject;
-
             allNewJobsIndex.forEach(function(index) {
+              const jobs = res.body.jobs;
+              let job = jobs[index];
               jobObject = {
-                id: jobs[index].id,
-                title: jobs[index].title,
-                description_short: jobs[index].description_short,
-                last_application_timestamp:
-                  jobs[index].last_application_timestamp,
-                published_first_date: jobs[index].published_first_date,
-                updated_timestamp: jobs[index].updated_timestamp,
-                apply_url: jobs[index].apply_url,
-                image: jobs[index].image,
-                company: jobs[index].company.name,
-                city: jobs[index].company.city || "Ospecificerad stad",
+                id: job.id,
+                title: job.title,
+                description_short: job.description_short,
+                last_application_timestamp: job.last_application_timestamp,
+                published_first_date: job.published_first_date,
+                updated_timestamp: job.updated_timestamp,
+                apply_url: job.apply_url,
+                image: job.image,
+                company: job.company.name,
+                city: job.location.city || "Ospecificerad stad",
                 views: 0,
                 clicks: 0,
                 applies: 0
@@ -144,7 +142,7 @@ AsyncPolling(function(end) {
         ctx.body = "There are no new jobs in the feed"; // REMOVE LATER ON
       }
 
-      ctx.body += "         polling runs: " + pollingRuns; // REMOVE LATER ON
+      // ctx.body += "         polling runs: " + pollingRuns; // REMOVE LATER ON
     });
   };
 
