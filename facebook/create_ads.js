@@ -109,9 +109,9 @@ campaign
       optimization_goal: "OFFSITE_CONVERSIONS",
       
       url: 'https://kyhdemo.workbuster.com',
-      
+      promoted_object : {
         pixel_id: pixel_id,
-      
+      },
       targeting : {
         'geo_locations':{
           'countries':[
