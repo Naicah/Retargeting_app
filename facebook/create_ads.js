@@ -10,6 +10,8 @@ const app_secret = "2696e47e54e4f6f25248900e99f12fd3";
 const app_id = "2272209449504167";
 let page_id = "272837913620776";
 const ad_account_id = "act_2268066353434439";
+const pixel_id = "384339385749203";
+const conversion_id = "709358172813044";
 const api = bizSdk.FacebookAdsApi.init(access_token);
 const showDebugingInfo = true; // Setting this to true shows more debugging info.
 if (showDebugingInfo) {
@@ -40,13 +42,56 @@ const logApiCallResult = (apiCallName, data) => {
 
 const fields = [];
 const params = {
-  objective: "PAGE_LIKES",
+  objective: "CONVERSIONS",
   status: "PAUSED",
   buying_type: "AUCTION",
   name: new Date()
 };
 campaign = new AdAccount(ad_account_id).createCampaign(fields, params);
 campaign
+
+  // // ====================================== //
+  // //         CREATE CUSTOM AUDIENCES        //
+  // // ====================================== //
+  // .then(result => {
+  //   logApiCallResult("custom audience api call complete.", result);
+  //   campaign_id = result.id;
+  //   const fields = [];
+  //   const params = {
+  //     'name' : 'FacebookPixelCA',
+  //     'rule' : {
+  //       'inclusions':{
+  //         'operator':'or',
+  //         'rules':[
+  //           {
+  //             'event_sources':[
+  //               {
+  //               'id':'384339385749203',
+  //               'type':'pixel'}
+  //             ],'retention_seconds':25992000,
+  //             'filter':{
+  //               'operator':'and','filters':[
+  //                 {
+  //                   "operator": "=",
+  //                   "field": "event",
+  //                   "value": "store_visit"
+  //                  }
+  //                ]
+  //               },
+  //               "aggregation" : {
+  //                 "type":"count",
+  //                 "operator":">",
+  //                 "value":0
+  //                }
+  //             }
+  //           ]
+  //         },
+  //       },
+  //     'prefill' : '1',
+  //   };
+  //   return new AdAccount(ad_account_id).createCustomAudience(fields, params);
+  // })
+
 
   // ====================================== //
   //              CREATE ADSET              //
@@ -57,16 +102,27 @@ campaign
     const fields = [];
     const params = {
       status: "PAUSED",
-      targeting: { geo_locations: { countries: ["US"] } },
       daily_budget: "1000",
       billing_event: "IMPRESSIONS",
       bid_amount: "20",
       campaign_id: campaign_id,
-      optimization_goal: "PAGE_LIKES",
-      promoted_object: {
-        object_store_url:
-          "https://kyhdemo.workbuster.com/jobs/62892-frontendutvecklare-till-workbuster"
-      },
+      optimization_goal: "OFFSITE_CONVERSIONS",
+      
+      url: 'https://kyhdemo.workbuster.com',
+      
+        pixel_id: pixel_id,
+      
+      targeting : {
+        'geo_locations':{
+          'countries':[
+            'US']
+          }
+        },
+      // targeting:{  
+        
+      //   "custom_audiences":[{"id":customAudience_id}]},
+ 
+    
       name: new Date()
     };
     return new AdAccount(ad_account_id).createAdSet(fields, params);
