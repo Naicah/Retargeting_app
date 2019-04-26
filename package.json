@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async-polling": "^0.2.1",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "facebook-nodejs-ads-sdk": "^2.11.4",
