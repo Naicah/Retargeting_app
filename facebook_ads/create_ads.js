@@ -27,6 +27,10 @@ let ad_id;
 let adpreview;
 let adpreview_id;
 
+// ====================================== //
+//              CREATE CAMPAIGN           //
+// ====================================== //
+
 const logApiCallResult = (apiCallName, data) => {
   console.log(apiCallName);
   if (showDebugingInfo) {
@@ -43,6 +47,10 @@ const params = {
 };
 campaign = new AdAccount(ad_account_id).createCampaign(fields, params);
 campaign
+
+  // ====================================== //
+  //              CREATE ADSET              //
+  // ====================================== //
   .then(result => {
     logApiCallResult("campaign api call complete.", result);
     campaign_id = result.id;
@@ -63,6 +71,10 @@ campaign
     };
     return new AdAccount(ad_account_id).createAdSet(fields, params);
   })
+
+  // ====================================== //
+  //              CREATE ADCREATIVE         //
+  // ====================================== //
   .then(result => {
     logApiCallResult("ad_set api call complete.", result);
     ad_set_id = result.id;
@@ -77,6 +89,9 @@ campaign
     };
     return new AdAccount(ad_account_id).createAdCreative(fields, params);
   })
+  // ====================================== //
+  //              CREATE AD                 //
+  // ====================================== //
   .then(result => {
     logApiCallResult("creative api call complete.", result);
     creative_id = result.id;
