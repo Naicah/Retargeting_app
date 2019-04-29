@@ -28,27 +28,39 @@ let ad;
 let ad_id;
 let adpreview;
 let adpreview_id;
-
+let fields, params;
 // ====================================== //
 //              CREATE CAMPAIGN           //
 // ====================================== //
 
 const logApiCallResult = (apiCallName, data) => {
+  console.log('', '\n');
+  console.log("============================");
   console.log(apiCallName);
+  console.log("============================");
   if (showDebugingInfo) {
     console.log("Data:" + JSON.stringify(data));
   }
+  console.log("============================");
+  console.log('', '\n');
 };
-
-const fields = [];
-const params = {
-  objective: "CONVERSIONS",
+async function myFunction () {
+fields = [];
+params = {
+  objective: "LINK_CLICKS",
   status: "PAUSED",
   buying_type: "AUCTION",
   name: new Date()
 };
-campaign = new AdAccount(ad_account_id).createCampaign(fields, params);
-campaign
+try {
+  campaign = await (new AdAccount(ad_account_id)).createCampaign(fields, params);
+  console.log('======= CAMPAIGN')
+} catch(e) {
+  console.log("It borked! " + e);
+}
+
+//campaign
+campaign_id = campaign.id;
 
   // // ====================================== //
   // //         CREATE CUSTOM AUDIENCES        //
@@ -96,22 +108,24 @@ campaign
   // ====================================== //
   //              CREATE ADSET              //
   // ====================================== //
-  .then(result => {
-    logApiCallResult("campaign api call complete.", result);
-    campaign_id = result.id;
-    const fields = [];
-    const params = {
+
+
+  //.then(result => {
+    logApiCallResult("campaign api call complete.", campaign);
+  //  campaign_id = result.id;
+    fields = [];
+    params = {
       status: "PAUSED",
       daily_budget: "1000",
       billing_event: "IMPRESSIONS",
       bid_amount: "20",
       campaign_id: campaign_id,
-      optimization_goal: "OFFSITE_CONVERSIONS",
+      optimization_goal: "LINK_CLICKS",
       
       url: 'https://kyhdemo.workbuster.com',
-      promoted_object : {
-        pixel_id: pixel_id,
-      },
+      // promoted_object : {
+      //   pixel_id: pixel_id,
+      // },
       targeting : {
         'geo_locations':{
           'countries':[
@@ -123,56 +137,156 @@ campaign
       //   "custom_audiences":[{"id":customAudience_id}]},
  
     
-      name: new Date()
+      name: ('New ' + new Date())
     };
-    return new AdAccount(ad_account_id).createAdSet(fields, params);
-  })
-
+    try {
+      ad_set = await (new AdAccount(ad_account_id)).createAdSet(fields, params);
+      console.log('======= AD_SET')
+    } catch(e) {
+      console.log("It borked! " + e);
+    }
+    
+   
+  //})
+  ad_set_id = ad_set.id;
   // ====================================== //
   //              CREATE ADCREATIVE         //
   // ====================================== //
-  .then(result => {
-    logApiCallResult("ad_set api call complete.", result);
-    ad_set_id = result.id;
-    const fields = [];
-    const params = {
-      body: "Like My Page",
-      image_url:
-        "https://s3-eu-west-1.amazonaws.com/wb-bolt-production/account_728/image-gallery/1e3cc4b203a11d11c389da18fee7052b4d9c7deb-bruqc3.jpg",
-      name: "My Creative",
+  /*
+  $link = (object)[
+    'link' => $linkUrl,
+];
+
+$signUp = (object)[
+    'type'  => "SIGN_UP",
+    'value' => $link,
+];
+
+$linkData = (object)[
+    'call_to_action' => $signUp,
+    'link'           => $objectUrl,
+    'image_hash'     => $response->hash,
+    'message'        => $body,
+];
+
+$objectStory = (object)[
+    'link_data' => $linkData,
+    'page_id'   => $pageId,
+];
+
+$data = (object)[
+    'name'              => 'system-generated-' . $accountId,
+    'title'             => $title,
+    'object_story_spec' => $objectStory,
+    'access_token'      => $this->accessToken,
+];
+*/
+
+const link = {
+  link: 'https://kyhdemo.workbuster.com/jobs/62892-frontendutvecklare-till-workbuster'
+}
+
+const signUp = {
+  type: 'SIGN_UP',
+  value: link,
+}
+
+const linkData = {
+  call_to_action: signUp,
+  link: 'https://kyhdemo.workbuster.com/jobs/62892-frontendutvecklare-till-workbuster',
+  //image_url: 'https://s3-eu-west-1.amazonaws.com/wb-bolt-production/account_728/image-gallery/1e3cc4b203a11d11c389da18fee7052b4d9c7deb-bruqc3.jpg',
+  image_hash: 'f053af9f189d66d8a479b15b01592391',
+  message: 'Hej på dig'
+}
+
+const objectStory = {
+  link_data: linkData,
+  page_id: 272837913620776
+}
+
+const data = {
+  name: ('ADC' + new Date()),
+  title: 'My title',
+  object_story_spec: objectStory
+}
+
+// const link_data = {
+// call_to_action: {
+//   type: 'SIGN_UP',
+//   value: {
+//     link: 'https://kyhdemo.workbuster.com/jobs/62892-frontendutvecklare-till-workbuster'
+//   },
+//   link: 'https://kyhdemo.workbuster.com/jobs/62892-frontendutvecklare-till-workbuster',
+//   image_url: 'https://s3-eu-west-1.amazonaws.com/wb-bolt-production/account_728/image-gallery/1e3cc4b203a11d11c389da18fee7052b4d9c7deb-bruqc3.jpg',
+//   message: 'Click me'
+// } 
+// }
+// const object_story = {
+//   link_data: link_data,
+//   page_id: "272837913620776"
+// }
+
+
+
+//.then(result => {
+    logApiCallResult("ad_set api call complete.", ad_set);
+    fields = [];
+    params = data;
+    //  params = {
+    //    name: ('ADC' + new Date()),
+    //      title:"front end utvecklare till workbuster",
+    //    body: "Like My Page",
+    //    object_story_spec: object_story,
+      //object_url: "https://kyhdemo.workbuster.com/jobs/62892-frontendutvecklare-till-workbuster",
+      //link_url: "https://kyhdemo.workbuster.com/jobs/62892-frontendutvecklare-till-workbuster",
+      //image_url:
+      //  "https://s3-eu-west-1.amazonaws.com/wb-bolt-production/account_728/image-gallery/1e3cc4b203a11d11c389da18fee7052b4d9c7deb-bruqc3.jpg"
+      
       //   object_id: page_id,
-      title: "My Page Like Ad"
-    };
-    return new AdAccount(ad_account_id).createAdCreative(fields, params);
-  })
+      
+     // };
+ 
+     try {
+      creative = await (new AdAccount(ad_account_id)).createAdCreative(fields, params);
+      console.log('======= CREATIVE')
+  } catch(e) {
+      console.log("It borked! " + e);
+  }
+    
+  //})
   // ====================================== //
   //              CREATE AD                 //
   // ====================================== //
-  .then(result => {
-    logApiCallResult("creative api call complete.", result);
-    creative_id = result.id;
-    const fields = [];
-    const params = {
-      status: "PAUSED",
-      adset_id: ad_set_id,
-      name: "My Ad",
-      creative: { creative_id: creative_id }
+  //.then(result => {
+    logApiCallResult("creative api call complete.", creative);
+    creative_id = creative.id;
+    fields = [];
+    params = {
+      'status': "PAUSED",
+      'adset_id': ad_set_id,
+      'name': "My Ad",
+      'creative': { 'creative_id': creative_id },
+      'ad_format' : 'DESKTOP_FEED_STANDARD',
     };
-    return new AdAccount(ad_account_id).createAd(fields, params);
-  })
-  .then(result => {
-    logApiCallResult("ad api call complete.", result);
-    ad_id = result.id;
-    const fields = [];
-    const params = {
+    ad = await (new AdAccount(ad_account_id)).createAd(fields, params);
+  //})
+  //.then(result => {
+    logApiCallResult("ad api call complete.", ad);
+    ad_id = ad.id;
+    fields = [];
+    params = {
       ad_format: "DESKTOP_FEED_STANDARD"
     };
-    return new Ad(ad_id).getPreviews(fields, params);
-  })
-  .then(result => {
-    logApiCallResult("adpreview api call complete.", result);
-    adpreview_id = result[0].id;
-  })
-  .catch(error => {
-    console.log(error);
-  });
+    ad_preview = await (new Ad(ad_id)).getPreviews(fields, params);
+  //})
+  //.then(result => {
+    logApiCallResult("adpreview api call complete.", ad_preview);
+    adpreview_id = ad_preview.id;
+  // })
+  // .catch(error => {
+  //   console.log(error);
+  // });
+    console.log("Look ma, i'm donezo. " + adpreview_id);
+  }
+  myFunction();
+
