@@ -2,8 +2,8 @@ const Koa = require("koa");
 const Router = require("koa-router");
 const app = new Koa();
 
-const knex = require("./knex/knex.js");
-const queries = require("./database/queries");
+// const knex = require("./knex/knex.js");
+// const queries = require("./database/queries");
 
 
 const PORT = process.env.PORT || 3000;
