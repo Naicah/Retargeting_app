@@ -3,7 +3,6 @@ const Router = require("koa-router");
 const app = new Koa();
 
 const knex = require("./knex/knex.js");
-const queries = require("./database/queries");
 
 const PORT = process.env.PORT || 3001;
 
@@ -35,7 +34,7 @@ app.use(async (ctx, next) => {
 // just without instantiating a variable
 
 const router = new Router();
-require("./feed/jobs")({ router });
+require("./database/update_database")({ router });
 // router.get("/ads", queries.getAllAds);
 // router.get("/ID", queries.getAllAdsID);
 app.use(router.routes());
