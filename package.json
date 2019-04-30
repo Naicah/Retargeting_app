@@ -16,7 +16,7 @@
     "facebook-nodejs-ads-sdk": "^2.11.4",
     "facebook-nodejs-business-sdk": "^3.2.11",
     "gulp": "^4.0.0",
-    "knex": "^0.13.0",
+    "knex": "^0.16.5",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
     "migrate": "^1.6.2",
