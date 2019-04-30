@@ -2,7 +2,7 @@ const request = require("superagent");
 const knex = require("../knex/knex");
 
 const AsyncPolling = require("async-polling");
-const checkNewJobsInterval = 60000; //60 000 = 1m
+const checkNewJobsInterval = 30000; //60 000 = 1m
 const feed = "https://api.workbuster.com/jobs/feed/kyhdemo?format=json";
 
 // ===========================================================================//
@@ -128,7 +128,7 @@ AsyncPolling(function(end) {
                 .insert(jobObject)
                 .then(function(result) {
                   // .then required so that promise is executed
-                  res.json({ success: true, message: "ok" }); // respond back to request
+                  result.json({ success: true, message: "ok" }); // respond back to request
                 });
 
               ctx.body = [jobObject]; // REMOVE LATER ON
