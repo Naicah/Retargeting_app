@@ -44,7 +44,7 @@ AsyncPolling(function(end) {
             allJobsID.push(jobId);
           }
           allResults.push(allJobsID); // REMOVE LATER ON
-          ctx.body = allJobsID; // REMOVE LATER ON
+          // ctx.body = allJobsID; // REMOVE LATER ON
         })
         .catch(err => {
           return ctx.throw(400, "no data to get the api,");
@@ -55,7 +55,7 @@ AsyncPolling(function(end) {
       // ======================= //
 
       allAds = await knex("ads");
-      ctx.body = allAds; // REMOVE LATER ON
+      // ctx.body = allAds; // REMOVE LATER ON
       allResults.push(allAds); // REMOVE LATER ON
 
       // ======================= //
@@ -69,7 +69,7 @@ AsyncPolling(function(end) {
         allAdsID.push(adID);
       }
       allResults.push(allAdsID); // REMOVE LATER ON
-      ctx.body = allAdsID; // REMOVE LATER ON
+      // ctx.body = allAdsID; // REMOVE LATER ON
 
       // =========================== //
       //    GET ALL NEW JOBS INDEX   // GET INDEX OF UNSAVED JOBS (exists in feed but not in database), SAVE TO ARRAY allNewJobsIndex
@@ -85,8 +85,8 @@ AsyncPolling(function(end) {
       }
       allResults.push(allNewJobsIndex); // REMOVE LATER ON
 
-      ctx.body = allNewJobsIndex; // REMOVE LATER ON
-      ctx.body = allResults; // REMOVE LATER ON
+      // ctx.body = allNewJobsIndex; // REMOVE LATER ON
+      // ctx.body = allResults; // REMOVE LATER ON
 
       // =========================== //
       //    IF THERE ARE NEW JOBS    //
@@ -131,7 +131,7 @@ AsyncPolling(function(end) {
                   result.json({ success: true, message: "ok" }); // respond back to request
                 });
 
-              ctx.body = [jobObject]; // REMOVE LATER ON
+              // ctx.body = [jobObject]; // REMOVE LATER ON
             });
           })
 
@@ -139,7 +139,7 @@ AsyncPolling(function(end) {
             return ctx.throw(400, "no data to get the api,");
           });
       } else {
-        ctx.body = "There are no new jobs in the feed"; // REMOVE LATER ON
+        // ctx.body = "There are no new jobs in the feed"; // REMOVE LATER ON
       }
 
       // ctx.body += "         polling runs: " + pollingRuns; // REMOVE LATER ON
