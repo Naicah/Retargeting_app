@@ -10,6 +10,7 @@
   <body>
     <div class="container">
       <header>Hej Peter!</header>
+
       <!-- ================================================================ -->
       <!--                            FILTERS                               -->
       <!-- ================================================================ -->
@@ -17,14 +18,15 @@
       <!-- ================================================================ -->
       <!--                              ADS                                 -->
       <!-- ================================================================ -->
-      <div class="ads">
-        <div class="ad" id="{ID}">
+      <div id="ads">
+        <p>{{ title }}</p>
+        <div class="ad" v-for="ad in adsList">
           <div>
-            <h3>FÖRETAGSNAMN</h3>
-            <h4>Jobb som söks</h4>
-            <p class="adJobDetail">Plats, Yrkeskategori</p>
+            <h3>{{ ad.company }}</h3>
+            <h4>{{ ad.title }}</h4>
+            <p class="adJobDetail">{{ ad.city }} + ', ' + {{ad.department}</p>
           </div>
-          <p class="adTimeLeft">18 dagar kvar</p>
+          <p class="adTimeLeft">{{ ad.last_application_timestamp }}</p>
           <!-- ====================== AD STATISCICS ======================= -->
           <div>
             <!-- ================ AD STATISCICS HEADERS =================== -->
@@ -42,198 +44,13 @@
             <!-- ================ AD STATISCICS NUMBERS =================== -->
             <div class="adStatisticsNumberContainer">
               <div>
-                2
+                {{ad.applies}
               </div>
               <div>
-                5
+                {{ ad.views }}
               </div>
               <div>
-                4
-              </div>
-            </div>
-          </div>
-          <!-- END STATISTICS-->
-        </div>
-        <!-- END AD -->
-        <div class="ad" id="{ID}">
-          <div>
-            <h3>KUNGLIGA OPERAN</h3>
-            <h4>Solist till baletten</h4>
-            <p class="adJobDetail">Stockholm, Dansare</p>
-          </div>
-          <p class="adTimeLeft">18 dagar kvar</p>
-          <!-- ====================== AD STATISCICS ======================= -->
-          <div>
-            <!-- ================ AD STATISCICS HEADERS =================== -->
-            <div class="adStatisticsHeaderContainer">
-              <div>
-                ANSÖKNINGAR
-              </div>
-              <div>
-                VISNINGAR
-              </div>
-              <div>
-                KLICK
-              </div>
-            </div>
-            <!-- ================ AD STATISCICS NUMBERS =================== -->
-            <div class="adStatisticsNumberContainer">
-              <div>
-                35
-              </div>
-              <div>
-                72
-              </div>
-              <div>
-                6
-              </div>
-            </div>
-          </div>
-          <!-- END STATISTICS-->
-        </div>
-        <!-- END AD -->
-        <div class="ad" id="{ID}">
-          <div>
-            <h3>FÖRETAGSNAMN</h3>
-            <h4>Jobb som söks</h4>
-            <p class="adJobDetail">Plats, Yrkeskategori</p>
-          </div>
-          <p class="adTimeLeft">18 dagar kvar</p>
-          <!-- ====================== AD STATISCICS ======================= -->
-          <div>
-            <!-- ================ AD STATISCICS HEADERS =================== -->
-            <div class="adStatisticsHeaderContainer">
-              <div>
-                ANSÖKNINGAR
-              </div>
-              <div>
-                VISNINGAR
-              </div>
-              <div>
-                KLICK
-              </div>
-            </div>
-            <!-- ================ AD STATISCICS NUMBERS =================== -->
-            <div class="adStatisticsNumberContainer">
-              <div>
-                2
-              </div>
-              <div>
-                5
-              </div>
-              <div>
-                4
-              </div>
-            </div>
-          </div>
-          <!-- END STATISTICS-->
-        </div>
-        <!-- END AD -->
-        <div class="ad" id="{ID}">
-          <div>
-            <h3>KUNGLIGA OPERAN</h3>
-            <h4>Solist till baletten</h4>
-            <p class="adJobDetail">Stockholm, Dansare</p>
-          </div>
-          <p class="adTimeLeft">18 dagar kvar</p>
-          <!-- ====================== AD STATISCICS ======================= -->
-          <div>
-            <!-- ================ AD STATISCICS HEADERS =================== -->
-            <div class="adStatisticsHeaderContainer">
-              <div>
-                ANSÖKNINGAR
-              </div>
-              <div>
-                VISNINGAR
-              </div>
-              <div>
-                KLICK
-              </div>
-            </div>
-            <!-- ================ AD STATISCICS NUMBERS =================== -->
-            <div class="adStatisticsNumberContainer">
-              <div>
-                35
-              </div>
-              <div>
-                72
-              </div>
-              <div>
-                6
-              </div>
-            </div>
-          </div>
-          <!-- END STATISTICS-->
-        </div>
-        <!-- END AD -->
-        <div class="ad" id="{ID}">
-          <div>
-            <h3>FÖRETAGSNAMN</h3>
-            <h4>Jobb som söks</h4>
-            <p class="adJobDetail">Plats, Yrkeskategori</p>
-          </div>
-          <p class="adTimeLeft">18 dagar kvar</p>
-          <!-- ====================== AD STATISCICS ======================= -->
-          <div>
-            <!-- ================ AD STATISCICS HEADERS =================== -->
-            <div class="adStatisticsHeaderContainer">
-              <div>
-                ANSÖKNINGAR
-              </div>
-              <div>
-                VISNINGAR
-              </div>
-              <div>
-                KLICK
-              </div>
-            </div>
-            <!-- ================ AD STATISCICS NUMBERS =================== -->
-            <div class="adStatisticsNumberContainer">
-              <div>
-                2
-              </div>
-              <div>
-                5
-              </div>
-              <div>
-                4
-              </div>
-            </div>
-          </div>
-          <!-- END STATISTICS-->
-        </div>
-        <!-- END AD -->
-        <div class="ad" id="{ID}">
-          <div>
-            <h3>KUNGLIGA OPERAN</h3>
-            <h4>Solist till baletten</h4>
-            <p class="adJobDetail">Stockholm, Dansare</p>
-          </div>
-          <p class="adTimeLeft">18 dagar kvar</p>
-          <!-- ====================== AD STATISCICS ======================= -->
-          <div>
-            <!-- ================ AD STATISCICS HEADERS =================== -->
-            <div class="adStatisticsHeaderContainer">
-              <div>
-                ANSÖKNINGAR
-              </div>
-              <div>
-                VISNINGAR
-              </div>
-              <div>
-                KLICK
-              </div>
-            </div>
-            <!-- ================ AD STATISCICS NUMBERS =================== -->
-            <div class="adStatisticsNumberContainer">
-              <div>
-                35
-              </div>
-              <div>
-                72
-              </div>
-              <div>
-                6
+                {{ ad.clicks }}
               </div>
             </div>
           </div>
@@ -245,10 +62,13 @@
       <!-- ================================================================ -->
       <!--                            STATISTICS                            -->
       <!-- ================================================================ -->
-      <div class="statistics">Statistik</div>
+      <div class="statistics">
+        Statistik
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-    <script src="app.js"></script>
+    <!-- <script src="app.js"></script> -->
+    <script src="./interface/ads/ads.js"></script>
   </body>
 </html>
