@@ -19,6 +19,7 @@
     "knex": "^0.13.0",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
+    "koa-static-server": "^1.4.0",
     "migrate": "^1.6.2",
     "nodemon": "^1.18.11",
     "objection": "^1.6.8",

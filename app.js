@@ -41,6 +41,8 @@ require("./database/update_database")({ router });
 app.use(router.routes());
 app.use(router.allowedMethods());
 
+app.use(require("koa-static-server")({ rootDir: "public" }));
+
 // ====================================================================================================== //
 //                                              DATABASE                                                  //
 // ====================================================================================================== //
