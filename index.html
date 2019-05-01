@@ -14,7 +14,41 @@
       <!-- ================================================================ -->
       <!--                            FILTERS                               -->
       <!-- ================================================================ -->
-      <div class="filters">Filter</div>
+      <div class="filters">Filter
+        <div class="searchWrapper">
+          <ul class="searchTitle">
+              <li>JOBBTITEL</li>
+              <li>PLATS</li>
+              <li>JOBBKATEGORI</li>
+              <li>FÖRETAG</li>
+          </ul>
+
+          <ul class="searchField">
+            
+              <input type="text" v-model="search" placeholder="Sök"/>
+
+              <select v-model="selected" class="selected">
+                  <option disabled value="Välj plats">Välj plats</option>
+                  <option>Stockholm</option>
+                  <option>Jönköping</option>
+                </select>
+
+                <select v-model="selected" class="selected" >
+                    <option disabled value="">JOBBKATEGORI</option>
+                    <option>Lärare</option>
+                    <option>Dansare</option>
+                  </select>
+
+                  <select v-model="selected" class="selected">
+                      <option disabled value="">FÖRETAG</option>
+
+                    </select>
+          </ul>
+
+
+        </div>
+
+      </div>
       <!-- ================================================================ -->
       <!--                              ADS                                 -->
       <!-- ================================================================ -->
