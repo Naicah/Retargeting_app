@@ -19,12 +19,11 @@
       <!--                              ADS                                 -->
       <!-- ================================================================ -->
       <div id="ads">
-        <p>{{ title }}</p>
         <div class="ad" v-for="ad in adsList">
           <div>
             <h3>{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
-            <p class="adJobDetail">{{ ad.city }} + ', ' + {{ad.department}</p>
+            <p class="adJobDetail">{{ ad.city }}, {{ ad.departmen }}</p>
           </div>
           <p class="adTimeLeft">{{ ad.last_application_timestamp }}</p>
           <!-- ====================== AD STATISCICS ======================= -->
@@ -44,7 +43,7 @@
             <!-- ================ AD STATISCICS NUMBERS =================== -->
             <div class="adStatisticsNumberContainer">
               <div>
-                {{ad.applies}
+                {{ ad.applies }}
               </div>
               <div>
                 {{ ad.views }}
@@ -69,6 +68,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <!-- <script src="app.js"></script> -->
-    <script src="./interface/ads/ads.js"></script>
+    <script src="./interface/ads.js"></script>
   </body>
 </html>
