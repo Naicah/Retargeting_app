@@ -3,10 +3,6 @@ const Router = require("koa-router");
 const app = new Koa();
 
 const knex = require("./knex/knex.js");
-<<<<<<< HEAD
-
-=======
->>>>>>> dev.nina
 
 const PORT = process.env.PORT || 3001;
 
