@@ -42,7 +42,7 @@ header {
   grid-area: 4/2/6/10;
 }
 
-.ads {
+#ads {
   display: flex;
   /* justify-content: space-around; */
   flex-wrap: wrap;
@@ -78,7 +78,7 @@ header {
 }
 
 .ad *,
-.ads,
+#ads,
 .ad {
   border: none;
 }
