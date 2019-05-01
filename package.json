@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "set PORT=3005 && nodemon app.js"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,7 @@
     "objection": "^1.6.8",
     "pg": "^7.1.2",
     "superagent": "^5.0.2",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-data-tables": "^3.4.4"
   }
 }
