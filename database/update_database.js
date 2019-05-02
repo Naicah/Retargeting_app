@@ -100,8 +100,6 @@ module.exports = ({ router }) => {
         .get(feed)
         .then(res => {
           let jobObject;
-          const now = new Date();
-          const timeLeft = 0;
           allNewJobsIndex.forEach(function(index) {
             const jobs = res.body.jobs;
             let job = jobs[index];
@@ -116,8 +114,8 @@ module.exports = ({ router }) => {
               apply_url: job.apply_url,
               image: job.image,
               company: job.company.name,
-              city: job.location.city || job.location.name,
-              // || "Ospecificerad stad",
+              city:
+                job.location.city || job.location.name || "Ospecificerad stad",
               job_category: job.department.name,
               applies: 0,
               clicks: 0,
