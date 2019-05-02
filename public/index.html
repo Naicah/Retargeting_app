@@ -63,10 +63,10 @@
           <div>
             <h3>{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
-            <p class="adJobDetail">{{ ad.city }}, {{ ad.job_category }}</p>
+            <p class="adJobDetail">{{ ad.city + "," }} {{ ad.job_category }}</p>
           </div>
           <p class="adTimeLeft">
-            {{ ad.last_application_timestamp }}
+            {{ calDaysLeft(ad.last_application_timestamp) }}
           </p>
           <!-- ====================== AD STATISCICS ======================= -->
           <div>
