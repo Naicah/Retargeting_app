@@ -1,36 +1,49 @@
-$.getJSON("/allAds", function(data) {
-  console.log(data);
+$.getJSON('/allAds', function(data) {
+  console.log(data)
   var ad = new Vue({
-    el: "#ads",
+    el: '#ads',
     data: {
       adsList: data,
-      title: "Workbuster"
-      
+      title: 'Workbuster'
+    }
+  })
+  var filterad = new Vue({
+    el: '#adFilterBindingdMethods',
+    data: {
+      adsList: data,
+      title: 'Workbuster'
     },
-
     computed: {
-    adLocationList: function(){
-
-      const adLocations = [];
-      this.adsList.forEach((ad)=>{
-        if(!adLocations.includes(ad.city)){
-          adLocations.push(ad.city);
-        }
-        console.log('adcity', ad.city)
-
-      });
-
-      return adLocations;
+      adLocationList: function() {
+        const adLocations = []
+        this.adsList.forEach(ad => {
+          if (!adLocations.includes(ad.city)) {
+            adLocations.push(ad.city)
+          }
+        })
+        return adLocations
+      },
+      adJobCategoryList: function() {
+        const adJobCategory = []
+        this.adsList.forEach(ad => {
+          if (!adJobCategory.includes(ad.job_category)) {
+            adJobCategory.push(ad.job_category)
+          }
+        })
+        return adJobCategory
+      },
+      adCompaniesList: function() {
+        const adCompanies = []
+        this.adsList.forEach(ad => {
+          if (!adCompanies.includes(ad.company)) {
+            adCompanies.push(ad.company)
+          }
+        })
+        return adCompanies
       }
-      }
-
-    });
-    console.log('adcity', data[0].city)
-
-  });
-
-
-
+    }
+  })
+})
 
 // const app = new Vue({
 //   el: '#adJobLocation',

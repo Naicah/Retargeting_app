@@ -8,9 +8,15 @@
     <title>Workbuster</title>
   </head>
   <body>
-    <div id="ads" class="container">
+    <div class="container">
       <header>Hej Peter!</header>
+      <!-- <div class="adOverviewContainer">
+        <div class="adOnGoing">
 
+        </div>
+        <div class="adFinished">
+        </div>
+      </div> -->
       <!-- ================================================================ -->
       <!--                            FILTERS                               -->
       <!-- ================================================================ -->
@@ -25,46 +31,37 @@
           </ul>
         </div>
         <div>
-          <div class="adFiltersSearchFieldContainer">
-              <div>
-              <input type="text" v-model="search" placeholder="Sök"/>
-              </div>
-              <div>
-              <!-- <select v-model="adJobLocation" class="adJobLocation">
-                  <option disabled value="Välj plats">Välj plats</option>
-                  <option>Stockholm</option> -->
-                  <select v-on:change="adLocationList">
+            <div class="adFiltersSearchFieldContainer" id="adFilterBindingdMethods">
+                <div>
+                  <input type="text" v-model="search" placeholder="Sök"/>
+                </div>
+                <div>
+                  <select v-on:change="adLocationList" id="adLocationListId" class="adJobLocation">
                     <option value="">Välj plats...</option>
                     <option v-for="ad in adLocationList">{{ ad }}</option>
                   </select>
-                  
-                <!-- </select> -->
                 </div>
                 <div>
-                <select v-model="adJobCategory" class="adJobCategory" >
-                    <option disabled value="">JOBBKATEGORI</option>
-                    <div class="ad" v-for="ad in adsList">
-                      <option>{{ ad.department }}</option>
-                    </div>
-
-
-                  </select>
-                </div>
-                <div>
-                  <select v-model="adCompany" class="adCompany">
-                      <option disabled value="">FÖRETAG</option>
-
+                    <select v-on:change="adJobCategoryList" id="adJobCategory" class="adJobCategory">
+                        <option value="">Välj jobbkategori...</option>
+                        <option v-for="ad in adJobCategoryList">{{ ad }}</option>
                     </select>
-                    </div>
-                    
                 </div>
+                <div>
+                  <select v-on:change="adCompany" id="adCompanyId" class="adCompany">
+                      <option value="">FÖRETAG</option>
+                      <option v-for="ad in adCompaniesList">{{ ad }}</option>
+                    </select>
+                </div>
+                
+            </div>
           </div>
         </div>
-      </div>
+    
       <!-- ================================================================ -->
       <!--                              ADS                                 -->
       <!-- ================================================================ -->
-      <div>
+      <div id="ads">
         <div class="ad" v-for="ad in adsList">
           <div>
             <h3>{{ ad.company }}</h3>
@@ -124,3 +121,33 @@
     <script src="./interface/job_ads/ads.js"></script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
