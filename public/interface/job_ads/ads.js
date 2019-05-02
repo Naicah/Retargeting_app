@@ -9,7 +9,6 @@ $.getJSON("/allAds", function(data) {
     methods: {
       calDaysLeft: function(date) {
         const now = Date.now();
-        // const latest = new Date("2019-06-01T22:00:00Z");
         const latest = new Date(date);
         const millisecondsLeft = latest - now;
         const daysLeft = Math.floor(millisecondsLeft / 1000 / 60 / 60 / 24);
@@ -18,6 +17,14 @@ $.getJSON("/allAds", function(data) {
           return daysLeft + " dagar kvar";
         } else {
           return "Avslutad";
+        }
+      },
+      ifJobCategory: function(ad) {
+        // if (ad.job_category === null || ad.job_category === "") {
+        if (ad.job_category) {
+          return ",";
+        } else {
+          return "";
         }
       }
     }

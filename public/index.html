@@ -64,7 +64,8 @@
             <h3 id="adCompany">{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
             <p class="adJobDetail">
-              <span id="adCity">{{ ad.city + "," }}</span>
+              <span id="adCity">{{ ad.city }}{{ ifJobCategory(ad) }}</span>
+
               <span id="adJobCategory">{{ ad.job_category }}</span>
             </p>
           </div>
