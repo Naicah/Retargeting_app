@@ -5,31 +5,54 @@ $.getJSON("/allAds", function(data) {
     data: {
       adsList: data,
       title: "Workbuster"
-    }
+      
+    },
+
+    computed: {
+    adLocationList: function(){
+
+      const adLocations = [];
+      this.adsList.forEach((ad)=>{
+        if(!adLocations.includes(ad.city)){
+          adLocations.push(ad.city);
+        }
+        console.log('adcity', ad.city)
+
+      });
+
+      return adLocations;
+      }
+      }
+
+    });
+    console.log('adcity', data[0].city)
+
   });
-});
+
+
+
 
 // const app = new Vue({
-//   el: '#media-list',
+//   el: '#adJobLocation',
 //   data: {
 //     title: 'Treehouse Public Library',
 //     mediaList: media,
-//     type: ''
+//     adLocationType: ''
 //   },
 //   methods: {
 //     toggleDetails: function(media){
 //       media.showDetail = !media.showDetail
 //     },
 //     filterList: function(){
-//       this.type = event.target.value;
+//       this.location = event.target.value;
 //     }
 //   },
 //   computed: {
-//     uniqueItemsList: function(){
-//       const types = [];
-//       this.mediaList.forEach((item)=>{
-//         if(!types.includes(item.type)){
-//           types.push(item.type);
+//     adLocationList: function(){
+//       const location = [];
+//       this.mediaList.forEach((adLocation)=>{
+//         if(!location.includes(adLocation.adLocationType)){
+//           location.push(adLocation.adLocationtype);
 //         }
 //       });
 //       return types;

@@ -1,3 +1,8 @@
+/*
+=======================
+**** General styles ****
+======================
+*/
 :root {
   --color-dark-1: #0e263f; /* Dark blue - almost black*/
   --color-dark-2: #225fa0; /* Dark blue*/
@@ -40,6 +45,12 @@ header {
 .filters {
   background: var(--color-light-4);
   grid-area: 4/2/6/10;
+  -webkit-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  margin: 0 0.5em 0 0;
+  
 }
 
 #ads {
@@ -54,6 +65,15 @@ header {
   grid-area: 4/10/12/13;
   margin-right: 2em;
 }
+
+
+
+
+/*
+======================================
+************ AD CARD STYLES ************
+======================================
+*/
 
 .ad {
   display: flex;
@@ -132,6 +152,13 @@ header {
 }
 
 
+
+/*
+=======================
+**** AD FILTER styles ****
+======================
+*/
+
 .filters h3 {
   /* font-family:; */
   font-weight: 800;
@@ -144,15 +171,11 @@ header {
 
 
 .adFiltersHeaderContainer {
-  /* position: relative; */
   margin-top:2em;
-  
-
 }
 
 .adFiltersHeaderContainer ul li {
   width: 25%;
-
 }
 .adFiltersHeaderContainer * {
   margin: 0;
@@ -163,15 +186,10 @@ header {
   list-style:none;
   display:flex;
   flex-direction: row;
-  /* position: relative; */
   justify-content: flex-start;
-  
   
 }
 
-.searchTitle li {
-  /* width: 25%; */
-}
 .adFiltersSearchFieldContainer * {
   margin: 0;
   padding: 0;
@@ -187,34 +205,19 @@ header {
 }
 
 
-/* li {
 
-  width:40em;
-  padding: 5px 50px 20px 20px;
-} */
-label {
-
-  position: absolute;
-  font-size:12px;
-  bottom:2.5em;
-  left:12px;
-}
-
-
-input,.selected {
- 
- 
+input, .adCompany, .adJobCategory, .adJobLocation {
   background-color: #edf2f6;
   border-color: #edf2f6;
   /* border: none; */
   position: relative;
   font-size: 13px;
   height: 30px;
-  -webkit-box-shadow: inset 0 1px 0px #dce6ee;
-  -moz-box-shadow: inset 0 1px 0px #dce6ee;
-  -o-box-shadow: inset 0 1px 0px #dce6ee;
-  -ms-box-shadow: inset 0 1px 0px #dce6ee;
-  box-shadow: inset 0 1px 0px #dce6ee;
+  -webkit-box-shadow: inset 0 1px 0px var(--color-light-2);
+  -moz-box-shadow: inset 0 1px 0px var(--color-light-2);
+  -o-box-shadow: inset 0 1px 0px var(--color-light-2);
+  -ms-box-shadow: inset 0 1px 0px var(--color-light-2);
+  box-shadow: inset 0 1px 0px var(--color-light-2);
   -webkit-transition: 0.2s all;
   -moz-transition: 0.2s all;
   -o-transition: 0.2s all;

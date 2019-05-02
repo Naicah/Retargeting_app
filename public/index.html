@@ -8,7 +8,7 @@
     <title>Workbuster</title>
   </head>
   <body>
-    <div class="container">
+    <div id="ads" class="container">
       <header>Hej Peter!</header>
 
       <!-- ================================================================ -->
@@ -30,25 +30,28 @@
               <input type="text" v-model="search" placeholder="Sök"/>
               </div>
               <div>
-              <select v-model="selected" class="selected">
+              <!-- <select v-model="adJobLocation" class="adJobLocation">
                   <option disabled value="Välj plats">Välj plats</option>
-                  <option>Stockholm</option>
-                  <!-- <select v-on:change="filterList">
-                    <option value="">Select a type of media...</option>
-                    <option v-for="item in uniqueItemsList">{{ item }}</option>
-                  </select> -->
-                  <option>Jönköping</option>
-                </select>
+                  <option>Stockholm</option> -->
+                  <select v-on:change="adLocationList">
+                    <option value="">Välj plats...</option>
+                    <option v-for="ad in adLocationList">{{ ad }}</option>
+                  </select>
+                  
+                <!-- </select> -->
                 </div>
                 <div>
-                <select v-model="selected" class="selected" >
+                <select v-model="adJobCategory" class="adJobCategory" >
                     <option disabled value="">JOBBKATEGORI</option>
-                    <option>Lärare</option>
-                    <option>Dansare</option>
+                    <div class="ad" v-for="ad in adsList">
+                      <option>{{ ad.department }}</option>
+                    </div>
+
+
                   </select>
                 </div>
                 <div>
-                  <select v-model="selected" class="selected">
+                  <select v-model="adCompany" class="adCompany">
                       <option disabled value="">FÖRETAG</option>
 
                     </select>
@@ -61,12 +64,12 @@
       <!-- ================================================================ -->
       <!--                              ADS                                 -->
       <!-- ================================================================ -->
-      <div id="ads">
+      <div>
         <div class="ad" v-for="ad in adsList">
           <div>
             <h3>{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
-            <p class="adJobDetail">{{ ad.city }}, {{ ad.departmen }}</p>
+            <p class="adJobDetail">{{ ad.city }}, {{ ad.department }}</p>
           </div>
           <p class="adTimeLeft">
             {{ ad.last_application_timestamp }}
