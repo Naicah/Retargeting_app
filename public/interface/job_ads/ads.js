@@ -4,7 +4,29 @@ $.getJSON('/allAds', function(data) {
     el: '#ads',
     data: {
       adsList: data,
-      title: 'Workbuster'
+      title: "Workbuster"
+    },
+    methods: {
+      calDaysLeft: function(date) {
+        const now = Date.now();
+        const latest = new Date(date);
+        const millisecondsLeft = latest - now;
+        const daysLeft = Math.floor(millisecondsLeft / 1000 / 60 / 60 / 24);
+
+        if (daysLeft > 0) {
+          return daysLeft + " dagar kvar";
+        } else {
+          return "Avslutad";
+        }
+      },
+      ifJobCategory: function(ad) {
+        // if (ad.job_category === null || ad.job_category === "") {
+        if (ad.job_category) {
+          return ",";
+        } else {
+          return "";
+        }
+      }
     }
   })
   var filterad = new Vue({
