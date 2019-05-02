@@ -18,13 +18,13 @@
         <h3>Filter</h3>
         <div class="adFiltersHeaderContainer">
           <ul class="searchTitle">
-              <li>JOBBTITEL</li>
-              <li >PLATS</li>
-              <li>JOBBKATEGORI</li>
-              <li>FÖRETAG</li>
+            <li>JOBBTITEL</li>
+            <li>PLATS</li>
+            <li>JOBBKATEGORI</li>
+            <li>FÖRETAG</li>
           </ul>
         </div>
-          <div>
+        <div>
           <div class="adFiltersSearchFieldContainer">
               <div>
               <input type="text" v-model="search" placeholder="Sök"/>
@@ -59,7 +59,7 @@
                     
                 </div>
           </div>
-
+        </div>
       </div>
       <!-- ================================================================ -->
       <!--                              ADS                                 -->
@@ -69,7 +69,7 @@
           <div>
             <h3>{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
-            <p class="adJobDetail">{{ ad.city }}, {{ ad.department }}</p>
+            <p class="adJobDetail">{{ ad.city }}, {{ ad.job_category }}</p>
           </div>
           <p class="adTimeLeft">
             {{ ad.last_application_timestamp }}
@@ -124,5 +124,3 @@
     <script src="./interface/job_ads/ads.js"></script>
   </body>
 </html>
-
-
