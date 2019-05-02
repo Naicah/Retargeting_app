@@ -132,30 +132,66 @@ header {
 }
 
 
+.filters h3 {
+  /* font-family:; */
+  font-weight: 800;
+  margin: 0.5em 1em;
+}
+.adFiltersHeaderContainer,
+.adFiltersSearchFieldContainer {
+  margin-left: 1em;
+}
 
 
-.searchWrapper {
-  position: relative;
+.adFiltersHeaderContainer {
+  /* position: relative; */
   margin-top:2em;
+  
 
 }
 
+.adFiltersHeaderContainer ul li {
+  width: 25%;
+
+}
+.adFiltersHeaderContainer * {
+  margin: 0;
+  padding: 0;
+  
+}
 .searchTitle {
   list-style:none;
   display:flex;
   flex-direction: row;
-  position: relative;
-
+  /* position: relative; */
+  justify-content: flex-start;
+  
+  
 }
-.searchField {
 
+.searchTitle li {
+  /* width: 25%; */
+}
+.adFiltersSearchFieldContainer * {
+  margin: 0;
+  padding: 0;
+  
+}
+.adFiltersSearchFieldContainer div {
+  padding: 0.7em 0;
+  width: 25%;
+}
+.adFiltersSearchFieldContainer {
+  
+  display: flex;
 }
 
-li {
+
+/* li {
 
   width:40em;
   padding: 5px 50px 20px 20px;
-}
+} */
 label {
 
   position: absolute;
@@ -166,8 +202,8 @@ label {
 
 
 input,.selected {
-  margin-right: 40px;
-  margin-bottom: 10px;
+ 
+ 
   background-color: #edf2f6;
   border-color: #edf2f6;
   /* border: none; */
@@ -184,7 +220,7 @@ input,.selected {
   -o-transition: 0.2s all;
   -ms-transition: 0.2s all;
   transition: 0.2s all;
-  padding:4px 5px;
-  margin-left: 3em;
+  width: 80%;
+ 
 }
 
