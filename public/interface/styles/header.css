@@ -1,0 +1,6 @@
+header {
+  background: var(--color-dark-1);
+  grid-area: 1/1/3/13;
+  font-size: 1.5em;
+  color: var(--color-light-4);
+}
