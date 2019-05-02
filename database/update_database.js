@@ -2,7 +2,7 @@ const request = require("superagent");
 const knex = require("../knex/knex");
 
 const AsyncPolling = require("async-polling");
-const checkNewJobsInterval = 60000; //60 000 = 1m
+const checkNewJobsInterval = 30000; //60 000 = 1m
 const feed = "https://api.workbuster.com/jobs/feed/kyhdemo?format=json";
 
 // ===========================================================================//
@@ -118,10 +118,12 @@ module.exports = ({ router }) => {
               apply_url: job.apply_url,
               image: job.image,
               company: job.company.name,
-              city: job.location.city || "Ospecificerad stad",
-              views: 0,
+              city: job.location.city || job.location.name,
+              // || "Ospecificerad stad",
+              job_category: job.department.name,
+              applies: 0,
               clicks: 0,
-              applies: 0
+              views: 0
             };
 
             // ================================== //
