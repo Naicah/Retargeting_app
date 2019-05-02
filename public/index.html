@@ -14,7 +14,50 @@
       <!-- ================================================================ -->
       <!--                            FILTERS                               -->
       <!-- ================================================================ -->
-      <div class="filters">Filter</div>
+      <div class="filters">
+        <h3>Filter</h3>
+        <div class="adFiltersHeaderContainer">
+          <ul class="searchTitle">
+              <li>JOBBTITEL</li>
+              <li >PLATS</li>
+              <li>JOBBKATEGORI</li>
+              <li>FÖRETAG</li>
+          </ul>
+        </div>
+          <div>
+          <div class="adFiltersSearchFieldContainer">
+              <div>
+              <input type="text" v-model="search" placeholder="Sök"/>
+              </div>
+              <div>
+              <select v-model="selected" class="selected">
+                  <option disabled value="Välj plats">Välj plats</option>
+                  <option>Stockholm</option>
+                  <!-- <select v-on:change="filterList">
+                    <option value="">Select a type of media...</option>
+                    <option v-for="item in uniqueItemsList">{{ item }}</option>
+                  </select> -->
+                  <option>Jönköping</option>
+                </select>
+                </div>
+                <div>
+                <select v-model="selected" class="selected" >
+                    <option disabled value="">JOBBKATEGORI</option>
+                    <option>Lärare</option>
+                    <option>Dansare</option>
+                  </select>
+                </div>
+                <div>
+                  <select v-model="selected" class="selected">
+                      <option disabled value="">FÖRETAG</option>
+
+                    </select>
+                    </div>
+                    
+                </div>
+          </div>
+
+      </div>
       <!-- ================================================================ -->
       <!--                              ADS                                 -->
       <!-- ================================================================ -->
@@ -25,7 +68,9 @@
             <h4>{{ ad.title }}</h4>
             <p class="adJobDetail">{{ ad.city }}, {{ ad.departmen }}</p>
           </div>
-          <p class="adTimeLeft">{{ ad.last_application_timestamp }}</p>
+          <p class="adTimeLeft">
+            {{ ad.last_application_timestamp }}
+          </p>
           <!-- ====================== AD STATISCICS ======================= -->
           <div>
             <!-- ================ AD STATISCICS HEADERS =================== -->
@@ -66,8 +111,15 @@
       </div>
     </div>
 
+    <script
+      src="https://code.jquery.com/jquery-3.4.0.js"
+      integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <!-- <script src="app.js"></script> -->
     <script src="./interface/job_ads/ads.js"></script>
   </body>
 </html>
+
+

@@ -65,48 +65,6 @@ try {
 //campaign
 campaign_id = campaign.id;
 
-  // // ====================================== //
-  // //         CREATE CUSTOM AUDIENCES        //
-  // // ====================================== //
-  // .then(result => {
-  //   logApiCallResult("custom audience api call complete.", result);
-  //   campaign_id = result.id;
-  //   const fields = [];
-  //   const params = {
-  //     'name' : 'FacebookPixelCA',
-  //     'rule' : {
-  //       'inclusions':{
-  //         'operator':'or',
-  //         'rules':[
-  //           {
-  //             'event_sources':[
-  //               {
-  //               'id':'384339385749203',
-  //               'type':'pixel'}
-  //             ],'retention_seconds':25992000,
-  //             'filter':{
-  //               'operator':'and','filters':[
-  //                 {
-  //                   "operator": "=",
-  //                   "field": "event",
-  //                   "value": "store_visit"
-  //                  }
-  //                ]
-  //               },
-  //               "aggregation" : {
-  //                 "type":"count",
-  //                 "operator":">",
-  //                 "value":0
-  //                }
-  //             }
-  //           ]
-  //         },
-  //       },
-  //     'prefill' : '1',
-  //   };
-  //   return new AdAccount(ad_account_id).createCustomAudience(fields, params);
-  // })
-
 
   // ====================================== //
   //              CREATE ADSET              //
@@ -135,11 +93,9 @@ campaign_id = campaign.id;
             'US']
           }
         },
-      // targeting:{  
-        
-      //   "custom_audiences":[{"id":customAudience_id}]},
- 
-    
+
+
+
       name: ('New ' + new Date())
     };
     try {
@@ -148,42 +104,8 @@ campaign_id = campaign.id;
     } catch(e) {
       console.log("It borked! " + e);
     }
-    
-   
-  //})
   ad_set_id = ad_set.id;
-  // ====================================== //
-  //              CREATE ADCREATIVE         //
-  // ====================================== //
-  /*
-  $link = (object)[
-    'link' => $linkUrl,
-];
 
-$signUp = (object)[
-    'type'  => "SIGN_UP",
-    'value' => $link,
-];
-
-$linkData = (object)[
-    'call_to_action' => $signUp,
-    'link'           => $objectUrl,
-    'image_hash'     => $response->hash,
-    'message'        => $body,
-];
-
-$objectStory = (object)[
-    'link_data' => $linkData,
-    'page_id'   => $pageId,
-];
-
-$data = (object)[
-    'name'              => 'system-generated-' . $accountId,
-    'title'             => $title,
-    'object_story_spec' => $objectStory,
-    'access_token'      => $this->accessToken,
-];
-*/
 
 const link = {
   link: 'https://kyhdemo.workbuster.com/jobs/62892-frontendutvecklare-till-workbuster'

@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "set PORT=3005 && nodemon app.js"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -19,10 +19,13 @@
     "knex": "^0.16.5",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
+    "koa-static-server": "^1.4.0",
     "migrate": "^1.6.2",
     "nodemon": "^1.18.11",
+    "objection": "^1.6.8",
     "pg": "^7.1.2",
     "superagent": "^5.0.2",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-data-tables": "^3.4.4"
   }
 }
