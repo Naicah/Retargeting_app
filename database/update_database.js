@@ -2,7 +2,7 @@ const request = require("superagent");
 const knex = require("../knex/knex");
 
 const AsyncPolling = require("async-polling");
-const checkNewJobsInterval = 30000; //60 000 = 1m
+const checkNewJobsInterval = 3000; //60 000 = 1m
 const feed = "https://api.workbuster.com/jobs/feed/kyhdemo?format=json";
 
 // ===========================================================================//
@@ -80,7 +80,6 @@ module.exports = ({ router }) => {
     allNewJobsIndex = []; // Epmty array to get a fresh one
     for (i = 0; i < allJobsID.length; i++) {
       let id = allJobsID[i];
-
       if (!allAdsID.includes(id)) {
         allNewJobsIndex.push(i);
       }
@@ -106,8 +105,7 @@ module.exports = ({ router }) => {
           allNewJobsIndex.forEach(function(index) {
             const jobs = res.body.jobs;
             let job = jobs[index];
-            timeLeft = now - last_application_timestamp;
-            console.log("timeLeft", timeLeft);
+
             jobObject = {
               id: job.id,
               title: job.title,
@@ -129,12 +127,11 @@ module.exports = ({ router }) => {
             // ================================== //
             //    ADD ALL NEW JOBS TO DATABASE    // SAVE EACH JOB OBJECT TO DATABASE
             // ================================== //
-
             knex("ads")
               .insert(jobObject)
               .then(function(result) {
                 // .then required so that promise is executed
-                result.json({ success: true, message: "ok" }); // respond back to request
+                // console.log("hej");
               });
           });
         })
