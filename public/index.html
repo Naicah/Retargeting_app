@@ -21,9 +21,12 @@
       <div id="ads">
         <div class="ad" v-for="ad in adsList">
           <div>
-            <h3>{{ ad.company }}</h3>
+            <h3 id="adCompany">{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
-            <p class="adJobDetail">{{ ad.city + "," }} {{ ad.job_category }}</p>
+            <p class="adJobDetail">
+              <span id="adCity">{{ ad.city + "," }}</span>
+              <span id="adJobCategory">{{ ad.job_category }}</span>
+            </p>
           </div>
           <p class="adTimeLeft">
             {{ calDaysLeft(ad.last_application_timestamp) }}

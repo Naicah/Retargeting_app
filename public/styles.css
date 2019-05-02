@@ -89,6 +89,13 @@ header {
   margin-bottom: 0.2em;
 }
 
+#adCompany:hover,
+#adCity:hover,
+#adJobCategory:hover {
+  transform: scale(1.1);
+  color: var(--color-dark-3);
+}
+
 .ad h4 {
   color: var(--color-dark-2);
   font: var(--font-stack-2);
