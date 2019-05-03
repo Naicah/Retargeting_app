@@ -2,6 +2,6 @@
 
 .statistics {
   background: var(--color-light-2);
-  grid-area: 4/10/12/13;
+  grid-area: 5/10/13/13;
   margin-right: 2em;
 }
