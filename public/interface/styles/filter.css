@@ -25,6 +25,7 @@
 
 .adFiltersHeaderContainer ul li {
   width: 25%;
+  font-weight: 200;
 }
 .adFiltersHeaderContainer * {
   margin: 0;

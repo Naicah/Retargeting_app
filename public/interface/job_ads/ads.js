@@ -29,6 +29,17 @@ $.getJSON('/allAds', function(data) {
       }
     }
   })
+
+ 
+
+   const toggle = new Vue({
+       el: '#filtercontainer',
+       data: {
+        isHidden: false
+      },
+
+    })
+
   var filterad = new Vue({
     el: '#adFilterBindingdMethods',
     data: {
@@ -67,8 +78,8 @@ $.getJSON('/allAds', function(data) {
   })
 })
 
-// const app = new Vue({
-//   el: '#adJobLocation',
+// const toggle = new Vue({
+//   el: '#container',
 //   data: {
 //     title: 'Treehouse Public Library',
 //     mediaList: media,
