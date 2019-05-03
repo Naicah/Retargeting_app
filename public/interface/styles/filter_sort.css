@@ -1,0 +1,51 @@
+.filterAndSortContainer {
+    background: var(--color-light-2);
+    grid-area: 4/2/5/10;
+    margin-right: 2em;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    
+  }
+.filterAndSortContainer * {
+    text-align: center;
+    /* border: 1px solid black; */
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+
+.filterAndSortContainer p {
+    font-size: 0.6em;
+}
+
+.filterAndSortContainer h3 {
+    font-weight: 800;
+    font-size: 1.5em;
+}
+.adOngoingAndFinished {
+    width: 24%;
+    display: flex;
+    flex-direction: row;
+    background: var(--color-light-4);
+    -webkit-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    margin: 0 0 0.5em 0;
+    border: solid gray 1px;
+}
+
+
+.adOnGoing, .adFinished, .adAll {
+    width: 33%;
+}
+
+.adOnGoing {
+    border-right: solid gray 0.1px;
+}
+
+.adAll {
+    border-left: solid gray 0.1px;
+}
