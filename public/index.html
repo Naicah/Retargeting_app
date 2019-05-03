@@ -15,16 +15,12 @@
     <title>Workbuster</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="filtercontainer">
       <header>Hej Peter!</header>
-      <!-- <div class="adOverviewContainer">
-        <div class="adOnGoing">
 
-        </div>
-        <div class="adFinished">
-        </div>
-      </div> -->
-
+      <!-- ================================================================ -->
+      <!--                      FILTER & SORTERING                          -->
+      <!-- ================================================================ -->
       <div class="filterAndSortContainer">
         <div class="adOngoingAndFinished">
           <div class="adOnGoing"><h3>8</h3>
@@ -37,16 +33,22 @@
             <p>Alla</p>
           </div>
         </div>
-        <div class="filterAndSortIcons">
-        <i class="fas fa-filter"></i>
-        <i class="fas fa-sort-amount-down"></i>
+        <div class="filterAndSortIcons" id="filterAndSortIcons">
+          <div class="filterIcon"  @click="isHidden ^= true">
+          <h3>FILTER</h3>
+          <i class="fas fa-filter" ></i>
+          </div>
+          <div class="sortIcon">
+          <h3>SORTERING</h3>
+          <i class="fas fa-sort-amount-down"></i>
+          </div>
         </div>
       </div>
-      
+
       <!-- ================================================================ -->
       <!--                            FILTERS                               -->
       <!-- ================================================================ -->
-      <div class="filters">
+      <div class="filters" v-if="!isHidden"  >
         <h3>Filter</h3>
         <div class="adFiltersHeaderContainer">
           <ul class="searchTitle">
