@@ -15,7 +15,7 @@
   --color-light-4: #f8f8f8; /* Super light blue*/
   --color-light-5: #c4d5e2; /* Light grey-blue*/
 
-  --font-stack-1: MontSerrat, "Open Sans", Helvetica, sans-serif; /* Headers */
+  --font-stack-1: "Montserrat", "Open Sans", Helvetica, sans-serif; /* Headers */
   --font-stack-2: "Source Sans Pro", "Open Sans", sans-serif; /* Sub headers */
   --font-stack-3: "Open Sans", Helvetica, sans-serif; /* Text */
 }
@@ -26,7 +26,7 @@
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family:"Montserrat", "Open Sans", sans-serif;
   background: var(--color-light-2);
 }
 

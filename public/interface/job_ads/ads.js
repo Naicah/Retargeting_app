@@ -43,10 +43,17 @@ $.getJSON('/allAds', function(data) {
   var filterad = new Vue({
     el: '#adFilterBindingdMethods',
     data: {
+      search: '',
       adsList: data,
       title: 'Workbuster'
     },
     computed: {
+      filteredList() {
+        return this.adsList.filter(ads => {
+          console.log(ads)
+          return ads.title.toLowerCase().includes(this.search.toLowerCase())
+        })
+      },
       adLocationList: function() {
         const adLocations = []
         this.adsList.forEach(ad => {
