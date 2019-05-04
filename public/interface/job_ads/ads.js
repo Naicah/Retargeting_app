@@ -30,6 +30,11 @@ $.getJSON('/allAds', function(data) {
     }
   })
 
+
+ // ====================================== //
+  //     METHODS TO hide filter % sort  //
+  // ====================================== //
+
   var filterSort = new Vue({
     el: '#filterAndSortIcons',
     // components: { 'filters': myComponent },
@@ -44,12 +49,11 @@ $.getJSON('/allAds', function(data) {
       sortBinding.isHidden ^=true
      } 
    },
-   computed:{
-  
-   }
   })
 
-
+  // ====================================== //
+  //         FILTER & SORT Menu             //
+  // ====================================== //
   var filterBinding = new Vue({
     el: '#adFilterBindingdMethods',
     data: {
@@ -91,46 +95,10 @@ $.getJSON('/allAds', function(data) {
     }
   })
 })
+
 var sortBinding = new Vue({
   el: '#adSortContainerId',
   data: {
     isHidden: false,
   },
 })
-
-//  methods: {
-//    sortIsHidden: function() {
-//      reurn {
-//        isHidden: true
-//    }
-//    }
-
-//   }
-
-// const app = new Vue({
-//   el: '#adJobLocation',
-//   data: {
-//     title: 'Treehouse Public Library',
-//     mediaList: media,
-//     adLocationType: ''
-//   },
-//   methods: {
-//     toggleDetails: function(media){
-//       media.showDetail = !media.showDetail
-//     },
-//     filterList: function(){
-//       this.location = event.target.value;
-//     }
-//   },
-//   computed: {
-//     adLocationList: function(){
-//       const location = [];
-//       this.mediaList.forEach((adLocation)=>{
-//         if(!location.includes(adLocation.adLocationType)){
-//           location.push(adLocation.adLocationtype);
-//         }
-//       });
-//       return types;
-//     }
-//   }
-// });
