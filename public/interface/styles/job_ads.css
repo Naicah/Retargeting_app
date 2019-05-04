@@ -10,7 +10,7 @@
   display: flex;
   /* justify-content: space-around; */
   flex-wrap: wrap;
-  grid-area: 7/2/12/10;
+  grid-area: 9/2/14/10;
 }
 
 .ad {

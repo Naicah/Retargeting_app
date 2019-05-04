@@ -29,13 +29,31 @@ $.getJSON('/allAds', function(data) {
       }
     }
   })
+
+ 
+
+   const toggle = new Vue({
+       el: '#filtercontainer',
+       data: {
+        isHidden: false
+      },
+
+    })
+
   var filterad = new Vue({
     el: '#adFilterBindingdMethods',
     data: {
+      search: '',
       adsList: data,
       title: 'Workbuster'
     },
     computed: {
+      filteredList() {
+        return this.adsList.filter(ads => {
+          console.log(ads)
+          return ads.title.toLowerCase().includes(this.search.toLowerCase())
+        })
+      },
       adLocationList: function() {
         const adLocations = []
         this.adsList.forEach(ad => {
@@ -67,8 +85,8 @@ $.getJSON('/allAds', function(data) {
   })
 })
 
-// const app = new Vue({
-//   el: '#adJobLocation',
+// const toggle = new Vue({
+//   el: '#container',
 //   data: {
 //     title: 'Treehouse Public Library',
 //     mediaList: media,
