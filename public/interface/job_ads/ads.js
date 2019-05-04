@@ -30,30 +30,34 @@ $.getJSON('/allAds', function(data) {
     }
   })
 
- 
+  var filterSort = new Vue({
+    el: '#filterAndSortIcons',
+    // components: { 'filters': myComponent },
+    data: {
 
-   const toggle = new Vue({
-       el: '#filtercontainer',
-       data: {
-        isHidden: false
+   },
+   methods: {
+    hideElement: function() {
+      filterBinding.isHidden ^= true
       },
+     hideSort: function() {
+      sortBinding.isHidden ^=true
+     } 
+   },
+   computed:{
+  
+   }
+  })
 
-    })
 
-  var filterad = new Vue({
+  var filterBinding = new Vue({
     el: '#adFilterBindingdMethods',
     data: {
-      search: '',
+      isHidden: false,
       adsList: data,
       title: 'Workbuster'
     },
     computed: {
-      filteredList() {
-        return this.adsList.filter(ads => {
-          console.log(ads)
-          return ads.title.toLowerCase().includes(this.search.toLowerCase())
-        })
-      },
       adLocationList: function() {
         const adLocations = []
         this.adsList.forEach(ad => {
@@ -68,9 +72,12 @@ $.getJSON('/allAds', function(data) {
         this.adsList.forEach(ad => {
           if (!adJobCategory.includes(ad.job_category)) {
             adJobCategory.push(ad.job_category)
+
           }
+
         })
         return adJobCategory
+
       },
       adCompaniesList: function() {
         const adCompanies = []
@@ -84,9 +91,24 @@ $.getJSON('/allAds', function(data) {
     }
   })
 })
+var sortBinding = new Vue({
+  el: '#adSortContainerId',
+  data: {
+    isHidden: false,
+  },
+})
 
-// const toggle = new Vue({
-//   el: '#container',
+//  methods: {
+//    sortIsHidden: function() {
+//      reurn {
+//        isHidden: true
+//    }
+//    }
+
+//   }
+
+// const app = new Vue({
+//   el: '#adJobLocation',
 //   data: {
 //     title: 'Treehouse Public Library',
 //     mediaList: media,
