@@ -59,6 +59,7 @@
     flex-direction: row;
     /* justify-content: space-between; */
     margin: 0 0 0.5em 0;
+    align-items: flex-end;
 }
 
 .filterAndSortIcons * {
@@ -67,13 +68,18 @@
 
 .filterIcon, .sortIcon {
     display: flex;
-    /* justify-content: center; */
     flex-direction: row;
     font-size: 1vw;
     align-items: flex-end;
-    /* width: 50%; */
-    /* justify-content: flex-start; */
-    /* padding-right: 5%; */
+    height: fit-content;
+    margin: 0 0 0 0;
+    padding: 0.8em 0.5em 0.8em 0.5em;
+}
+
+.filterIcon:hover, .sortIcon:hover {
+    border-radius: 50px;
+    background: #c8e1fa;
+    transition: all 0.3s;
 }
 .filterIcon {
     width: 40%;

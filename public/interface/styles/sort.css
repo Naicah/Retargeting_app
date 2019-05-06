@@ -1,12 +1,15 @@
 .adSortContainer {
     background: var(--color-dark-1);
+    display: flex;
     grid-area: 7/2/9/10;
     -webkit-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
     border-radius: 3px;
-    margin: 0.5em 0.5em 1em 0;
+    margin: 0.5em 0.5em 0.5em 0;
     border: solid gray 1px;
+    /* align-content: center; */
+    flex-direction: column;
   }
 
 
