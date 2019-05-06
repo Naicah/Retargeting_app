@@ -56,12 +56,9 @@ $.getJSON('/allAds', function(data) {
   // ====================================== //
   //         FILTER & SORT Menu             //
   // ====================================== //
-  const FILTER_CITY = 'all';
   var filterBinding = new Vue({
     el: '#adFilterBindingdMethods',
     data: {
-      selectedValue1: '',
-      selectedType: FILTER_CITY,
       isHidden: false,
       adsList: data,
       title: 'Workbuster'
@@ -95,26 +92,8 @@ $.getJSON('/allAds', function(data) {
         })
         return adCompanies
       },
-      // <---------------FILTER FUNCTION ------------------>
-      filteredProducts: function() {
-        console.log('filterprod')
-        if (this.selectedType === FILTER_CITY) {
-          ad.adsList == this.selectedType
-          console.log('click')
-          return this.adsList
-        } else {
-        console.log('click')
-          return this.adsList.filter(p => p.city === this.selectedType)
-        }
-      }
+
     },
-    methods: {
-      selectType(event) {
-        filterBinding.selectedType = event.target.value
-        //this.filteredProducts()
-        console.log(event.target.value)
-      }
-    }
   })
 })
 
