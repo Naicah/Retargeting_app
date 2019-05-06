@@ -32,11 +32,22 @@
 .adSortButtons div {
   border-radius: 3px;
   /* border: solid black 0.5px; */
-  background: var(--color-light-2);
+  background: white;
   padding: 0.5em 0.3em 0.5em 0.3em;
   min-width: 10%;
 }
 
 .adSortButtons p {
   font-size: 0.8vw;
+}
+
+.adSortButtons {
+  border-bottom: none;
+}
+.adSortButton:hover {
+  box-shadow: inset 0 -3px 0 var(--color-dark-3);
+}
+
+.adSortButton:active {
+  box-shadow: inset 0 -3px 0 var(--color-dark-2);
 }
