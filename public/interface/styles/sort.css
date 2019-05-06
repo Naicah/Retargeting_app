@@ -1,0 +1,43 @@
+.adSortContainer {
+  background: var(--color-dark-1);
+  grid-area: 7/2/9/10;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  margin: 0.5em 1% 1em 1%;
+  border: solid gray 1px;
+  min-height: 15vh;
+}
+
+.adSortContainer h3 {
+  /* font-family:; */
+  font-weight: 800;
+  margin: 0.5em 1em;
+  color: var(--color-light-1);
+}
+
+.adSortButtons {
+  display: flex;
+  /* margin: 0 0 0 1em; */
+  justify-content: space-evenly;
+  width: 100%;
+  color: var(--color-dark-1);
+  text-align: center;
+  padding: 0 1% 0 1%;
+  font-weight: 600;
+}
+
+.adSortButtons div {
+  border-radius: 3px;
+  /* border: solid black 0.5px; */
+  background: var(--color-light-2);
+  padding: 0.5em 0.3em 0.5em 0.3em;
+  min-width: 10%;
+}
+
+.adSortButtons p {
+  font-size: 0.8vw;
+}

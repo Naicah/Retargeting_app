@@ -2,7 +2,7 @@ const request = require("superagent");
 const knex = require("../knex/knex");
 
 const AsyncPolling = require("async-polling");
-const checkNewJobsInterval = 60000; //60 000 = 1m
+const checkNewJobsInterval = 3000; //60 000 = 1m
 const feed = "https://api.workbuster.com/jobs/feed/kyhdemo?format=json";
 
 // ===========================================================================//
@@ -80,7 +80,6 @@ module.exports = ({ router }) => {
     allNewJobsIndex = []; // Epmty array to get a fresh one
     for (i = 0; i < allJobsID.length; i++) {
       let id = allJobsID[i];
-
       if (!allAdsID.includes(id)) {
         allNewJobsIndex.push(i);
       }
@@ -101,13 +100,10 @@ module.exports = ({ router }) => {
         .get(feed)
         .then(res => {
           let jobObject;
-          const now = new Date();
-          const timeLeft = 0;
           allNewJobsIndex.forEach(function(index) {
             const jobs = res.body.jobs;
             let job = jobs[index];
-            timeLeft = now - last_application_timestamp;
-            console.log("timeLeft", timeLeft);
+
             jobObject = {
               id: job.id,
               title: job.title,
@@ -118,21 +114,22 @@ module.exports = ({ router }) => {
               apply_url: job.apply_url,
               image: job.image,
               company: job.company.name,
-              city: job.location.city || "Ospecificerad stad",
-              views: 0,
+              city:
+                job.location.city || job.location.name || "Ospecificerad stad",
+              job_category: job.department.name,
+              applies: 0,
               clicks: 0,
-              applies: 0
+              views: 0
             };
 
             // ================================== //
             //    ADD ALL NEW JOBS TO DATABASE    // SAVE EACH JOB OBJECT TO DATABASE
             // ================================== //
-
             knex("ads")
               .insert(jobObject)
               .then(function(result) {
                 // .then required so that promise is executed
-                result.json({ success: true, message: "ok" }); // respond back to request
+                // console.log("hej");
               });
           });
         })
