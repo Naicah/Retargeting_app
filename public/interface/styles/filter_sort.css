@@ -36,6 +36,7 @@
   margin: 0 0 0.5em 0;
   border: solid gray 1px;
   text-align: center;
+  min-height: 8vh;
 }
 
 .adOnGoing,
