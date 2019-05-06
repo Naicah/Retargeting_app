@@ -5,11 +5,14 @@ const Campaign = bizSdk.Campaign;
 const AdSet = bizSdk.AdSet;
 
 const access_token =
-  "EAAgSjZC0XzacBAChsNn9QFmCta44IgUsOkuZCiIfjrKfvKCOblLvX0HDqQPIgNqNw2TvsSNDdABSw5pwg2GonpZArH9PP846LAGxLY7k4wdCLW9jUu9KmA4IVP1qETSg2zYFxSLHwj1FbU4KlavijqRegcs3ZB28mi4ZAI0GkgPIb4IZBH2S0yDyl5uwvUyA0ZD";
+"EAAgSjZC0XzacBAPaK7wy61kbxZBWjvgN99dUYZAkcziUTGvPNkmIWQf86GtoZCoVTO7gwDuZBcASiXGE6t3Pco8cjtskoKSPe5WlAjWeOMtRfnds1B3ypz7w721TQZAM7U6ZCJC8KBthkZCUXFQeU3PQjAUrpO8X1D1kdvJQPCGFEnVbo4yomYNrHJHaDC8zWY4ZD";
+// const access_token = "EAAgSjZC0XzacBAJNT5qOkZB7ZAqO2m7ZBhYTovyXmXmhZCGnmOMdhpPZCHEHZCrIQNNIootZBetm5EtsQbaDSToIYCeW2pQknIcqYW3MeehaegqswepLUB9XbakPxZCnTh2GhqKMAE5I8ZAuyOdtRxR9liFLZCrpk2lU6uY3Oy2lyNodXcFwuOvIgG1Pc2JZB9nP7awZD";
+
 const app_secret = "2696e47e54e4f6f25248900e99f12fd3";
 const app_id = "2272209449504167";
 let page_id = "272837913620776";
-const ad_account_id = "act_2268066353434439";
+const ad_account_id = "act_2268066353434439"; // Old account ID
+// const ad_account_id = "act_1897009923766808"; // Sandbox acc id
 const pixel_id = "384339385749203";
 const conversion_id = "709358172813044";
 const api = bizSdk.FacebookAdsApi.init(access_token);
