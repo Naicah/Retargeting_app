@@ -1,21 +1,34 @@
 :root {
-  --color-dark-1: #0e263f; /* Dark blue - almost black*/
-  --color-dark-2: #225fa0; /* Dark blue*/
-  --color-dark-3: #2d7dd2; /* Medium blue*/
-  --color-dark-4: #848584; /* Dark grey*/
-  --color-light-1: #d5e9f9; /* Light blue*/
-  --color-light-2: #eaf2fa; /* Super light blue*/
-  --color-light-3: #edf2f6; /* Light grey*/
-  --color-light-4: #f8f8f8; /* Super light blue*/
-  --color-light-5: #c4d5e2; /* Light grey-blue*/
+  --color-dark-1: #0e263f;
+  /* Dark blue - almost black*/
+  --color-dark-2: #225fa0;
+  /* Dark blue*/
+  --color-dark-3: #2d7dd2;
+  /* Medium blue*/
+  --color-dark-4: #848584;
+  /* Dark grey*/
+  --color-light-1: #d5e9f9;
+  /* Light blue*/
+  --color-light-2: #eaf2fa;
+  /* Super light blue*/
+  --color-light-3: #edf2f6;
+  /* Light grey*/
+  --color-light-4: #f8f8f8;
+  /* Super light blue*/
+  --color-light-5: #c4d5e2;
+  /* Light grey-blue*/
 
-  --font-stack-1: MontSerrat, "Open Sans", Helvetica, sans-serif; /* Headers */
-  --font-stack-2: "Source Sans Pro", "Open Sans", sans-serif; /* Sub headers */
-  --font-stack-3: "Open Sans", Helvetica, sans-serif; /* Text */
+  --font-stack-1: MontSerrat, "Open Sans", Helvetica, sans-serif;
+  /* Headers */
+  --font-stack-2: "Source Sans Pro", "Open Sans", sans-serif;
+  /* Sub headers */
+  --font-stack-3: "Open Sans", Helvetica, sans-serif;
+  /* Text */
 }
+
 * {
   box-sizing: border-box;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   margin: 0;
 }
 
@@ -47,6 +60,23 @@ header {
   /* justify-content: space-around; */
   flex-wrap: wrap;
   grid-area: 7/2/12/10;
+}
+
+#bar-chart {
+  width: 300px;
+  height: 500px;
+  border: none;
+  margin-left: 20px;
+
+}
+
+#chart {
+  position: sticky;
+  max-width: 300px;
+  display: flex;
+  /* justify-content: space-around; */
+  flex-wrap: wrap;
+  /* grid-area: 7/2/12/10; */
 }
 
 .statistics {
@@ -82,6 +112,7 @@ header {
 .ad {
   border: none;
 }
+
 .ad h3 {
   color: var(--color-dark-1);
   font: var(--font-stack-1);
@@ -106,6 +137,7 @@ header {
 .adJobDetail {
   font-weight: 600;
 }
+
 .adTimeLeft {
   font-style: italic;
 }
@@ -126,6 +158,7 @@ header {
 .adStatisticsNumberContainer div {
   width: 33%;
 }
+
 .adStatisticsNumberContainer div {
   font-size: 1.5em;
   font-weight: 800;

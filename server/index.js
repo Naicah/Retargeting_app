@@ -1,4 +1,3 @@
-
 // // Koa - Get job feed
 // const Koa = require('koa')
 // const Router = require('koa-router')
@@ -33,6 +32,3 @@
 
 //   // require our external routes and pass in the router
 //   require('../routes/jobs')({ jobsRouter })
-
-
-  
