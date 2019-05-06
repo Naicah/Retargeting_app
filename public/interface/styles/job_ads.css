@@ -32,7 +32,6 @@
 
 .ad:hover {
   transform: scale(1.05);
-  cursor: pointer;
 }
 
 .ad h3 {

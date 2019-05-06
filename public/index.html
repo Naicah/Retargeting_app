@@ -63,23 +63,22 @@
         <div>
             <div class="adFiltersSearchFieldContainer" >
                 <div>
-                  <input type="text"  value="Sök"/>
-
+                  <input type="text"  placeholder="Sök.."/>
                 </div>
                 <div>
-                  <select  id="adLocationListId" class="adJobLocation">
+                  <select  id="adLocationListId" class="adFilterSelect">
                     <option value="">Välj plats...</option>
                     <option v-for="ad in adLocationList">{{ ad }}</option>
                   </select>
                 </div>
                 <div>
-                    <select  id="adJobCategoryId" class="adJobCategory">
+                    <select  id="adJobCategoryId" class="adFilterSelect">
                         <option value="">Välj jobbkategori...</option>
                         <option v-for="ad in adJobCategoryList">{{ ad }}</option>
                     </select>
                 </div>
                 <div>
-                  <select id="adCompanyId" class="adCompany">
+                  <select id="adCompanyId" class="adFilterSelect">
                       <option value="">Välj företag...</option>
                       <option v-for="ad in adCompaniesList">{{ ad }}</option>
                     </select>
@@ -95,14 +94,14 @@
         <div class="adSortContainer" id="adSortContainerId" v-show="!isHidden" >
           <h3>Sortering</h3>
           <div class="adSortButtons">
-            <div class="adSortTitle"><p>Jobbtitel</p></div>
-            <div class="adSortCompany"><p>Företagsnamn</p></div>
-            <div class="adSortLocation"><p>Plats</p></div>
-            <div class="adSortCategory"><p>Kategori</p></div>
-            <div class="adSortShowings"><p>Antal visningar</p></div>
-            <div class="adSortClicks"><p>Antal Klick</p></div>
-            <div class="adSortSearchings"><p>Antal sökningar</p></div>
-            <div class="adSortDaysLeft"><p>Antal dagar kvar</p></div>
+            <div class="adSortButton"><p>Jobbtitel</p></div>
+            <div class="adSortButton"><p>Företagsnamn</p></div>
+            <div class="adSortButton"><p>Plats</p></div>
+            <div class="adSortButton"><p>Kategori</p></div>
+            <div class="adSortButton"><p>Antal visningar</p></div>
+            <div class="adSortButton"><p>Antal Klick</p></div>
+            <div class="adSortButton"><p>Antal sökningar</p></div>
+            <div class="adSortButton"><p>Antal dagar kvar</p></div>
           </div>
 
         </div>

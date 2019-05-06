@@ -52,9 +52,7 @@
 }
 
 input,
-.adCompany,
-.adJobCategory,
-.adJobLocation {
+.adFilterSelect {
   background-color: #edf2f6;
   border-color: #edf2f6;
   /* border: none; */
