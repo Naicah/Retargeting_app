@@ -32,7 +32,6 @@
 
 .ad:hover {
   transform: scale(1.05);
-  cursor: pointer;
 }
 
 .ad h3 {
@@ -54,6 +53,7 @@
   font: var(--font-stack-2);
   font-weight: 600;
   margin-bottom: 0.2em;
+  font-size: 0.9em;
 }
 
 .ad p,
@@ -77,15 +77,16 @@
   flex-direction: row;
 }
 
-.adStatisticsHeaderContainer div {
-  text-align: center;
-  font-size: 0.5em;
-}
-
 .adStatisticsHeaderContainer div,
 .adStatisticsNumberContainer div {
   width: 33%;
 }
+
+.adStatisticsHeaderContainer div {
+  text-align: center;
+  font-size: 0.6vw;
+}
+
 .adStatisticsNumberContainer div {
   font-size: 1.5em;
   font-weight: 800;

@@ -1,15 +1,19 @@
-
-
-$.getJSON('/allAds', function(data) {
+$.getJSON("/allAds", function(data) {
+  console.log(data);
   var ad = new Vue({
-    el: '#ads',
+    el: "#mainContainer",
     data: {
       adsList: data,
-      title: "Workbuster"
+      title: "Workbuster",
+      sortContainerHidden: false,
+      filterContainerHidden: false,
+      filterSearch: "",
+      filterLocation: "",
+      filterJobCategory: "",
+      filterCompany: ""
     },
     methods: {
-
-      calDaysLeft: function(date) {
+      calcDaysLeft: function(date) {
         const now = Date.now();
         const latest = new Date(date);
         const millisecondsLeft = latest - now;
@@ -21,6 +25,12 @@ $.getJSON('/allAds', function(data) {
           return "Avslutad";
         }
       },
+      hideElement: function() {
+        this.filterContainerHidden ^= true;
+      },
+      hideSort: function() {
+        this.filterContainerHidden ^= true;
+      },
       ifJobCategory: function(ad) {
         // if (ad.job_category === null || ad.job_category === "") {
         if (ad.job_category) {
@@ -28,79 +38,49 @@ $.getJSON('/allAds', function(data) {
         } else {
           return "";
         }
-      }
-    }
-  })
-
-
- // ====================================== //
-  //     METHODS TO hide filter % sort  //
-  // ====================================== //
-
-  var filterSort = new Vue({
-    el: '#filterAndSortIcons',
-    // components: { 'filters': myComponent },
-    data: {
-
-   },
-   methods: {
-    hideElement: function() {
-      filterBinding.isHidden ^= true
       },
-     hideSort: function() {
-      sortBinding.isHidden ^=true
-     }
-   },
-  })
-
-  // ====================================== //
-  //         FILTER & SORT Menu             //
-  // ====================================== //
-  var filterBinding = new Vue({
-    el: '#adFilterBindingdMethods',
-    data: {
-      isHidden: false,
-      adsList: data,
-      title: 'Workbuster'
+      getFilterSearch: function() {
+        this.filterSearch = event.target.value;
+      },
+      getFilterLocation: function() {
+        this.filterLocation = event.target.value;
+      },
+      getFilterJobCategory: function() {
+        this.filterJobCategory = event.target.value;
+      },
+      getFilterCompany: function() {
+        this.filterCompany = event.target.value;
+      }
     },
     computed: {
 // <----------------- See city,jobcat and company from database --------------------->
       adLocationList: function() {
-        const adLocations = []
+        const adLocations = [];
         this.adsList.forEach(ad => {
           if (!adLocations.includes(ad.city)) {
-            adLocations.push(ad.city)
+            adLocations.push(ad.city);
           }
-        })
-        return adLocations
+        });
+        return adLocations;
       },
       adJobCategoryList: function() {
-        const adJobCategory = []
+        const adJobCategory = [];
         this.adsList.forEach(ad => {
           if (!adJobCategory.includes(ad.job_category)) {
-            adJobCategory.push(ad.job_category)
+            adJobCategory.push(ad.job_category);
           }
-        })
-        return adJobCategory
+        });
+        return adJobCategory;
       },
       adCompaniesList: function() {
-        const adCompanies = []
+        const adCompanies = [];
         this.adsList.forEach(ad => {
           if (!adCompanies.includes(ad.company)) {
-            adCompanies.push(ad.company)
+            adCompanies.push(ad.company);
           }
-        })
-        return adCompanies
-      },
-
-    },
-  })
-})
-
-var sortBinding = new Vue({
-  el: '#adSortContainerId',
-  data: {
-    isHidden: false,
-  },
-})
-
+        });
+        return adCompanies;
+      }
+    }
+  });
+});
