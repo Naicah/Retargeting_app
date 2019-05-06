@@ -1,4 +1,3 @@
-
 /*
 =======================
 **** General styles ****
@@ -26,12 +25,11 @@
 }
 
 body {
-  font-family:"Montserrat", "Open Sans", sans-serif;
+  font-family: "Montserrat", "Open Sans", sans-serif;
   background: var(--color-light-2);
 }
 
 .container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 10vh;
 }
