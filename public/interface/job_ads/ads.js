@@ -30,30 +30,38 @@ $.getJSON('/allAds', function(data) {
     }
   })
 
- 
 
-   const toggle = new Vue({
-       el: '#filtercontainer',
-       data: {
-        isHidden: false
+ // ====================================== //
+  //     METHODS TO hide filter % sort  //
+  // ====================================== //
+
+  var filterSort = new Vue({
+    el: '#filterAndSortIcons',
+    // components: { 'filters': myComponent },
+    data: {
+
+   },
+   methods: {
+    hideElement: function() {
+      filterBinding.isHidden ^= true
       },
+     hideSort: function() {
+      sortBinding.isHidden ^=true
+     } 
+   },
+  })
 
-    })
-
-  var filterad = new Vue({
+  // ====================================== //
+  //         FILTER & SORT Menu             //
+  // ====================================== //
+  var filterBinding = new Vue({
     el: '#adFilterBindingdMethods',
     data: {
-      search: '',
+      isHidden: false,
       adsList: data,
       title: 'Workbuster'
     },
     computed: {
-      filteredList() {
-        return this.adsList.filter(ads => {
-          console.log(ads)
-          return ads.title.toLowerCase().includes(this.search.toLowerCase())
-        })
-      },
       adLocationList: function() {
         const adLocations = []
         this.adsList.forEach(ad => {
@@ -68,9 +76,12 @@ $.getJSON('/allAds', function(data) {
         this.adsList.forEach(ad => {
           if (!adJobCategory.includes(ad.job_category)) {
             adJobCategory.push(ad.job_category)
+
           }
+
         })
         return adJobCategory
+
       },
       adCompaniesList: function() {
         const adCompanies = []
@@ -85,30 +96,9 @@ $.getJSON('/allAds', function(data) {
   })
 })
 
-// const toggle = new Vue({
-//   el: '#container',
-//   data: {
-//     title: 'Treehouse Public Library',
-//     mediaList: media,
-//     adLocationType: ''
-//   },
-//   methods: {
-//     toggleDetails: function(media){
-//       media.showDetail = !media.showDetail
-//     },
-//     filterList: function(){
-//       this.location = event.target.value;
-//     }
-//   },
-//   computed: {
-//     adLocationList: function(){
-//       const location = [];
-//       this.mediaList.forEach((adLocation)=>{
-//         if(!location.includes(adLocation.adLocationType)){
-//           location.push(adLocation.adLocationtype);
-//         }
-//       });
-//       return types;
-//     }
-//   }
-// });
+var sortBinding = new Vue({
+  el: '#adSortContainerId',
+  data: {
+    isHidden: false,
+  },
+})

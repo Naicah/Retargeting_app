@@ -17,13 +17,13 @@
     <title>Workbuster</title>
   </head>
   <body>
-    <div class="container" id="filtercontainer">
+    <div class="container">
       <header>Hej Peter!</header>
 
       <!-- ================================================================ -->
       <!--                      FILTER & SORTERING                          -->
       <!-- ================================================================ -->
-      <div class="filterAndSortContainer">
+      <div class="filterAndSortContainer" id="filtercontainer">
         <div class="adOngoingAndFinished">
           <div class="adOnGoing"><h3>8</h3>
             <p>Pågående</p>
@@ -38,11 +38,11 @@
         <div class="filterAndSortIcons" id="filterAndSortIcons">
           <div class="filterIcon"  >
           <h3>FILTER</h3>
-          <i class="fas fa-filter" @click="isHidden ^= true"></i>
+          <i class="fas fa-filter"  v-on:click="hideElement"></i>
           </div>
-          <div class="sortIcon">
+          <div class="sortIcon" id="sortIcon">
           <h3>SORTERING</h3>
-          <i class="fas fa-sort-amount-down"></i>
+          <i class="fas fa-sort-amount-down"   @click="hideSort"></i>
           </div>
         </div>
       </div>
@@ -50,9 +50,9 @@
       <!-- ================================================================ -->
       <!--                            FILTERS                               -->
       <!-- ================================================================ -->
-      <div class="filters" v-if="!isHidden"  >
-        <h3>Filter</h3>
-        <div class="adFiltersHeaderContainer">
+      <div class="filters" id="adFilterBindingdMethods"  v-show="!isHidden" >
+        <h3>Filter <h3>
+        <div class="adFiltersHeaderContainer" >
           <ul class="searchTitle">
             <li>JOBBTITEL</li>
             <li>PLATS</li>
@@ -61,25 +61,25 @@
           </ul>
         </div>
         <div>
-            <div class="adFiltersSearchFieldContainer" id="adFilterBindingdMethods">
+            <div class="adFiltersSearchFieldContainer" >
                 <div>
-                  <input type="text"  v-model="search" placeholder="Sök"/>
+                  <input type="text"  value="Sök"/>
 
                 </div>
                 <div>
-                  <select v-on:change="adLocationList" id="adLocationListId" class="adJobLocation">
+                  <select  id="adLocationListId" class="adJobLocation">
                     <option value="">Välj plats...</option>
                     <option v-for="ad in adLocationList">{{ ad }}</option>
                   </select>
                 </div>
                 <div>
-                    <select v-on:change="adJobCategoryList" id="adJobCategory" class="adJobCategory">
+                    <select  id="adJobCategoryId" class="adJobCategory">
                         <option value="">Välj jobbkategori...</option>
                         <option v-for="ad in adJobCategoryList">{{ ad }}</option>
                     </select>
                 </div>
                 <div>
-                  <select v-on:change="adCompany" id="adCompanyId" class="adCompany">
+                  <select id="adCompanyId" class="adCompany">
                       <option value="">Välj företag...</option>
                       <option v-for="ad in adCompaniesList">{{ ad }}</option>
                     </select>
@@ -92,7 +92,7 @@
       <!--                              SORT                                -->
       <!-- ================================================================ -->
 
-        <div class="adSortContainer" v-if="!isHidden" >
+        <div class="adSortContainer" id="adSortContainerId" v-show="!isHidden" >
           <h3>Sortering</h3>
           <div class="adSortButtons">
             <div class="adSortTitle">Jobbtitel</div>
