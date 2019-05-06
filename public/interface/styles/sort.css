@@ -5,7 +5,7 @@
     -moz-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
     border-radius: 3px;
-    margin: 1em 0.5em 1em 0;
+    margin: 0.5em 0.5em 1em 0;
     border: solid gray 1px;
   }
 
@@ -23,15 +23,22 @@
     justify-content: space-evenly;
     width: 100%;
     color: var(--color-dark-1);
-    
-    /* padding: 0 1% 0 1%; */
+    text-align: center;
+    padding: 0 1% 0 1%;
+    font-weight: 600;
     
   }
 
   .adSortButtons div {
     border-radius: 3px;
-    border: solid black 0.5px;
-    background: var(--color-light-1);
-    padding: 0.5em 0.1em 0.5em 0.1em;
+    /* border: solid black 0.5px; */
+    background: var(--color-light-2);
+    padding: 0.5em 0.3em 0.5em 0.3em;
     min-width: 10%;
+    
+  }
+
+  .adSortButtons p {
+    font-size: 0.8vw;
+  
   }
