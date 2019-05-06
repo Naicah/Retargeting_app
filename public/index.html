@@ -67,8 +67,8 @@
 
                 </div>
                 <div>
-                  <select  id="adLocationListId" class="adJobLocation">
-                    <option value="">Välj plats...</option>
+                  <select id="adLocationListId"  @change="selectType($event)" v-model="selectedValue1" class="adJobLocation">
+                    <option value=""  >Välj plats...</option>
                     <option v-for="ad in adLocationList">{{ ad }}</option>
                   </select>
                 </div>
@@ -109,12 +109,12 @@
       <!--                              ADS                                 -->
       <!-- ================================================================ -->
       <div id="ads">
-        <div class="ad" v-for="ad in adsList">
+        <div class="ad" v-show="selectedType === '' || selectedType === ad.location" v-for="ad in adsList":key="ad.id" >
           <div>
             <h3 id="adCompany">{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
-            <p class="adJobDetail">
-              <span id="adCity">{{ ad.city }}{{ ifJobCategory(ad) }}</span>
+            <p class="adJobDetail"  >
+              <span id="adCity" >{{ ad.city }}{{ ifJobCategory(ad) }}</span>
 
               <span id="adJobCategory">{{ ad.job_category }}</span>
             </p>
@@ -168,6 +168,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
     <!-- <script src="app.js"></script> -->
     <script src="./interface/job_ads/ads.js"></script>
   </body>

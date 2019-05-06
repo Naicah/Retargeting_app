@@ -1,5 +1,6 @@
+
+
 $.getJSON('/allAds', function(data) {
-  console.log(data)
   var ad = new Vue({
     el: '#ads',
     data: {
@@ -7,6 +8,7 @@ $.getJSON('/allAds', function(data) {
       title: "Workbuster"
     },
     methods: {
+
       calDaysLeft: function(date) {
         const now = Date.now();
         const latest = new Date(date);
@@ -47,21 +49,25 @@ $.getJSON('/allAds', function(data) {
       },
      hideSort: function() {
       sortBinding.isHidden ^=true
-     } 
+     }
    },
   })
 
   // ====================================== //
   //         FILTER & SORT Menu             //
   // ====================================== //
+  const FILTER_CITY = 'all';
   var filterBinding = new Vue({
     el: '#adFilterBindingdMethods',
     data: {
+      selectedValue1: '',
+      selectedType: FILTER_CITY,
       isHidden: false,
       adsList: data,
       title: 'Workbuster'
     },
     computed: {
+// <----------------- See city,jobcat and company from database --------------------->
       adLocationList: function() {
         const adLocations = []
         this.adsList.forEach(ad => {
@@ -76,12 +82,9 @@ $.getJSON('/allAds', function(data) {
         this.adsList.forEach(ad => {
           if (!adJobCategory.includes(ad.job_category)) {
             adJobCategory.push(ad.job_category)
-
           }
-
         })
         return adJobCategory
-
       },
       adCompaniesList: function() {
         const adCompanies = []
@@ -91,6 +94,25 @@ $.getJSON('/allAds', function(data) {
           }
         })
         return adCompanies
+      },
+      // <---------------FILTER FUNCTION ------------------>
+      filteredProducts: function() {
+        console.log('filterprod')
+        if (this.selectedType === FILTER_CITY) {
+          ad.adsList == this.selectedType
+          console.log('click')
+          return this.adsList
+        } else {
+        console.log('click')
+          return this.adsList.filter(p => p.city === this.selectedType)
+        }
+      }
+    },
+    methods: {
+      selectType(event) {
+        filterBinding.selectedType = event.target.value
+        //this.filteredProducts()
+        console.log(event.target.value)
       }
     }
   })
@@ -102,3 +124,4 @@ var sortBinding = new Vue({
     isHidden: false,
   },
 })
+
