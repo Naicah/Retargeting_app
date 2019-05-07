@@ -12,7 +12,10 @@
     <link href="./interface/styles/sort.css" rel="stylesheet" />
     <link href="./interface/styles/filter.css" rel="stylesheet" />
     <link href="./interface/styles/job_ads.css" rel="stylesheet" />
+    <link href="./interface/styles/chart.css" rel="stylesheet" />
     <link href="./interface/styles/statistics.css" rel="stylesheet" />
+    
+
 
     <title>Workbuster</title>
   </head>
@@ -162,8 +165,11 @@
       <!-- ================================================================ -->
       <!--                            STATISTICS                            -->
       <!-- ================================================================ -->
-      <div class="statistics">
+      <div class="statistics" id="chart">
         Statistik
+        <!-- <div id="chart"> -->
+          <bar-chart></bar-chart>
+        
       </div>
     </div>
 
@@ -172,9 +178,13 @@
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+   <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <!-- <script src="app.js"></script> -->
     <script src="./interface/job_ads/ads.js"></script>
+    <script src="./interface/chart.js"></script>
+
   </body>
 </html>
 
