@@ -90,3 +90,4 @@ $.getJSON("/allAds", function(data) {
     }
   });
 });
+

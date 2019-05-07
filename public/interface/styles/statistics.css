@@ -1,5 +1,14 @@
 
+#bar-chart {
+  background: var(--color-light-2);
+  grid-area: 5/10/13/13;
+  margin-right: 2em;
+}
 
+#chart {
+  width: auto;
+  height: fit-content;
+}
 .statistics {
   background: var(--color-light-2);
   grid-area: 5/10/13/13;

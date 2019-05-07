@@ -43,7 +43,7 @@
   margin: 0;
  
 }
-.adFiltersSearchFieldContainer div {
+.adFiltersSearchFieldContainer div,.v-select {
   padding: 0.7em 0;
   width: 25%;
 }
