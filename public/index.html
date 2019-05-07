@@ -13,6 +13,8 @@
     <link href="./interface/styles/filter.css" rel="stylesheet" />
     <link href="./interface/styles/job_ads.css" rel="stylesheet" />
     <link href="./interface/styles/statistics.css" rel="stylesheet" />
+    
+
 
     <title>Workbuster</title>
   </head>
@@ -63,7 +65,7 @@
         <div>
             <div class="adFiltersSearchFieldContainer" >
                 <div>
-                  <input type="text" v-model="search"  value="" placeholder="Sök.." v-on:change="getFilterSearch"/>
+                  <input type="text"  value="" placeholder="Sök.." v-on:change="getFilterSearch"/>
                 </div>
                 <div>
                   <select  id="adLocationListId" class="adFilterSelect" v-on:change="getFilterLocation">
@@ -110,17 +112,16 @@
       <!-- ================================================================ -->
       <div id="ads">
         <div class="ad"
-        v-show=" (filterSearch === '' || filterSearch === ad.title)
+        v-show=" (filterSearch === '' || filterSearch === ad.title) 
               && (filterLocation === '' || filterLocation === ad.city)
               && (filterJobCategory === '' || filterJobCategory === ad.job_category) 
-              && (filterCompany === '' || filterCompany === ad.company)"
-        v-for="ad in adsList"
-        v-for="ad in searchFilter" >
+              && (filterCompany === '' || filterCompany === ad.company)" 
+        v-for="ad in adsList" >
           <div>
             <h3 id="adCompany">{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
-            <p class="adJobDetail"  >
-              <span id="adCity" >{{ ad.city }}{{ ifJobCategory(ad) }}</span>
+            <p class="adJobDetail">
+              <span id="adCity">{{ ad.city }}{{ ifJobCategory(ad) }}</span>
 
               <span id="adJobCategory">{{ ad.job_category }}</span>
             </p>
@@ -163,25 +164,25 @@
       <!-- ================================================================ -->
       <!--                            STATISTICS                            -->
       <!-- ================================================================ -->
-      <div class="statistics">
+      <div class="statistics" id="chart">
         Statistik
-        <div id="chart">
+        <!-- <div id="chart"> -->
           <bar-chart></bar-chart>
-        </div>
-
+        
+      </div>
     </div>
 
     <script
-    src="https://code.jquery.com/jquery-3.4.0.js"
-    integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
-    crossorigin="anonymous"
-  ></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
- <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-  <!-- <script src="app.js"></script> -->
-  <script src="./interface/job_ads/ads.js"></script>
-  <script src="./interface/chart.js"></script>
+      src="https://code.jquery.com/jquery-3.4.0.js"
+      integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+   <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <!-- <script src="app.js"></script> -->
+    <script src="./interface/job_ads/ads.js"></script>
+    <script src="./interface/chart.js"></script>
 
-</body>
+  </body>
 </html>
