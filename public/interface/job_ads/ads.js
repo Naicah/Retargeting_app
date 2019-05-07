@@ -83,11 +83,11 @@ $.getJSON("/allAds", function(data) {
         return adCompanies;
       }
     },
-    searchFilter:function() {
-      return this.adsList.filter((ad) => {
-        return ad.title.match(this.search)
-      })
-    }
+    // searchFilter:function() {
+    //   return this.adsList.filter((ad) => {
+    //     return ad.title.match(this.search)
+    //   })
+    // }
   });
 });
 
