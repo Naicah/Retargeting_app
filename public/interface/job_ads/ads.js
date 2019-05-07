@@ -10,7 +10,8 @@ $.getJSON("/allAds", function(data) {
       filterSearch: "",
       filterLocation: "",
       filterJobCategory: "",
-      filterCompany: ""
+      filterCompany: "",
+      search:''
     },
     methods: {
       calcDaysLeft: function(date) {
@@ -29,7 +30,7 @@ $.getJSON("/allAds", function(data) {
         this.filterContainerHidden ^= true;
       },
       hideSort: function() {
-        this.filterContainerHidden ^= true;
+        this.sortContainerHidden ^= true;
       },
       ifJobCategory: function(ad) {
         // if (ad.job_category === null || ad.job_category === "") {
@@ -81,6 +82,11 @@ $.getJSON("/allAds", function(data) {
         });
         return adCompanies;
       }
+    },
+    searchFilter:function() {
+      return this.adsList.filter((ad) => {
+        return ad.title.match(this.search)
+      })
     }
   });
 });

@@ -63,7 +63,7 @@
         <div>
             <div class="adFiltersSearchFieldContainer" >
                 <div>
-                  <input type="text"  value="" placeholder="Sök.." v-on:change="getFilterSearch"/>
+                  <input type="text" v-model="search"  value="" placeholder="Sök.." v-on:change="getFilterSearch"/>
                 </div>
                 <div>
                   <select  id="adLocationListId" class="adFilterSelect" v-on:change="getFilterLocation">
@@ -91,7 +91,7 @@
       <!--                              SORT                                -->
       <!-- ================================================================ -->
 
-        <div class="adSortContainer" id="adSortContainerId" v-show="!filterLocation" >
+        <div class="adSortContainer" id="adSortContainerId" v-show="!sortContainerHidden" >
           <h3>Sortering</h3>
           <div class="adSortButtons">
             <div class="adSortButton"><p>Jobbtitel</p></div>
@@ -110,11 +110,12 @@
       <!-- ================================================================ -->
       <div id="ads">
         <div class="ad"
-        v-show=" (filterSearch === '' || filterSearch === ad.title) 
+        v-show=" (filterSearch === '' || filterSearch === ad.title)
               && (filterLocation === '' || filterLocation === ad.city)
               && (filterJobCategory === '' || filterJobCategory === ad.job_category) 
-              && (filterCompany === '' || filterCompany === ad.Company)" 
-        v-for="ad in adsList" >
+              && (filterCompany === '' || filterCompany === ad.company)"
+        v-for="ad in adsList"
+        v-for="ad in searchFilter" >
           <div>
             <h3 id="adCompany">{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
