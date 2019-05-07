@@ -17,7 +17,7 @@
     <title>Workbuster</title>
   </head>
   <body>
-    <div class="container">
+    <div id="mainContainer" class="container">
       <header>Hej Peter!</header>
 
       <!-- ================================================================ -->
@@ -38,7 +38,7 @@
         <div class="filterAndSortIcons" id="filterAndSortIcons">
           <div class="filterIcon"  >
           <h3 id="filterText">FILTER</h3>
-          <i class="fas fa-filter"  v-on:click="hideElement"></i>
+          <i class="fas fa-filter"  @click="hideElement"></i>
           </div>
           <div class="sortIcon" id="sortIcon">
           <h3 id="sortText">SORTERING</h3>
@@ -50,7 +50,7 @@
       <!-- ================================================================ -->
       <!--                            FILTERS                               -->
       <!-- ================================================================ -->
-      <div class="filters" id="adFilterBindingdMethods"  v-show="!isHidden" >
+      <div class="filters" id="adFilterBindingdMethods"  v-show="!filterContainerHidden" >
         <h3>Filter <h3>
         <div class="adFiltersHeaderContainer" >
           <ul class="searchTitle">
@@ -63,25 +63,25 @@
         <div>
             <div class="adFiltersSearchFieldContainer" >
                 <div>
-                  <input type="text"  value="" placeholder="Sök.."/>
+                  <input type="text"  value="" placeholder="Sök.." v-on:change="getFilterSearch"/>
                 </div>
                 <div>
-                  <select  id="adLocationListId" class="adFilterSelect">
+                  <select  id="adLocationListId" class="adFilterSelect" v-on:change="getFilterLocation">
                     <option value="">Välj plats...</option>
                     <option v-for="ad in adLocationList">{{ ad }}</option>
                   </select>
                 </div>
                 <div>
-                    <select  id="adJobCategoryId" class="adFilterSelect">
-                        <option value="">Välj jobbkategori...</option>
-                        <option v-for="ad in adJobCategoryList">{{ ad }}</option>
-                    </select>
+                  <select  id="adJobCategoryId" class="adFilterSelect" v-on:change="getFilterJobCategory">
+                    <option value="">Välj jobbkategori...</option>
+                    <option v-for="ad in adJobCategoryList">{{ ad }}</option>
+                  </select>
                 </div>
                 <div>
-                  <select id="adCompanyId" class="adFilterSelect">
-                      <option value="">Välj företag...</option>
-                      <option v-for="ad in adCompaniesList">{{ ad }}</option>
-                    </select>
+                  <select id="adCompanyId" class="adFilterSelect" v-on:change="getFilterCompany">
+                    <option value="">Välj företag...</option>
+                    <option v-for="ad in adCompaniesList">{{ ad }}</option>
+                  </select>
                 </div>
                 
             </div>
@@ -91,7 +91,7 @@
       <!--                              SORT                                -->
       <!-- ================================================================ -->
 
-        <div class="adSortContainer" id="adSortContainerId" v-show="!isHidden" >
+        <div class="adSortContainer" id="adSortContainerId" v-show="!filterLocation" >
           <h3>Sortering</h3>
           <div class="adSortButtons">
             <div class="adSortButton"><p>Jobbtitel</p></div>
@@ -109,7 +109,12 @@
       <!--                              ADS                                 -->
       <!-- ================================================================ -->
       <div id="ads">
-        <div class="ad" v-for="ad in adsList">
+        <div class="ad"
+        v-show=" (filterSearch === '' || filterSearch === ad.title) 
+              && (filterLocation === '' || filterLocation === ad.city)
+              && (filterJobCategory === '' || filterJobCategory === ad.job_category) 
+              && (filterCompany === '' || filterCompany === ad.Company)" 
+        v-for="ad in adsList" >
           <div>
             <h3 id="adCompany">{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
@@ -120,7 +125,7 @@
             </p>
           </div>
           <p class="adTimeLeft">
-            {{ calDaysLeft(ad.last_application_timestamp) }}
+            {{ calcDaysLeft(ad.last_application_timestamp) }}
           </p>
           <!-- ====================== AD STATISCICS ======================= -->
           <div>
