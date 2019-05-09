@@ -13,6 +13,7 @@ $.getJSON("/allAds", function(data) {
       filterCompany: ""
     },
     methods: {
+      // CALCULATE DAYS LEFT TO APPLY TO JOB, RETURN STRING
       calcDaysLeft: function(date) {
         const now = Date.now();
         const latest = new Date(date);
@@ -25,32 +26,37 @@ $.getJSON("/allAds", function(data) {
           return "Avslutad";
         }
       },
-      hideFilter: function() {
+      // TOGGLE FILTER SECTION
+      toggleFilter: function() {
         this.filterContainerHidden ^= true;
       },
-      hideSort: function() {
+      // TOGGLE SORT SECTION
+      toggleSort: function() {
         this.sortContainerHidden ^= true;
       },
+      // CREATES COMMA IF AD HAS A JOB CATEGORY
       ifJobCategory: function(ad) {
-        // if (ad.job_category === null || ad.job_category === "") {
         if (ad.job_category) {
           return ",";
         } else {
           return "";
         }
       },
-
+      // GET WHICH LOCATION TO FILTER ON
       getFilterLocation: function() {
         this.filterLocation = event.target.value;
       },
+      // GET WHICH JOB CATEGORY TO FILTER ON
       getFilterJobCategory: function() {
         this.filterJobCategory = event.target.value;
       },
+      // GET WHICH COMPANY TO FILTER ON
       getFilterCompany: function() {
         this.filterCompany = event.target.value;
       }
     },
     computed: {
+      // CREATES LIST OF ALL LOCATIONS
       adLocationList: function() {
         const adLocations = [];
         this.adsList.forEach(ad => {
@@ -60,6 +66,7 @@ $.getJSON("/allAds", function(data) {
         });
         return adLocations;
       },
+      // CREATES LIST OF ALL JOB CATEGORIES
       adJobCategoryList: function() {
         const adJobCategory = [];
         this.adsList.forEach(ad => {
@@ -69,6 +76,7 @@ $.getJSON("/allAds", function(data) {
         });
         return adJobCategory;
       },
+      // CREATES LIST OF ALL COMPANIES
       adCompaniesList: function() {
         const adCompanies = [];
         this.adsList.forEach(ad => {
@@ -78,6 +86,15 @@ $.getJSON("/allAds", function(data) {
         });
         return adCompanies;
       },
+      // RETURNS ONLY ONGOING ADS
+      // filterOngoing() {
+      //   return this.adsList.filter(ad => {
+      //     return ad.title
+      //       .toLowerCase()
+      //       .includes(this.filterSearch.toLowerCase());
+      //   });
+      // },
+      // RETURNS ONLY ADS THAT MATCHES THE SEARCH
       filterSearchList() {
         return this.adsList.filter(ad => {
           return ad.title
