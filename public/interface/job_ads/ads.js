@@ -1,8 +1,4 @@
-
-const url = 'allAds';
-fetch(url)
-.then(res => res.json())
-.then((data) => {
+$.getJSON("/allAds", function(data) {
   new Vue({
 
     el: "#mainContainer",
@@ -95,6 +91,4 @@ fetch(url)
   })
 
 
-
-.catch(err => { throw err })
 
