@@ -58,6 +58,80 @@ $.getJSON("/allAds", function(data) {
       console.log("created");
     },
     methods: {
+      // -------------- SORT & FILTER --------------- //
+      // TOGGLE FILTER SECTION
+      toggleFilter: function() {
+        this.filterContainerHidden ^= true;
+      },
+      // TOGGLE SORT SECTION
+      toggleSort: function() {
+        this.sortContainerHidden ^= true;
+      },
+
+      // --------------- FILTER --------------- //
+      // GET WHICH LOCATION TO FILTER ON
+      getFilterLocation: function() {
+        this.filterLocation = event.target.value;
+      },
+      // GET WHICH JOB CATEGORY TO FILTER ON
+      getFilterJobCategory: function() {
+        this.filterJobCategory = event.target.value;
+      },
+      // GET WHICH COMPANY TO FILTER ON
+      getFilterCompany: function() {
+        this.filterCompany = event.target.value;
+      },
+
+      // --------------- SORT --------------- //
+      // SORT ADS BASED ON WHICH SORT BUTTON WAS CLICKED
+      sortAds(value) {
+        switch (value) {
+          case "title":
+            this.adsToShowList.sort((a, b) => (a.title > b.title ? 1 : -1));
+            break;
+          case "company":
+            this.adsToShowList.sort((a, b) => (a.company > b.company ? 1 : -1));
+            break;
+          case "city":
+            this.adsToShowList.sort((a, b) => (a.city > b.city ? 1 : -1));
+            break;
+          case "job_category":
+            this.adsToShowList.sort((a, b) =>
+              a.job_category > b.job_category ? 1 : -1
+            );
+            break;
+          case "applies":
+            this.adsToShowList.sort((a, b) => b.applies - a.applies);
+            break;
+          case "views":
+            this.adsToShowList.sort((a, b) => b.views - a.views);
+            break;
+          case "clicks":
+            this.adsToShowList.sort((a, b) => b.clicks - a.clicks);
+            break;
+          case "last_application_timestamp":
+            this.adsToShowList.sort((a, b) =>
+              a.last_application_timestamp > b.last_application_timestamp
+                ? 1
+                : -1
+            );
+            break;
+        }
+      },
+
+      // ----------------------- ADS ------------------------ //
+
+      // --------------- JOB CATEGORY --------------- //
+      // CREATES COMMA IF AD HAS A JOB CATEGORY
+      ifJobCategory: function(ad) {
+        if (ad.job_category) {
+          return ",";
+        } else {
+          return "";
+        }
+      },
+
+      // --------------- DAYS LEFT --------------- //
       // CALCULATE DAYS LEFT TO APPLY TO JOB
       calcDaysLeft: function(date) {
         const now = Date.now();
@@ -74,37 +148,18 @@ $.getJSON("/allAds", function(data) {
         } else {
           return "Avslutad";
         }
-      },
-      // TOGGLE FILTER SECTION
-      toggleFilter: function() {
-        this.filterContainerHidden ^= true;
-      },
-      // TOGGLE SORT SECTION
-      toggleSort: function() {
-        this.sortContainerHidden ^= true;
-      },
-      // CREATES COMMA IF AD HAS A JOB CATEGORY
-      ifJobCategory: function(ad) {
-        if (ad.job_category) {
-          return ",";
-        } else {
-          return "";
-        }
-      },
-      // GET WHICH LOCATION TO FILTER ON
-      getFilterLocation: function() {
-        this.filterLocation = event.target.value;
-      },
-      // GET WHICH JOB CATEGORY TO FILTER ON
-      getFilterJobCategory: function() {
-        this.filterJobCategory = event.target.value;
-      },
-      // GET WHICH COMPANY TO FILTER ON
-      getFilterCompany: function() {
-        this.filterCompany = event.target.value;
       }
     },
     computed: {
+      // -------------- FILTER --------------- //
+      // SHOW ADS THAT MATCHES SEARCH
+      searchList() {
+        return this.adsToShowList.filter(ad => {
+          return ad.title
+            .toLowerCase()
+            .includes(this.filterSearch.toLowerCase());
+        });
+      },
       // CREATES LIST OF ALL LOCATIONS
       adLocationList: function() {
         const adLocations = [];
@@ -134,14 +189,6 @@ $.getJSON("/allAds", function(data) {
           }
         });
         return adCompanies;
-      },
-
-      searchList() {
-        return this.adsToShowList.filter(ad => {
-          return ad.title
-            .toLowerCase()
-            .includes(this.filterSearch.toLowerCase());
-        });
       }
     }
   });
