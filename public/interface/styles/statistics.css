@@ -1,16 +1,24 @@
-
-#bar-chart {
-  background: var(--color-light-2);
-  grid-area: 5/10/13/13;
-  margin-right: 2em;
-}
-
-#chart {
-  width: auto;
-  height: fit-content;
-}
 .statistics {
   background: var(--color-light-2);
   grid-area: 5/10/13/13;
-  margin-right: 2em;
+  margin: 0 2em 0 0.5em;
+}
+.statistics h3 {
+  margin: 0 0 5vh 2vh;
+  font-weight: 600;
+}
+
+#adVisualStatistics {
+  text-align: center;
+  margin: 0.5em 0 0 0;
+}
+#bar-chart {
+  width: 300px;
+  height: 500px;
+}
+
+#chart {
+  width: 300px;
+  height: 500px;
+  margin: 0;
 }
