@@ -70,14 +70,23 @@
     <link href="./interface/styles/filter.css" rel="stylesheet" />
     <link href="./interface/styles/job_ads.css" rel="stylesheet" />
     <link href="./interface/styles/statistics.css" rel="stylesheet" />
-    
+    <link href="./interface/workbuster.png" rel="stylesheet" />
+
 
 
     <title>Workbuster</title>
   </head>
   <body>
     <div id="mainContainer" class="container">
-      <header>Hej Peter!</header>
+      <header>
+        <img src="./interface/workbuster.png">
+        <div class="talk-bubble tri-right left-in">
+            <div class="talktext">
+              <p>Hej Peter!</p>
+            </div>
+          </div>
+      
+      </header>
 
       <!-- ================================================================ -->
       <!--                      FILTER & SORTERING                          -->
@@ -270,10 +279,10 @@
       <!--                            STATISTICS                            -->
       <!-- ================================================================ -->
       <div class="statistics" id="chart">
-        Statistik
+        <h3>Statistik</h3>
         <!-- <div id="chart"> -->
           <bar-chart></bar-chart>
-        
+        <h3 id="adVisualStatistics">Alla annonser</h3>
       </div>
     </div>
 
