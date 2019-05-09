@@ -16,7 +16,6 @@ $.getJSON("/allAds", function(data) {
     },
     methods: {
       calcDaysLeft: function(date) {
-        const onGoingAds  = []
         const now = Date.now();
         const latest = new Date(date);
         const millisecondsLeft = latest - now;
@@ -87,7 +86,77 @@ $.getJSON("/allAds", function(data) {
         return adCompanies;
       }
     },
-  })
+  }),
+  new Chart('bar-chart', {
+    type: 'bar',
+      data: {
+          labels: ["Ansökningar", "Visningar", "Klick"],
+          datasets:
+              [{
+                  data: [40, 60, 30,],
+                  label: "Antal:",
+                  backgroundColor: [
+                    "rgba(45, 125, 210, 1)",
+                    "rgba(34, 95, 160, 1)",
+                    "rgba(14, 38, 63, 1)"
+                  ],
+                  datalabels: {
+                    align: 'end',
+                    anchor: 'end'
+                  }
+
+              }]
+          },
+
+          options: {
+            scales: {
+
+              yAxes: [{
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+                ticks: {
+
+          display: false,
+          beginAtZero: true
+
+                }
+              }],
+              xAxes: [{
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+                ticks: {
+                  beginAtZero: true
+                }
+
+              }]
+
+            },
+
+            legend: false,
+            tooltip: false,
+              plugins: {
+                datalabels: {
+                  color:'#36A2EB'
+                },
+                 
+                }
+          }
+        },
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            display: false
+          },
+
+
+        }
+      );
+
   })
 
 

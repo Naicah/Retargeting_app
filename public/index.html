@@ -175,12 +175,14 @@
       <!-- ================================================================ -->
       <!--                            STATISTICS                            -->
       <!-- ================================================================ -->
-      <div class="statistics" id="chart">
+
+      <div class="statistics"  id="chart">
         <h3>Statistik</h3>
         <!-- <div id="chart"> -->
-          <bar-chart></bar-chart>
-        <h3 id="adVisualStatistics">Alla annonser</h3>
-      </div>
+          <canvas id="bar-chart">
+          </canvas>
+        <h3></h3>
+        </div>
     </div>
 
     <script
@@ -188,44 +190,15 @@
       integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
       crossorigin="anonymous"
     ></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
    <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.5.0"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <!-- <script src="app.js"></script> -->
     <script src="./interface/job_ads/ads.js"></script>
     <script src="./interface/chart.js"></script>
-
-  </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   </body>
 </html>
