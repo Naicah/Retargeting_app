@@ -25,11 +25,11 @@ $.getJSON("/allAds", function(data) {
           return "Avslutad";
         }
       },
-      hideElement: function() {
+      hideFilter: function() {
         this.filterContainerHidden ^= true;
       },
       hideSort: function() {
-        this.filterContainerHidden ^= true;
+        this.sortContainerHidden ^= true;
       },
       ifJobCategory: function(ad) {
         // if (ad.job_category === null || ad.job_category === "") {
@@ -39,9 +39,7 @@ $.getJSON("/allAds", function(data) {
           return "";
         }
       },
-      getFilterSearch: function() {
-        this.filterSearch = event.target.value;
-      },
+
       getFilterLocation: function() {
         this.filterLocation = event.target.value;
       },
@@ -79,6 +77,13 @@ $.getJSON("/allAds", function(data) {
           }
         });
         return adCompanies;
+      },
+      filterSearchList() {
+        return this.adsList.filter(ad => {
+          return ad.title
+            .toLowerCase()
+            .includes(this.filterSearch.toLowerCase());
+        });
       }
     }
   });

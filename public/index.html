@@ -32,7 +32,7 @@
       </header>
 
       <!-- ================================================================ -->
-      <!--                      FILTER & SORTERING                          -->
+      <!--                      FILTER & SORTING                            -->
       <!-- ================================================================ -->
       <div class="filterAndSortContainer" id="filtercontainer">
         <div class="adOngoingAndFinished">
@@ -47,13 +47,13 @@
           </div>
         </div>
         <div class="filterAndSortIcons" id="filterAndSortIcons">
-          <div class="filterIcon"  >
+          <div class="filterIcon" @click="hideFilter">
           <h3 id="filterText">FILTER</h3>
-          <i class="fas fa-filter"  @click="hideElement"></i>
+          <i class="fas fa-filter"></i>
           </div>
-          <div class="sortIcon" id="sortIcon">
+          <div class="sortIcon" id="sortIcon" @click="hideSort">
           <h3 id="sortText">SORTERING</h3>
-          <i class="fas fa-sort-amount-down"   @click="hideSort"></i>
+          <i class="fas fa-sort-amount-down"></i>
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
         <div>
             <div class="adFiltersSearchFieldContainer" >
                 <div>
-                  <input type="text"  value="" placeholder="Sök.." v-on:change="getFilterSearch"/>
+                  <input type="text"  value="" placeholder="Sök.." v-model="filterSearch"/>
                 </div>
                 <div>
                   <select  id="adLocationListId" class="adFilterSelect" v-on:change="getFilterLocation">
@@ -102,7 +102,7 @@
       <!--                              SORT                                -->
       <!-- ================================================================ -->
 
-        <div class="adSortContainer" id="adSortContainerId" v-show="!filterLocation" >
+        <div class="adSortContainer" id="adSortContainerId" v-show="!sortContainerHidden" >
           <h3>Sortering</h3>
           <div class="adSortButtons">
             <div class="adSortButton"><p>Jobbtitel</p></div>
@@ -121,11 +121,12 @@
       <!-- ================================================================ -->
       <div id="ads">
         <div class="ad"
-        v-show=" (filterSearch === '' || filterSearch === ad.title) 
-              && (filterLocation === '' || filterLocation === ad.city)
+        v-show= 
+              " (filterLocation === '' || filterLocation === ad.city)
               && (filterJobCategory === '' || filterJobCategory === ad.job_category) 
-              && (filterCompany === '' || filterCompany === ad.Company)" 
-        v-for="ad in adsList" >
+              && (filterCompany === '' || filterCompany === ad.company)" 
+        
+        v-for="ad in filterSearchList" >
           <div>
             <h3 id="adCompany">{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
