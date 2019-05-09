@@ -3,8 +3,12 @@ $.getJSON("/allAds", function(data) {
   var ad = new Vue({
     el: "#mainContainer",
     data: {
-      adsList: data,
       title: "Workbuster",
+      allAdsList: data,
+      ongoingAdsList: "",
+      finishedAdsList: "",
+      adsToShowList: data,
+      showAdsWithStatus: "all",
       sortContainerHidden: false,
       filterContainerHidden: false,
       filterSearch: "",
@@ -12,13 +16,46 @@ $.getJSON("/allAds", function(data) {
       filterJobCategory: "",
       filterCompany: ""
     },
+    watch: {
+      showAdsWithStatus: function() {
+        switch (this.showAdsWithStatus) {
+          case "ongoing":
+            this.adsToShowList = this.ongoingAdsList.filter(
+              ad => ad.status === "ongoing"
+            );
+            break;
+          case "finished":
+            this.adsToShowList = this.finishedAdsList.filter(
+              ad => ad.status === "finished"
+            );
+            break;
+        }
+      }
+
+      // whenever search field changes, this function will run
+      // filterSearch: function() {
+      //   this.adsToShowList = this.adsToShowList.filter(ad =>
+      //     ad.title.toLowerCase().includes(this.filterSearch.toLowerCase())
+      //   );
+      // }
+    },
     methods: {
-      // CALCULATE DAYS LEFT TO APPLY TO JOB, RETURN STRING
+      // CALCULATE DAYS LEFT TO APPLY TO JOB
       calcDaysLeft: function(date) {
         const now = Date.now();
         const latest = new Date(date);
         const millisecondsLeft = latest - now;
-        const daysLeft = Math.floor(millisecondsLeft / 1000 / 60 / 60 / 24);
+        return (daysLeft = Math.floor(millisecondsLeft / 1000 / 60 / 60 / 24));
+      },
+      // RETURNS ONLY ONGOING ADS
+      filterOngoing: function() {
+        this.adsToShowList = this.adsToShowList.filter(
+          ad => this.calcDaysLeft(ad.last_application_timestamp) > 0
+        );
+      },
+      // RETURNS HOW MANY DAYS LEFT TO APPLY, OR SAYS THAT AD IS FINISHED
+      getStatus: function(date) {
+        const daysLeft = this.calcDaysLeft(date);
 
         if (daysLeft > 0) {
           return daysLeft + " dagar kvar";
@@ -59,7 +96,7 @@ $.getJSON("/allAds", function(data) {
       // CREATES LIST OF ALL LOCATIONS
       adLocationList: function() {
         const adLocations = [];
-        this.adsList.forEach(ad => {
+        this.allAdsList.forEach(ad => {
           if (!adLocations.includes(ad.city)) {
             adLocations.push(ad.city);
           }
@@ -69,7 +106,7 @@ $.getJSON("/allAds", function(data) {
       // CREATES LIST OF ALL JOB CATEGORIES
       adJobCategoryList: function() {
         const adJobCategory = [];
-        this.adsList.forEach(ad => {
+        this.allAdsList.forEach(ad => {
           if (!adJobCategory.includes(ad.job_category)) {
             adJobCategory.push(ad.job_category);
           }
@@ -79,24 +116,45 @@ $.getJSON("/allAds", function(data) {
       // CREATES LIST OF ALL COMPANIES
       adCompaniesList: function() {
         const adCompanies = [];
-        this.adsList.forEach(ad => {
+        this.allAdsList.forEach(ad => {
           if (!adCompanies.includes(ad.company)) {
             adCompanies.push(ad.company);
           }
         });
         return adCompanies;
       },
-      // RETURNS ONLY ONGOING ADS
-      // filterOngoing() {
-      //   return this.adsList.filter(ad => {
-      //     return ad.title
-      //       .toLowerCase()
-      //       .includes(this.filterSearch.toLowerCase());
-      //   });
-      // },
-      // RETURNS ONLY ADS THAT MATCHES THE SEARCH
-      filterSearchList() {
-        return this.adsList.filter(ad => {
+      setStatus: function() {
+        const list = this.allAdsList;
+        var i;
+        for (i = 0; i < list.length; i++) {
+          daysLeft = this.calcDaysLeft(list[i].last_application_timestamp);
+
+          if (daysLeft > 0) {
+            list[i].status = "ongoing";
+          } else {
+            list[i].status = "finished";
+          }
+        }
+
+        console.log("setStatus");
+        // return this.allAdsList;
+      },
+      setStatusLists: function() {
+        switch (this.showAdsWithStatus) {
+          case "ongoing":
+            this.ongoingAdsList = this.allAdsList.filter(
+              ad => ad.status === "ongoing"
+            );
+            break;
+          case "finished":
+            this.finishedAdsList = this.allAdsList.filter(
+              ad => ad.status === "finished"
+            );
+            break;
+        }
+      },
+      searchList() {
+        return this.adsToShowList.filter(ad => {
           return ad.title
             .toLowerCase()
             .includes(this.filterSearch.toLowerCase());
