@@ -1,20 +1,26 @@
-$.getJSON("/allAds", function(data) {
-  console.log(data);
-  var ad = new Vue({
+
+const url = 'allAds';
+fetch(url)
+.then(res => res.json())
+.then((data) => {
+  new Vue({
+
     el: "#mainContainer",
     data: {
-      adsList: data,
-      title: "Workbuster",
-      sortContainerHidden: false,
-      filterContainerHidden: false,
-      filterSearch: "",
-      filterLocation: "",
-      filterJobCategory: "",
-      filterCompany: "",
-      search:''
+        adsList: data,
+        title: "Workbuster",
+        sortContainerHidden: false,
+        filterContainerHidden: false,
+        ongoing: "",
+        filterSearch: "",
+        filterLocation: "",
+        filterJobCategory: "",
+        filterCompany: "",
+
     },
     methods: {
       calcDaysLeft: function(date) {
+        const onGoingAds  = []
         const now = Date.now();
         const latest = new Date(date);
         const millisecondsLeft = latest - now;
@@ -40,8 +46,10 @@ $.getJSON("/allAds", function(data) {
           return "";
         }
       },
-      getFilterSearch: function() {
+      getFilterSearch: function(ads) {
         this.filterSearch = event.target.value;
+        // var players = this.adsList.filter(ads)
+        console.log('searchfilter', this.adsList.filter(this.filterSearch))
       },
       getFilterLocation: function() {
         this.filterLocation = event.target.value;
@@ -83,11 +91,10 @@ $.getJSON("/allAds", function(data) {
         return adCompanies;
       }
     },
-    // searchFilter:function() {
-    //   return this.adsList.filter((ad) => {
-    //     return ad.title.match(this.search)
-    //   })
-    // }
-  });
-});
+  })
+  })
+
+
+
+.catch(err => { throw err })
 
