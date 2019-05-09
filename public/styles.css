@@ -44,9 +44,6 @@ body {
 .container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-<<<<<<< HEAD
-}
-=======
 }
 
 .adOngoingAndFinished:hover,
@@ -57,4 +54,3 @@ body {
 .ad:hover {
   cursor: pointer;
 }
->>>>>>> newinterface
