@@ -33,7 +33,6 @@
 
 * {
   box-sizing: border-box;
-  /* border: 1px solid black; */
   margin: 0;
 }
 
@@ -45,4 +44,17 @@ body {
 .container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+<<<<<<< HEAD
 }
+=======
+}
+
+.adOngoingAndFinished:hover,
+.filterIcon:hover,
+.sortIcon:hover,
+.adFilterSelect:hover,
+.adSortButton:hover,
+.ad:hover {
+  cursor: pointer;
+}
+>>>>>>> newinterface

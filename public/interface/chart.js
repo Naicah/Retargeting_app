@@ -24,12 +24,21 @@ Vue.component("bar-chart", {
   }
 });
 
+<<<<<<< HEAD
 var vm = new Vue({
   el: "#chart",
   data: {
     message: ""
   }
 });
+=======
+// var vm = new Vue({
+//   el: "#chart",
+//   data: {
+//     message: ""
+//   }
+// });
+>>>>>>> newinterface
 
 /* var annons = document.getElementsByClassName("ad");
 

@@ -1,7 +1,17 @@
-
-
 .statistics {
   background: var(--color-light-2);
   grid-area: 5/10/13/13;
   margin-right: 2em;
+}
+
+#bar-chart {
+  width: 300px;
+  height: 500px;
+ 
+}
+
+#chart {
+  
+  width: 300px;
+  height: 500px;
 }

@@ -45,6 +45,19 @@
   width: 33%;
 }
 
+.adOnGoing:hover,
+.adFinished:hover,
+.adAll:hover {
+    box-shadow: inset 0 -4px 0 var(--color-dark-3);
+}
+
+.adOnGoing:active,
+.adFinished:active,
+.adAll:active {
+    box-shadow: inset 0 -5px 0 var(--color-dark-2);
+}
+
+
 .adOnGoing {
   border-right: solid gray 0.1px;
 }
