@@ -9,7 +9,7 @@
   border-radius: 3px;
   margin: 0.5em 1% 0 1%;
   border: solid gray 1px;
-  min-height: 15vh;
+  height: 15vh;
 }
 
 .adSortContainer h3 {

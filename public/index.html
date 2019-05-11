@@ -32,28 +32,31 @@
       </header>
 
       <!-- ================================================================ -->
-      <!--                      FILTER & SORTERING                          -->
+      <!--                      FILTER & SORTING                            -->
       <!-- ================================================================ -->
       <div class="filterAndSortContainer" id="filtercontainer">
         <div class="adOngoingAndFinished">
-          <div class="adOnGoing" ><h3>8</h3>
+          <div class="adOnGoing">
+            <h3>8</h3>
             <p>Pågående</p>
           </div>
-          <div class="adFinished"><h3>10</h3>
+          <div class="adFinished">
+            <h3>10</h3>
             <p>Avslutade</p>
           </div>
-          <div class="adAll"><h3>18</h3>
+          <div class="adAll">
+            <h3>18</h3>
             <p>Alla</p>
           </div>
         </div>
         <div class="filterAndSortIcons" id="filterAndSortIcons">
-          <div class="filterIcon"  >
+          <div class="filterIcon" @click="toggleFilter">
           <h3 id="filterText">FILTER</h3>
-          <i class="fas fa-filter"  @click="hideElement"></i>
+          <i class="fas fa-filter"></i>
           </div>
-          <div class="sortIcon" id="sortIcon">
+          <div class="sortIcon" id="sortIcon" @click="toggleSort">
           <h3 id="sortText">SORTERING</h3>
-          <i class="fas fa-sort-amount-down"   @click="hideSort"></i>
+          <i class="fas fa-sort-amount-down"></i>
           </div>
         </div>
       </div>
@@ -66,15 +69,22 @@
         <div class="adFiltersHeaderContainer" >
           <ul class="searchTitle">
             <li>JOBBTITEL</li>
+            <li>FÖRETAG</li>
             <li>PLATS</li>
             <li>JOBBKATEGORI</li>
-            <li>FÖRETAG</li>
+            
           </ul>
         </div>
         <div>
             <div class="adFiltersSearchFieldContainer" >
-                <div v-on:change="getFilterSearch">
-                  <input type="text"  value="" placeholder="Sök.." />
+                <div>
+                  <input type="text"  value="" placeholder="Sök.." v-model="filterSearch"/>
+                </div>
+                <div>
+                  <select id="adCompanyId" class="adFilterSelect" v-on:change="getFilterCompany">
+                    <option value="">Välj företag...</option>
+                    <option v-for="ad in adCompaniesList">{{ ad }}</option>
+                  </select>
                 </div>
                 <div>
                   <select  id="adLocationListId" class="adFilterSelect" v-on:change="getFilterLocation">
@@ -88,12 +98,7 @@
                     <option v-for="ad in adJobCategoryList">{{ ad }}</option>
                   </select>
                 </div>
-                <div>
-                  <select id="adCompanyId" class="adFilterSelect" v-on:change="getFilterCompany">
-                    <option value="">Välj företag...</option>
-                    <option v-for="ad in adCompaniesList">{{ ad }}</option>
-                  </select>
-                </div>
+                
                 
             </div>
           </div>
@@ -105,14 +110,17 @@
         <div class="adSortContainer" id="adSortContainerId" v-show="!sortContainerHidden" >
           <h3>Sortering</h3>
           <div class="adSortButtons">
-            <div class="adSortButton"><p>Jobbtitel</p></div>
-            <div class="adSortButton"><p>Företagsnamn</p></div>
-            <div class="adSortButton"><p>Plats</p></div>
-            <div class="adSortButton"><p>Kategori</p></div>
-            <div class="adSortButton"><p>Antal visningar</p></div>
-            <div class="adSortButton"><p>Antal Klick</p></div>
-            <div class="adSortButton"><p>Antal sökningar</p></div>
-            <div class="adSortButton"><p>Antal dagar kvar</p></div>
+            <div class="adSortButton" @click="sortAds('title')"><p>Jobbtitel</p></div>
+            <div class="adSortButton" @click="sortAds('company')"><p>Företagsnamn</p></div>
+            <div class="adSortButton" @click="sortAds('city')"><p>Plats</p></div>
+            <div class="adSortButton" @click="sortAds('job_category')"><p>Kategori</p></div>
+            <div class="adSortButton" @click="sortAds('applies')">
+              <p>Antal ansökningar</p>
+            </div>
+            <div class="adSortButton" @click="sortAds('views')"><p>Antal visningar</p></div>
+            <div class="adSortButton" @click="sortAds('clicks')"><p>Antal Klick</p></div>
+           
+            <div class="adSortButton" @click="sortAds('last_application_timestamp')"><p>Antal dagar kvar</p></div>
           </div>
 
         </div>
@@ -121,13 +129,12 @@
       <!-- ================================================================ -->
       <div id="ads">
         <div class="ad"
-        v-show=" (filterSearch === '' || filterSearch === ad.title) 
-              && (filterLocation === '' || filterLocation === ad.city)
+        v-show="
+            (filterLocation === '' || filterLocation === ad.city)
               && (filterJobCategory === '' || filterJobCategory === ad.job_category) 
-              && (filterCompany === '' || filterCompany === ad.company)
-
-              "
-        v-for="ad in adsList"  >
+              && (filterCompany === '' || filterCompany === ad.company)" 
+        
+        v-for="ad in searchList" >
           <div>
             <h3 id="adCompany">{{ ad.company }}</h3>
             <h4>{{ ad.title }}</h4>
@@ -138,11 +145,11 @@
             </p>
           </div>
           <p class="adTimeLeft">
-            {{ calcDaysLeft(ad.last_application_timestamp) }}
+            {{ getStatus(ad.last_application_timestamp) }}
           </p>
           <!-- ====================== AD STATISCICS ======================= -->
           <div>
-            <!-- ================ AD STATISCICS HEADERS =================== -->
+            <!-- ============= AD STATISCICS HEADERS ================= -->
             <div class="adStatisticsHeaderContainer">
               <div>
                 ANSÖKNINGAR
@@ -154,7 +161,7 @@
                 KLICK
               </div>
             </div>
-            <!-- ================ AD STATISCICS NUMBERS =================== -->
+            <!-- ============= AD STATISCICS NUMBERS ================ -->
             <div class="adStatisticsNumberContainer">
               <div>
                 {{ ad.applies }}
