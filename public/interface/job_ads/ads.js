@@ -1,3 +1,5 @@
+
+
 $.getJSON('/allAds', function(data) {
   new Vue({
     el: '#mainContainer',
@@ -14,6 +16,9 @@ $.getJSON('/allAds', function(data) {
       showOngoing: false,
       showFinished: false,
       showAll: false
+    },
+    mounted() {
+      this.createChart();
     },
     watch: {
       showOngoing: function() {
@@ -49,14 +54,78 @@ $.getJSON('/allAds', function(data) {
           list[i].status = "finished";
         }
       }
-
       console.log("setStatus");
       // return this.allAdsList;
-
       this.showOngoing = true;
       console.log("created");
     },
     methods: {
+      createChart() {
+         new Chart('bar-chart', {
+           methods:{
+            adStatistic: function(){
+              console.log('hej', this.allAdsList)
+            }
+           },
+          type: 'bar',
+          data: {
+            labels: ['Ansökningar', 'Visningar', 'Klick'],
+            datasets: [
+              {
+                data: [12, 20, 10],
+                label: 'Antal:',
+                backgroundColor: [
+                  'rgba(45, 125, 210, 1)',
+                  'rgba(34, 95, 160, 1)',
+                  'rgba(14, 38, 63, 1)'
+                ],
+                datalabels: {
+                  align: 'end',
+                  anchor: 'end'
+                }
+              }
+  
+            ]
+  
+          },
+  
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  gridLines: {
+                    display: false,
+                    drawBorder: false
+                  },
+                  ticks: {
+                    display: false,
+                    beginAtZero: true
+                  }
+                }
+              ],
+              xAxes: [
+                {
+                  gridLines: {
+                    display: false,
+                    drawBorder: false
+                  },
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }
+              ]
+            },
+
+            legend: false,
+            tooltip: false,
+            plugins: {
+              datalabels: {
+              }
+            }
+          }
+        })
+      },
+
       // -------------- SORT & FILTER --------------- //
       // TOGGLE FILTER SECTION
       toggleFilter: function() {
@@ -71,6 +140,7 @@ $.getJSON('/allAds', function(data) {
       // GET WHICH LOCATION TO FILTER ON
       getFilterLocation: function() {
         this.filterLocation = event.target.value
+        console.log(this.filterLocation,'locatoin')
       },
       // GET WHICH JOB CATEGORY TO FILTER ON
       getFilterJobCategory: function() {
@@ -149,6 +219,7 @@ $.getJSON('/allAds', function(data) {
         }
       }
     },
+
     computed: {
       // -------------- FILTER --------------- //
       // SHOW ADS THAT MATCHES SEARCH
@@ -190,67 +261,10 @@ $.getJSON('/allAds', function(data) {
         return adCompanies
       }
     }
-  }),
+  })
     // ========================================================= //
-    //               STATISTIC MENUE                              //
+    //               STATISTIC MENU                              //
     //         INIT A CHART FOR STATISTIC                         //
     // ========================================================= //
-    new Chart('bar-chart', {
-      type: 'bar',
-      data: {
-        labels: ['Ansökningar', 'Visningar', 'Klick'],
-        datasets: [
-          {
-            data: [40, 60, 30],
-            label: 'Antal:',
-            backgroundColor: [
-              'rgba(45, 125, 210, 1)',
-              'rgba(34, 95, 160, 1)',
-              'rgba(14, 38, 63, 1)'
-            ],
-            datalabels: {
-              align: 'end',
-              anchor: 'end'
-            }
-          }
 
-        ]
-
-      },
-      options: {
-        scales: {
-          yAxes: [
-            {
-              gridLines: {
-                display: false,
-                drawBorder: false
-              },
-              ticks: {
-                display: false,
-                beginAtZero: true
-              }
-            }
-          ],
-          xAxes: [
-            {
-              gridLines: {
-                display: false,
-                drawBorder: false
-              },
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        },
-       
-        legend: false,
-        tooltip: false,
-        plugins: {
-          datalabels: {
-            color: '#36A2EB'
-          }
-        }
-      }
-    })
 })
