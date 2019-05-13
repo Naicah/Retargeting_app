@@ -47,3 +47,7 @@ export default {
   padding: 10px;
 }
 </style>
+
+
+// https://www.npmjs.com/package/vue-google-login
+// https://github.com/rmartide/vue-google-login
