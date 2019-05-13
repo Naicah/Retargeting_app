@@ -4,7 +4,7 @@ $.getJSON("/allAds", function(data) {
     data: {
       title: "Workbuster",
       allAdsList: data,
-      adStats: [],
+      adStatistic: [],
       adsToShowList: [],
       sortContainerHidden: false,
       filterContainerHidden: false,
@@ -12,7 +12,13 @@ $.getJSON("/allAds", function(data) {
       filterLocation: "",
       filterJobCategory: "",
       filterCompany: "",
-      active_el: 0
+      active_el: 0,
+      showOngoing: false,
+      showFinished: false,
+      showAll: false
+    },
+    activate: function(el) {
+      this.active_el = el;
     },
     mounted() {
       this.createChart();
@@ -25,6 +31,9 @@ $.getJSON("/allAds", function(data) {
           );
           console.log("showOngoing true");
         }
+      },
+      adStatistic: function() {
+        this.createChart();
       },
       showFinished: function() {
         if (this.showOngoing) {
@@ -57,21 +66,20 @@ $.getJSON("/allAds", function(data) {
       console.log("created");
     },
     methods: {
-      adStatistic: function() {
-        // getAttribute
-        this.allAdsList.filter(ad => {
-          const data = this.adStats.push(ad.applies);
-        });
-        console.log(data.clicks);
+      getAdStatistic: function(ad) {
+        this.adStatistic.length < 3
+          ? this.adStatistic.push(ad.applies, ad.views, ad.clicks)
+          : (this.adStatistic = new Array());
+        this.adStatistic.push(ad.applies, ad.views, ad.clicks);
       },
       createChart: function() {
         new Chart("bar-chart", {
           type: "bar",
           data: {
-            labels: ["Ansökningar", "Visningar", "Klick"],
+            labels: ["Ansökningar", "Klick", "Visningar"],
             datasets: [
               {
-                data: [12, 16, 10],
+                data: this.adStatistic,
                 label: "Antal:",
                 backgroundColor: [
                   "rgba(45, 125, 210, 1)",
@@ -228,9 +236,7 @@ $.getJSON("/allAds", function(data) {
       getFilterCompany: function() {
         this.filterCompany = event.target.value;
       },
-      activate: function(el) {
-        this.active_el = el;
-      },
+
       // RETURNS HOW MANY DAYS LEFT TO APPLY, OR SAYS THAT AD IS FINISHED
       getStatus: function(date) {
         const daysLeft = this.calcDaysLeft(date);
