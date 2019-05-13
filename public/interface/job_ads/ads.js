@@ -1,8 +1,6 @@
-
-
-$.getJSON('/allAds', function(data) {
+$.getJSON("/allAds", function(data) {
   new Vue({
-    el: '#mainContainer',
+    el: "#mainContainer",
     data: {
       title: "Workbuster",
       allAdsList: data,
@@ -62,91 +60,89 @@ $.getJSON('/allAds', function(data) {
       adStatistic: function() {
         // getAttribute
         this.allAdsList.filter(ad => {
-          const data= this.adStats.push(ad.applies)
-      })
-      console.log(data.clicks)
-    },
+          const data = this.adStats.push(ad.applies);
+        });
+        console.log(data.clicks);
+      },
       createChart: function() {
-      new Chart('bar-chart', {
-        type: 'bar',
-        data: {
-          labels: ['Ansökningar', 'Visningar', 'Klick'],
-          datasets: [
-            {
-              data: [12, 16, 10],
-              label: 'Antal:',
-              backgroundColor: [
-                'rgba(45, 125, 210, 1)',
-                'rgba(34, 95, 160, 1)',
-                'rgba(14, 38, 63, 1)'
-              ],
-              datalabels: {
-                align: 'end',
-                anchor: 'end'
-              }
-            }
-          ]
-        },
-        options: {
-          scales: {
-            yAxes: [
+        new Chart("bar-chart", {
+          type: "bar",
+          data: {
+            labels: ["Ansökningar", "Visningar", "Klick"],
+            datasets: [
               {
-                gridLines: {
-                  display: false,
-                  drawBorder: false
-                },
-                ticks: {
-                  display: false,
-                  beginAtZero: true
+                data: [12, 16, 10],
+                label: "Antal:",
+                backgroundColor: [
+                  "rgba(45, 125, 210, 1)",
+                  "rgba(34, 95, 160, 1)",
+                  "rgba(14, 38, 63, 1)"
+                ],
+                datalabels: {
+                  align: "end",
+                  anchor: "end"
                 }
-              }
-            ],
-            xAxes: [
-              {
-                gridLines: {
-                  display: false,
-                  drawBorder: false
-                },
-                ticks: {
-                  beginAtZero: true
-                },
-                barPercentage: 0.7
               }
             ]
           },
-          layout: {
-            padding: {
-              left: 50,
-              right: 50,
-              top: 42,
-              bottom: 32
-            }
-          },
-          tooltips: {
-            enabled: false
-          },
-   
-          legend: false,
-          tooltip: false,
-          plugins: {
-            datalabels: {
-              font: {
-                weight: 'bold',
-                size: 25,
-                family: 'Montserrat'
-              },
-              color: 'rgba(132, 133, 132, 1)',
-              
-            }
-          },
-          responsive: true,
-          responsiveAnimationDuration: 0,
-          maintainAspectRatio: true,
-          aspectRatio: 1
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  gridLines: {
+                    display: false,
+                    drawBorder: false
+                  },
+                  ticks: {
+                    display: false,
+                    beginAtZero: true
+                  }
+                }
+              ],
+              xAxes: [
+                {
+                  gridLines: {
+                    display: false,
+                    drawBorder: false
+                  },
+                  ticks: {
+                    beginAtZero: true
+                  },
+                  barPercentage: 0.7
+                }
+              ]
+            },
+            layout: {
+              padding: {
+                left: 50,
+                right: 50,
+                top: 42,
+                bottom: 32
+              }
+            },
+            tooltips: {
+              enabled: false
+            },
 
-        }
-      })
-    },
+            legend: false,
+            tooltip: false,
+            plugins: {
+              datalabels: {
+                font: {
+                  weight: "bold",
+                  size: 25,
+                  family: "Montserrat"
+                },
+                color: "rgba(132, 133, 132, 1)"
+              }
+            },
+            responsive: true,
+            responsiveAnimationDuration: 0,
+            maintainAspectRatio: false
+            // aspectRatio: 4/3
+          }
+        });
+      },
       // -------------- SORT & FILTER --------------- //
       // TOGGLE FILTER SECTION
       toggleFilter: function() {
@@ -160,12 +156,12 @@ $.getJSON('/allAds', function(data) {
       // --------------- FILTER --------------- //
       // GET WHICH LOCATION TO FILTER ON
       getFilterLocation: function() {
-        this.filterLocation = event.target.value
-        console.log(this.filterLocation,'locatoin')
+        this.filterLocation = event.target.value;
+        console.log(this.filterLocation, "locatoin");
       },
       // GET WHICH JOB CATEGORY TO FILTER ON
       getFilterJobCategory: function() {
-        this.filterJobCategory = event.target.value
+        this.filterJobCategory = event.target.value;
       },
       // GET WHICH COMPANY TO FILTER ON
       getFilterCompany: function() {
@@ -234,6 +230,7 @@ $.getJSON('/allAds', function(data) {
       },
       activate: function(el) {
         this.active_el = el;
+      },
       // RETURNS HOW MANY DAYS LEFT TO APPLY, OR SAYS THAT AD IS FINISHED
       getStatus: function(date) {
         const daysLeft = this.calcDaysLeft(date);
@@ -264,36 +261,35 @@ $.getJSON('/allAds', function(data) {
         const adLocations = [];
         this.allAdsList.forEach(ad => {
           if (!adLocations.includes(ad.city)) {
-            adLocations.push(ad.city)
+            adLocations.push(ad.city);
           }
-        })
-        return adLocations
+        });
+        return adLocations;
       },
       // CREATES LIST OF ALL JOB CATEGORIES
       adJobCategoryList: function() {
         const adJobCategory = [];
         this.allAdsList.forEach(ad => {
           if (!adJobCategory.includes(ad.job_category)) {
-            adJobCategory.push(ad.job_category)
+            adJobCategory.push(ad.job_category);
           }
-        })
-        return adJobCategory
+        });
+        return adJobCategory;
       },
       // CREATES LIST OF ALL COMPANIES
       adCompaniesList: function() {
         const adCompanies = [];
         this.allAdsList.forEach(ad => {
           if (!adCompanies.includes(ad.company)) {
-            adCompanies.push(ad.company)
+            adCompanies.push(ad.company);
           }
-        })
-        return adCompanies
+        });
+        return adCompanies;
       }
     }
-  })
-    // ========================================================= //
-    //               STATISTIC MENU                              //
-    //         INIT A CHART FOR STATISTIC                         //
-    // ========================================================= //
-
-})
+  });
+  // ========================================================= //
+  //               STATISTIC MENU                              //
+  //         INIT A CHART FOR STATISTIC                         //
+  // ========================================================= //
+});
