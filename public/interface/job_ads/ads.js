@@ -17,14 +17,9 @@ $.getJSON('/allAds', function(data) {
       showOngoing: false,
       showFinished: false,
       showAll: false,
-      statApplies:'',
-      statView: '',
-      statClick:''
-
-
     },
     mounted() {
-      this.createChart(this.adStatistic);
+      this.createChart();
     },
     watch: {
       showOngoing: function() {
@@ -35,8 +30,7 @@ $.getJSON('/allAds', function(data) {
           console.log("showOngoing true");
         }
       },
-
-      statApplies: function () {
+      adStatistic: function () {
         this.createChart()
       },
       showFinished: function() {
@@ -71,35 +65,18 @@ $.getJSON('/allAds', function(data) {
     },
     methods: {
       getAdStatistic: function(ad) {
-        const adStats = []
-        this.statApplies = ad.applies
-        this.statView = ad.views,
-        this.statClick = ad.clicks
-
-        // if(adStats.length < 3) {
-        //   adStats.push(this.statApplies,this.statView,this.statClick)
-        // } else {
-        //   adStats = new Array
-        //   adStats.push(this.statApplies,this.statClick,this.statViews)
-        // }
-        // console.log(JSON.parse(JSON.stringify(adStats)))
-        // return adStats
-        // getAttribute
-      //   dataStat = []
-      //   this.allAdsList.forEach(ad => {
-      //     event.target.value.push(ad.applies,ad.clicks,ad.views)
-      // })
-
+        this.adStatistic.length <3 ? this.adStatistic.push(ad.applies,ad.views,ad.clicks)
+        : this.adStatistic = new Array
+         this.adStatistic.push(ad.applies,ad.views,ad.clicks)
     },
       createChart: function() {
-        console.log('inside chart', this.statApplies)
       new Chart('bar-chart', {
         type: 'bar',
         data: {
           labels: ['Ansökningar', 'Visningar', 'Klick'],
           datasets: [
             {
-              data: [this.statApplies,this.statView,this.statClick],
+              data: this.adStatistic,
               label: 'Antal:',
               backgroundColor: [
                 'rgba(45, 125, 210, 1)',

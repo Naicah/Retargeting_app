@@ -13,7 +13,7 @@
 //         labels: ["Ansökningar", "Visningar", "Klick"],
 //         datasets: [
 //           {
-//             data: [40, 20, 30,],
+//             data: banandata,
 //             label: "Antal:",
 //             backgroundColor: [
 //               "rgba(45, 125, 210, 1)",
