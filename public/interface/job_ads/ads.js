@@ -1,3 +1,5 @@
+//import is from "bluebird";
+
 $.getJSON("/allAds", function(data) {
   console.log(data);
   var ad = new Vue({
@@ -10,7 +12,11 @@ $.getJSON("/allAds", function(data) {
       filterSearch: "",
       filterLocation: "",
       filterJobCategory: "",
-      filterCompany: ""
+      filterCompany: "",
+      active_el: 0
+      //showOngoing: true,
+      //showFinished: false,
+      //showAll: false
     },
     methods: {
       calcDaysLeft: function(date) {
@@ -25,11 +31,11 @@ $.getJSON("/allAds", function(data) {
           return "Avslutad";
         }
       },
-      hideElement: function() {
+      hideFilter: function() {
         this.filterContainerHidden ^= true;
       },
       hideSort: function() {
-        this.filterContainerHidden ^= true;
+        this.sortContainerHidden ^= true;
       },
       ifJobCategory: function(ad) {
         // if (ad.job_category === null || ad.job_category === "") {
@@ -39,9 +45,7 @@ $.getJSON("/allAds", function(data) {
           return "";
         }
       },
-      getFilterSearch: function() {
-        this.filterSearch = event.target.value;
-      },
+
       getFilterLocation: function() {
         this.filterLocation = event.target.value;
       },
@@ -50,8 +54,15 @@ $.getJSON("/allAds", function(data) {
       },
       getFilterCompany: function() {
         this.filterCompany = event.target.value;
+      },
+      activate: function(el) {
+        this.active_el = el;
       }
+      /* showactive: function() {
+        if()
+      } */
     },
+
     computed: {
       adLocationList: function() {
         const adLocations = [];
@@ -79,6 +90,13 @@ $.getJSON("/allAds", function(data) {
           }
         });
         return adCompanies;
+      },
+      filterSearchList() {
+        return this.adsList.filter(ad => {
+          return ad.title
+            .toLowerCase()
+            .includes(this.filterSearch.toLowerCase());
+        });
       }
     }
   });

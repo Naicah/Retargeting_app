@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -34,31 +35,57 @@
     </header>
 
     <!-- ================================================================ -->
-    <!--                      FILTER & SORTERING                          -->
+    <!--                      FILTER & SORTING                            -->
     <!-- ================================================================ -->
-    <div class="filterAndSortContainer" id="filtercontainer">
+    <!--  <div class="filterAndSortContainer" id="filtercontainer">
       <div class="adOngoingAndFinished">
-        <div class="adOnGoing">
+        <div class="adOngoing" v-bind:class="{ active:showOngoing}" v-on:click="showactive">
           <h3>8</h3>
           <p>Pågående</p>
         </div>
-        <div class="adFinished">
+        <div class="adFinished" v-bind:class="{active:showFinished}" v-on:click="showactive">
           <h3>10</h3>
           <p>Avslutade</p>
         </div>
-        <div class="adAll">
+        <div class="adAll" v-bind:class="{active:showAll}" v-on:click="showactive">
           <h3>18</h3>
           <p>Alla</p>
         </div>
       </div>
       <div class="filterAndSortIcons" id="filterAndSortIcons">
-        <div class="filterIcon">
+        <div class="filterIcon" @click="hideFilter">
           <h3 id="filterText">FILTER</h3>
-          <i class="fas fa-filter" @click="hideElement"></i>
+          <i class="fas fa-filter"></i>
         </div>
-        <div class="sortIcon" id="sortIcon">
+        <div class="sortIcon" id="sortIcon" @click="hideSort">
           <h3 id="sortText">SORTERING</h3>
-          <i class="fas fa-sort-amount-down" @click="hideSort"></i>
+          <i class="fas fa-sort-amount-down"></i>
+        </div>
+      </div>
+    </div> -->
+    <div class="filterAndSortContainer" id="filtercontainer">
+      <ul class="adOngoingAndFinished">
+        <li class="adOngoing" @click="activate(1)" :class="{ active : active_el == 1 }">
+          <h3>8</h3>
+          <p>Pågående</p>
+        </li>
+        <li class="adFinished" @click="activate(2)" :class="{ active : active_el == 2 }">
+          <h3>10</h3>
+          <p>Avslutade</p>
+        </li>
+        <li class="adAll" @click="activate(3)" :class="{ active : active_el == 3 }">
+          <h3>18</h3>
+          <p>Alla</p>
+        </li>
+      </ul>
+      <div class="filterAndSortIcons" id="filterAndSortIcons">
+        <div class="filterIcon" @click="hideFilter">
+          <h3 id="filterText">FILTER</h3>
+          <i class="fas fa-filter"></i>
+        </div>
+        <div class="sortIcon" id="sortIcon" @click="hideSort">
+          <h3 id="sortText">SORTERING</h3>
+          <i class="fas fa-sort-amount-down"></i>
         </div>
       </div>
     </div>
@@ -78,8 +105,8 @@
           </div>
           <div>
             <div class="adFiltersSearchFieldContainer">
-              <div v-on:change="getFilterSearch">
-                <input type="text" value="" placeholder="Sök.." />
+              <div>
+                <input type="text" value="" placeholder="Sök.." v-model="filterSearch" />
               </div>
               <div>
                 <select id="adLocationListId" class="adFilterSelect" v-on:change="getFilterLocation">
@@ -141,12 +168,9 @@
     <!--                              ADS                                 -->
     <!-- ================================================================ -->
     <div id="ads">
-      <div class="ad" v-show=" (filterSearch === '' || filterSearch === ad.title) 
-              && (filterLocation === '' || filterLocation === ad.city)
+      <div class="ad" v-show=" (filterLocation === '' || filterLocation === ad.city)
               && (filterJobCategory === '' || filterJobCategory === ad.job_category) 
-              && (filterCompany === '' || filterCompany === ad.company)
-
-              " v-for="ad in adsList">
+              && (filterCompany === '' || filterCompany === ad.company)" v-for="ad in filterSearchList">
         <div>
           <h3 id="adCompany">{{ ad.company }}</h3>
           <h4>{{ ad.title }}</h4>
@@ -167,10 +191,12 @@
               ANSÖKNINGAR
             </div>
             <div>
-              VISNINGAR
+              <!-- VISNINGAR -->
+              KLICK
             </div>
             <div>
-              KLICK
+              <!-- KLICK -->
+              VISNINGAR
             </div>
           </div>
           <!-- ================ AD STATISCICS NUMBERS =================== -->

@@ -2,7 +2,7 @@ const request = require("superagent");
 const knex = require("../knex/knex");
 
 const AsyncPolling = require("async-polling");
-const checkNewJobsInterval = 3000; //60 000 = 1m
+const checkNewJobsInterval = 60000; //60 000 = 1m
 const feed = "https://api.workbuster.com/jobs/feed/kyhdemo?format=json";
 
 // ===========================================================================//
