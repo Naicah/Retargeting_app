@@ -6,6 +6,7 @@ $.getJSON('/allAds', function(data) {
     data: {
       title: "Workbuster",
       allAdsList: data,
+      adStats: [],
       adsToShowList: [],
       sortContainerHidden: false,
       filterContainerHidden: false,
@@ -60,72 +61,70 @@ $.getJSON('/allAds', function(data) {
       console.log("created");
     },
     methods: {
-      createChart() {
-         new Chart('bar-chart', {
-           methods:{
-            adStatistic: function(){
-              console.log('hej', this.allAdsList)
-            }
-           },
-          type: 'bar',
-          data: {
-            labels: ['Ansökningar', 'Visningar', 'Klick'],
-            datasets: [
-              {
-                data: [12, 20, 10],
-                label: 'Antal:',
-                backgroundColor: [
-                  'rgba(45, 125, 210, 1)',
-                  'rgba(34, 95, 160, 1)',
-                  'rgba(14, 38, 63, 1)'
-                ],
-                datalabels: {
-                  align: 'end',
-                  anchor: 'end'
-                }
-              }
-  
-            ]
-  
-          },
-  
-          options: {
-            scales: {
-              yAxes: [
-                {
-                  gridLines: {
-                    display: false,
-                    drawBorder: false
-                  },
-                  ticks: {
-                    display: false,
-                    beginAtZero: true
-                  }
-                }
+      adStatistic: function() {
+        // getAttribute
+        this.allAdsList.filter(ad => {
+          const data= this.adStats.push(ad.applies)
+      })
+      console.log(data.clicks)
+    },
+      createChart: function() {
+      new Chart('bar-chart', {
+        type: 'bar',
+        data: {
+          labels: ['Ansökningar', 'Visningar', 'Klick'],
+          datasets: [
+            {
+              data: [12, 20, 10],
+              label: 'Antal:',
+              backgroundColor: [
+                'rgba(45, 125, 210, 1)',
+                'rgba(34, 95, 160, 1)',
+                'rgba(14, 38, 63, 1)'
               ],
-              xAxes: [
-                {
-                  gridLines: {
-                    display: false,
-                    drawBorder: false
-                  },
-                  ticks: {
-                    beginAtZero: true
-                  }
-                }
-              ]
-            },
-
-            legend: false,
-            tooltip: false,
-            plugins: {
               datalabels: {
+                align: 'end',
+                anchor: 'end'
               }
+            }
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+                ticks: {
+                  display: false,
+                  beginAtZero: true
+                }
+              }
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+                ticks: {
+                  beginAtZero: true
+                }
+              }
+            ]
+          },
+   
+          legend: false,
+          tooltip: false,
+          plugins: {
+            datalabels: {
             }
           }
-        })
-      },
-
+        }
+      })
+    },
       // -------------- SORT & FILTER --------------- //
       // TOGGLE FILTER SECTION
       toggleFilter: function() {
