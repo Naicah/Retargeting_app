@@ -54,3 +54,9 @@ body {
 .ad:hover {
   cursor: pointer;
 }
+
+#id {
+  background-color: red;
+  width: 20vh;
+  height: 20vh;
+}

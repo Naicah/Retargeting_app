@@ -29,6 +29,7 @@
     "superagent": "^5.0.2",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.4.2",
-    "vue-data-tables": "^3.4.4"
+    "vue-data-tables": "^3.4.4",
+    "vue-google-login": "^2.0.0"
   }
 }
