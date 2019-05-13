@@ -7,6 +7,9 @@
   border-radius: 3px;
   margin: 0 1% 0 1%;
   height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 .filters h3 {
   /* font-family:; */
@@ -44,7 +47,8 @@
 .adFiltersSearchFieldContainer * {
   margin: 0;
 }
-.adFiltersSearchFieldContainer div,.v-select {
+.adFiltersSearchFieldContainer div,
+.v-select {
   padding: 0.7em 0;
   width: 25%;
 }
