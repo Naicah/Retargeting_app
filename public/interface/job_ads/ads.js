@@ -111,7 +111,8 @@ $.getJSON('/allAds', function(data) {
                 },
                 ticks: {
                   beginAtZero: true
-                }
+                },
+                barPercentage: 0.7
               }
             ]
           },
