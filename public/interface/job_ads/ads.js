@@ -75,7 +75,7 @@ $.getJSON('/allAds', function(data) {
           labels: ['Ansökningar', 'Visningar', 'Klick'],
           datasets: [
             {
-              data: [12, 20, 10],
+              data: [12, 16, 10],
               label: 'Antal:',
               backgroundColor: [
                 'rgba(45, 125, 210, 1)',
@@ -115,13 +115,36 @@ $.getJSON('/allAds', function(data) {
               }
             ]
           },
+          layout: {
+            padding: {
+              left: 50,
+              right: 50,
+              top: 42,
+              bottom: 32
+            }
+          },
+          tooltips: {
+            enabled: false
+          },
    
           legend: false,
           tooltip: false,
           plugins: {
             datalabels: {
+              font: {
+                weight: 'bold',
+                size: 25,
+                family: 'Montserrat'
+              },
+              color: 'rgba(132, 133, 132, 1)',
+              
             }
-          }
+          },
+          responsive: true,
+          responsiveAnimationDuration: 0,
+          maintainAspectRatio: true,
+          aspectRatio: 1
+
         }
       })
     },
