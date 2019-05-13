@@ -112,7 +112,7 @@ $.getJSON('/allAds', function(data) {
                 ticks: {
                   beginAtZero: true
                 },
-                barPercentage: 0.7
+                barPercentage: 0.7,
               }
             ]
           },
@@ -143,8 +143,8 @@ $.getJSON('/allAds', function(data) {
           },
           responsive: true,
           responsiveAnimationDuration: 0,
-          maintainAspectRatio: true,
-          aspectRatio: 1
+          maintainAspectRatio: false,
+          // aspectRatio: 4/3
 
         }
       })
