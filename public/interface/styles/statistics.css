@@ -13,12 +13,13 @@
   margin: 0.5em 0 0 0;
 }
 #bar-chart {
-  width: 300px;
-  height: 500px;
+  /* margin-top:200px; */
+  width: auto;
+  height: auto;
 }
 
 #chart {
-  width: 300px;
-  height: 500px;
+  width: auto;
+  height: auto;
   margin: 0;
 }

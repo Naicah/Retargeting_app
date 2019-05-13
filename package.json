@@ -12,6 +12,7 @@
   "dependencies": {
     "async-polling": "^0.2.1",
     "chart.js": "^2.8.0",
+    "chartjs-plugin-datalabels": "^0.6.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "facebook-nodejs-ads-sdk": "^2.11.4",

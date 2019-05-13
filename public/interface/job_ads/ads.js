@@ -1,12 +1,13 @@
-//import is from "bluebird";
 
-$.getJSON("/allAds", function(data) {
-  console.log(data);
-  var ad = new Vue({
-    el: "#mainContainer",
+
+$.getJSON('/allAds', function(data) {
+  new Vue({
+    el: '#mainContainer',
     data: {
-      adsList: data,
       title: "Workbuster",
+      allAdsList: data,
+      adStats: [],
+      adsToShowList: [],
       sortContainerHidden: false,
       filterContainerHidden: false,
       filterSearch: "",
@@ -14,31 +15,205 @@ $.getJSON("/allAds", function(data) {
       filterJobCategory: "",
       filterCompany: "",
       active_el: 0
-      //showOngoing: true,
-      //showFinished: false,
-      //showAll: false
     },
-    methods: {
-      calcDaysLeft: function(date) {
-        const now = Date.now();
-        const latest = new Date(date);
-        const millisecondsLeft = latest - now;
-        const daysLeft = Math.floor(millisecondsLeft / 1000 / 60 / 60 / 24);
-
-        if (daysLeft > 0) {
-          return daysLeft + " dagar kvar";
-        } else {
-          return "Avslutad";
+    mounted() {
+      this.createChart();
+    },
+    watch: {
+      showOngoing: function() {
+        if (this.showOngoing) {
+          this.adsToShowList = this.allAdsList.filter(
+            ad => ad.status === "ongoing"
+          );
+          console.log("showOngoing true");
         }
       },
-      hideFilter: function() {
+      showFinished: function() {
+        if (this.showOngoing) {
+          this.adsToShowList = this.allAdsList.filter(
+            ad => ad.status === "finished"
+          );
+        }
+      },
+      showAll: function() {
+        if (this.showOngoing) {
+          this.adsToShowList = this.allAdsList;
+        }
+      }
+    },
+    created() {
+      const list = this.allAdsList;
+      var i;
+      for (i = 0; i < list.length; i++) {
+        daysLeft = this.calcDaysLeft(list[i].last_application_timestamp);
+
+        if (daysLeft > 0) {
+          list[i].status = "ongoing";
+        } else {
+          list[i].status = "finished";
+        }
+      }
+      console.log("setStatus");
+      // return this.allAdsList;
+      this.showOngoing = true;
+      console.log("created");
+    },
+    methods: {
+      adStatistic: function() {
+        // getAttribute
+        this.allAdsList.filter(ad => {
+          const data= this.adStats.push(ad.applies)
+      })
+      console.log(data.clicks)
+    },
+      createChart: function() {
+      new Chart('bar-chart', {
+        type: 'bar',
+        data: {
+          labels: ['Ansökningar', 'Visningar', 'Klick'],
+          datasets: [
+            {
+              data: [12, 16, 10],
+              label: 'Antal:',
+              backgroundColor: [
+                'rgba(45, 125, 210, 1)',
+                'rgba(34, 95, 160, 1)',
+                'rgba(14, 38, 63, 1)'
+              ],
+              datalabels: {
+                align: 'end',
+                anchor: 'end'
+              }
+            }
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+                ticks: {
+                  display: false,
+                  beginAtZero: true
+                }
+              }
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+                ticks: {
+                  beginAtZero: true
+                },
+                barPercentage: 0.7
+              }
+            ]
+          },
+          layout: {
+            padding: {
+              left: 50,
+              right: 50,
+              top: 42,
+              bottom: 32
+            }
+          },
+          tooltips: {
+            enabled: false
+          },
+   
+          legend: false,
+          tooltip: false,
+          plugins: {
+            datalabels: {
+              font: {
+                weight: 'bold',
+                size: 25,
+                family: 'Montserrat'
+              },
+              color: 'rgba(132, 133, 132, 1)',
+              
+            }
+          },
+          responsive: true,
+          responsiveAnimationDuration: 0,
+          maintainAspectRatio: true,
+          aspectRatio: 1
+
+        }
+      })
+    },
+      // -------------- SORT & FILTER --------------- //
+      // TOGGLE FILTER SECTION
+      toggleFilter: function() {
         this.filterContainerHidden ^= true;
       },
-      hideSort: function() {
+      // TOGGLE SORT SECTION
+      toggleSort: function() {
         this.sortContainerHidden ^= true;
       },
+
+      // --------------- FILTER --------------- //
+      // GET WHICH LOCATION TO FILTER ON
+      getFilterLocation: function() {
+        this.filterLocation = event.target.value
+        console.log(this.filterLocation,'locatoin')
+      },
+      // GET WHICH JOB CATEGORY TO FILTER ON
+      getFilterJobCategory: function() {
+        this.filterJobCategory = event.target.value
+      },
+      // GET WHICH COMPANY TO FILTER ON
+      getFilterCompany: function() {
+        this.filterCompany = event.target.value;
+      },
+
+      // --------------- SORT --------------- //
+      // SORT ADS BASED ON WHICH SORT BUTTON WAS CLICKED
+      sortAds(value) {
+        switch (value) {
+          case "title":
+            this.adsToShowList.sort((a, b) => (a.title > b.title ? 1 : -1));
+            break;
+          case "company":
+            this.adsToShowList.sort((a, b) => (a.company > b.company ? 1 : -1));
+            break;
+          case "city":
+            this.adsToShowList.sort((a, b) => (a.city > b.city ? 1 : -1));
+            break;
+          case "job_category":
+            this.adsToShowList.sort((a, b) =>
+              a.job_category > b.job_category ? 1 : -1
+            );
+            break;
+          case "applies":
+            this.adsToShowList.sort((a, b) => b.applies - a.applies);
+            break;
+          case "views":
+            this.adsToShowList.sort((a, b) => b.views - a.views);
+            break;
+          case "clicks":
+            this.adsToShowList.sort((a, b) => b.clicks - a.clicks);
+            break;
+          case "last_application_timestamp":
+            this.adsToShowList.sort((a, b) =>
+              a.last_application_timestamp > b.last_application_timestamp
+                ? 1
+                : -1
+            );
+            break;
+        }
+      },
+
+      // ----------------------- ADS ------------------------ //
+
+      // --------------- JOB CATEGORY --------------- //
+      // CREATES COMMA IF AD HAS A JOB CATEGORY
       ifJobCategory: function(ad) {
-        // if (ad.job_category === null || ad.job_category === "") {
         if (ad.job_category) {
           return ",";
         } else {
@@ -46,17 +221,28 @@ $.getJSON("/allAds", function(data) {
         }
       },
 
-      getFilterLocation: function() {
-        this.filterLocation = event.target.value;
-      },
-      getFilterJobCategory: function() {
-        this.filterJobCategory = event.target.value;
+      // --------------- DAYS LEFT --------------- //
+      // CALCULATE DAYS LEFT TO APPLY TO JOB
+      calcDaysLeft: function(date) {
+        const now = Date.now();
+        const latest = new Date(date);
+        const millisecondsLeft = latest - now;
+        return (daysLeft = Math.floor(millisecondsLeft / 1000 / 60 / 60 / 24));
       },
       getFilterCompany: function() {
         this.filterCompany = event.target.value;
       },
       activate: function(el) {
         this.active_el = el;
+      // RETURNS HOW MANY DAYS LEFT TO APPLY, OR SAYS THAT AD IS FINISHED
+      getStatus: function(date) {
+        const daysLeft = this.calcDaysLeft(date);
+
+        if (daysLeft > 0) {
+          return daysLeft + " dagar kvar";
+        } else {
+          return "Avslutad";
+        }
       }
       /* showactive: function() {
         if()
@@ -64,40 +250,50 @@ $.getJSON("/allAds", function(data) {
     },
 
     computed: {
-      adLocationList: function() {
-        const adLocations = [];
-        this.adsList.forEach(ad => {
-          if (!adLocations.includes(ad.city)) {
-            adLocations.push(ad.city);
-          }
-        });
-        return adLocations;
-      },
-      adJobCategoryList: function() {
-        const adJobCategory = [];
-        this.adsList.forEach(ad => {
-          if (!adJobCategory.includes(ad.job_category)) {
-            adJobCategory.push(ad.job_category);
-          }
-        });
-        return adJobCategory;
-      },
-      adCompaniesList: function() {
-        const adCompanies = [];
-        this.adsList.forEach(ad => {
-          if (!adCompanies.includes(ad.company)) {
-            adCompanies.push(ad.company);
-          }
-        });
-        return adCompanies;
-      },
-      filterSearchList() {
-        return this.adsList.filter(ad => {
+      // -------------- FILTER --------------- //
+      // SHOW ADS THAT MATCHES SEARCH
+      searchList() {
+        return this.adsToShowList.filter(ad => {
           return ad.title
             .toLowerCase()
             .includes(this.filterSearch.toLowerCase());
         });
+      },
+      // CREATES LIST OF ALL LOCATIONS
+      adLocationList: function() {
+        const adLocations = [];
+        this.allAdsList.forEach(ad => {
+          if (!adLocations.includes(ad.city)) {
+            adLocations.push(ad.city)
+          }
+        })
+        return adLocations
+      },
+      // CREATES LIST OF ALL JOB CATEGORIES
+      adJobCategoryList: function() {
+        const adJobCategory = [];
+        this.allAdsList.forEach(ad => {
+          if (!adJobCategory.includes(ad.job_category)) {
+            adJobCategory.push(ad.job_category)
+          }
+        })
+        return adJobCategory
+      },
+      // CREATES LIST OF ALL COMPANIES
+      adCompaniesList: function() {
+        const adCompanies = [];
+        this.allAdsList.forEach(ad => {
+          if (!adCompanies.includes(ad.company)) {
+            adCompanies.push(ad.company)
+          }
+        })
+        return adCompanies
       }
     }
-  });
-});
+  })
+    // ========================================================= //
+    //               STATISTIC MENU                              //
+    //         INIT A CHART FOR STATISTIC                         //
+    // ========================================================= //
+
+})
