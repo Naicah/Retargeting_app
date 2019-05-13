@@ -129,12 +129,12 @@
       <!-- ================================================================ -->
       <div id="ads">
         <div class="ad"
-        @click="adStatistic"
+        @click="getAdStatistic(ad)"
         v-show="
             (filterLocation === '' || filterLocation === ad.city)
               && (filterJobCategory === '' || filterJobCategory === ad.job_category)
               && (filterCompany === '' || filterCompany === ad.company)" 
-        
+
         v-for="ad in searchList" >
           <div>
             <h3 id="adCompany">{{ ad.company }}</h3>
@@ -184,10 +184,11 @@
       <!--                            STATISTICS                            -->
       <!-- ================================================================ -->
 
-      <div class="statistics" id="chart">
+      <div class="statistics"  id="chart" @click="createChart">
         <h3>Statistik</h3>
+
         <!-- <div id="chart"> -->
-          <canvas id="bar-chart">
+          <canvas id="bar-chart" >
           </canvas>
         <h3></h3>
         </div>

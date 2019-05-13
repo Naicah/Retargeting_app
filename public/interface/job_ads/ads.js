@@ -6,7 +6,7 @@ $.getJSON('/allAds', function(data) {
     data: {
       title: "Workbuster",
       allAdsList: data,
-      adStats: [],
+       adStatistic:[],
       adsToShowList: [],
       sortContainerHidden: false,
       filterContainerHidden: false,
@@ -16,10 +16,15 @@ $.getJSON('/allAds', function(data) {
       filterCompany: "",
       showOngoing: false,
       showFinished: false,
-      showAll: false
+      showAll: false,
+      statApplies:'',
+      statView: '',
+      statClick:''
+
+
     },
     mounted() {
-      this.createChart();
+      this.createChart(this.adStatistic);
     },
     watch: {
       showOngoing: function() {
@@ -29,6 +34,10 @@ $.getJSON('/allAds', function(data) {
           );
           console.log("showOngoing true");
         }
+      },
+
+      statApplies: function () {
+        this.createChart()
       },
       showFinished: function() {
         if (this.showOngoing) {
@@ -61,21 +70,36 @@ $.getJSON('/allAds', function(data) {
       console.log("created");
     },
     methods: {
-      adStatistic: function() {
+      getAdStatistic: function(ad) {
+        const adStats = []
+        this.statApplies = ad.applies
+        this.statView = ad.views,
+        this.statClick = ad.clicks
+
+        // if(adStats.length < 3) {
+        //   adStats.push(this.statApplies,this.statView,this.statClick)
+        // } else {
+        //   adStats = new Array
+        //   adStats.push(this.statApplies,this.statClick,this.statViews)
+        // }
+        // console.log(JSON.parse(JSON.stringify(adStats)))
+        // return adStats
         // getAttribute
-        this.allAdsList.filter(ad => {
-          const data= this.adStats.push(ad.applies)
-      })
-      console.log(data.clicks)
+      //   dataStat = []
+      //   this.allAdsList.forEach(ad => {
+      //     event.target.value.push(ad.applies,ad.clicks,ad.views)
+      // })
+
     },
       createChart: function() {
+        console.log('inside chart', this.statApplies)
       new Chart('bar-chart', {
         type: 'bar',
         data: {
           labels: ['Ansökningar', 'Visningar', 'Klick'],
           datasets: [
             {
-              data: [12, 20, 10],
+              data: [this.statApplies,this.statView,this.statClick],
               label: 'Antal:',
               backgroundColor: [
                 'rgba(45, 125, 210, 1)',
