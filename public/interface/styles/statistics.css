@@ -6,6 +6,7 @@
   position: sticky;
   top: 20vh;
 }
+
 .statistics h3 {
   margin: 0 0 5vh 2vh;
   font-weight: 600;
@@ -16,6 +17,7 @@
   margin: 0 0 0 0;
   color: var(--color-dark-4);
 }
+
 #bar-chart {
   /* margin-top:200px; */
   width: auto;

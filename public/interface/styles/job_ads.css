@@ -4,6 +4,7 @@
 .ad {
   border: none;
 }
+
 /* REMOVE LATER ON */
 
 #ads {
@@ -66,6 +67,7 @@
 .adJobDetail {
   font-weight: 600;
 }
+
 .adTimeLeft {
   font-style: italic;
 }

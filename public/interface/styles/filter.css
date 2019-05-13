@@ -11,12 +11,14 @@
   flex-direction: column;
   justify-content: space-evenly;
 }
+
 .filters h3 {
   /* font-family:; */
   font-weight: 800;
   margin: 0.5em 1em;
   color: var(--color-light-1);
 }
+
 .adFiltersHeaderContainer,
 .adFiltersSearchFieldContainer {
   margin-left: 1em;
@@ -33,10 +35,12 @@
   /* font: var(--font-stack-1); */
   font-size: 1.2vw;
 }
+
 .adFiltersHeaderContainer * {
   margin: 0;
   padding: 0;
 }
+
 .searchTitle {
   list-style: none;
   display: flex;
@@ -47,11 +51,13 @@
 .adFiltersSearchFieldContainer * {
   margin: 0;
 }
+
 .adFiltersSearchFieldContainer div,
 .v-select {
   padding: 0.7em 0;
   width: 25%;
 }
+
 .adFiltersSearchFieldContainer {
   display: flex;
 }

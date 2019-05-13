@@ -12,14 +12,12 @@ $.getJSON("/allAds", function(data) {
       filterLocation: "",
       filterJobCategory: "",
       filterCompany: "",
-      active_el: 0,
       showOngoing: false,
       showFinished: false,
-      showAll: false
+      showAll: false,
+      active_el: 0
     },
-    activate: function(el) {
-      this.active_el = el;
-    },
+
     mounted() {
       this.createChart();
     },
@@ -29,7 +27,7 @@ $.getJSON("/allAds", function(data) {
           this.adsToShowList = this.allAdsList.filter(
             ad => ad.status === "ongoing"
           );
-          // console.log("showOngoing true");
+          console.log("showOngoing true");
         }
       },
       adStatistic: function() {
@@ -48,6 +46,7 @@ $.getJSON("/allAds", function(data) {
         }
       }
     },
+
     created() {
       const list = this.allAdsList;
       var i;
@@ -175,6 +174,9 @@ $.getJSON("/allAds", function(data) {
       getFilterCompany: function() {
         this.filterCompany = event.target.value;
       },
+      activate: function(el) {
+        this.active_el = el;
+      },
 
       // --------------- SORT --------------- //
       // SORT ADS BASED ON WHICH SORT BUTTON WAS CLICKED
@@ -233,10 +235,6 @@ $.getJSON("/allAds", function(data) {
         const millisecondsLeft = latest - now;
         return (daysLeft = Math.floor(millisecondsLeft / 1000 / 60 / 60 / 24));
       },
-      getFilterCompany: function() {
-        this.filterCompany = event.target.value;
-      },
-
       // RETURNS HOW MANY DAYS LEFT TO APPLY, OR SAYS THAT AD IS FINISHED
       getStatus: function(date) {
         const daysLeft = this.calcDaysLeft(date);
@@ -247,9 +245,6 @@ $.getJSON("/allAds", function(data) {
           return "Avslutad";
         }
       }
-      /* showactive: function() {
-        if()
-      } */
     },
 
     computed: {

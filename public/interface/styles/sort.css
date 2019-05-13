@@ -46,6 +46,7 @@
 .adSortButtons {
   border-bottom: none;
 }
+
 .adSortButton:hover {
   box-shadow: inset 0 -3px 0 var(--color-dark-3);
 }
