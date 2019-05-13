@@ -2,6 +2,9 @@
   background: var(--color-light-2);
   grid-area: 5/10/13/13;
   margin: 0 2em 0 0.5em;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20vh;
 }
 .statistics h3 {
   margin: 0 0 5vh 2vh;
@@ -10,16 +13,17 @@
 
 #adVisualStatistics {
   text-align: center;
-  margin: 0.5em 0 0 0;
+  margin: 0 0 0 0;
+  color: var(--color-dark-4);
 }
 #bar-chart {
-  margin-top:200px;
+  /* margin-top:200px; */
   width: auto;
   height: auto;
 }
 
 #chart {
   width: auto;
-  height: auto;
+  height: 60vh;
   margin: 0;
 }

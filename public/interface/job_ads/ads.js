@@ -112,17 +112,41 @@ $.getJSON('/allAds', function(data) {
                 },
                 ticks: {
                   beginAtZero: true
-                }
+                },
+                barPercentage: 0.7,
               }
             ]
+          },
+          layout: {
+            padding: {
+              left: 50,
+              right: 50,
+              top: 42,
+              bottom: 32
+            }
+          },
+          tooltips: {
+            enabled: false
           },
    
           legend: false,
           tooltip: false,
           plugins: {
             datalabels: {
+              font: {
+                weight: 'bold',
+                size: 25,
+                family: 'Montserrat'
+              },
+              color: 'rgba(132, 133, 132, 1)',
+              
             }
-          }
+          },
+          responsive: true,
+          responsiveAnimationDuration: 0,
+          maintainAspectRatio: false,
+          // aspectRatio: 4/3
+
         }
       })
     },

@@ -91,3 +91,29 @@
   font-size: 1.5em;
   font-weight: 800;
 }
+
+/* ======================= MEDIA QUERIES ====================== */
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+  .ad {
+    min-width: 31%;
+    max-width: 31%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  .ad {
+    min-width: 46%;
+    max-width: 46%;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .ad {
+    min-width: 98%;
+    max-width: 98%;
+  }
+}
