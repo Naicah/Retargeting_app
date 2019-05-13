@@ -29,7 +29,7 @@ $.getJSON("/allAds", function(data) {
           this.adsToShowList = this.allAdsList.filter(
             ad => ad.status === "ongoing"
           );
-          console.log("showOngoing true");
+          // console.log("showOngoing true");
         }
       },
       adStatistic: function() {
