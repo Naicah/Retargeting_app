@@ -73,7 +73,7 @@ $.getJSON('/allAds', function(data) {
       new Chart('bar-chart', {
         type: 'bar',
         data: {
-          labels: ['Ansökningar', 'Visningar', 'Klick'],
+          labels: ['Ansökningar', 'Klick', 'Visningar'],
           datasets: [
             {
               data: this.adStatistic,
