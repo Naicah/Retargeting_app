@@ -65,10 +65,20 @@ $.getJSON('/allAds', function(data) {
     },
     methods: {
       getAdStatistic: function(ad) {
-        this.adStatistic.length <3 ? this.adStatistic.push(ad.applies,ad.views,ad.clicks)
-        : this.adStatistic = new Array
-         this.adStatistic.push(ad.applies,ad.views,ad.clicks)
+        const adStats = []
+        this.statApplies = ad.applies
+        this.statView = ad.views,
+        this.statClick = ad.clicks
+
+        if(this.adStatistic.length < 3) {
+          this.adStatistic.push(this.statApplies,this.statView,this.statClick)
+        } else {
+          this.adStatistic = new Array
+          this.adStatistic.push(this.statApplies,this.statView,this.statClick)
+        }
+        return this.adStatistic
     },
+
       createChart: function() {
       new Chart('bar-chart', {
         type: 'bar',
