@@ -1,19 +1,19 @@
 /* REMOVE LATER ON */
-.ad *,
-#ads,
-.ad {
+.adCardsContainer *,
+.adsContainer,
+.adCardsContainer {
   border: none;
 }
-/* REMOVE LATER ON */
 
-#ads {
+/* REMOVE LATER ON - fråga Nina*/
+
+.adsContainer {
   display: flex;
-  /* justify-content: space-around; */
   flex-wrap: wrap;
   grid-area: 9/2/14/10;
 }
 
-.ad {
+.adCardsContainer {
   display: flex;
   min-width: 23%;
   max-width: 23%;
@@ -30,25 +30,7 @@
   transition: transform 0.2s;
 }
 
-.ad:hover {
-  transform: scale(1.05);
-}
-
-.ad h3 {
-  color: var(--color-dark-1);
-  font: var(--font-stack-1);
-  font-weight: 600;
-  margin-bottom: 0.2em;
-}
-
-#adCompany:hover,
-#adCity:hover,
-#adJobCategory:hover {
-  transform: scale(1.1);
-  color: var(--color-dark-3);
-}
-
-.ad h4 {
+.adCardsContainer h4 {
   color: var(--color-dark-2);
   font: var(--font-stack-2);
   font-weight: 600;
@@ -56,18 +38,28 @@
   font-size: 0.9em;
 }
 
-.ad p,
+.adCardsContainer h3 {
+  color: var(--color-dark-1);
+  font: var(--font-stack-1);
+  font-weight: 600;
+  margin-bottom: 0.2em;
+}
+
+.adCardsContainer:hover {
+  transform: scale(1.05);
+}
+
+
+.highlightOnHover:hover {
+  color: var(--color-dark-3);
+}
+
+
+.adCardsContainer p,
 .adStatisticsHeaderContainer div,
 .adStatisticsNumberContainer div {
   color: var(--color-dark-4);
   font-size: 0.7em;
-}
-
-.adJobDetail {
-  font-weight: 600;
-}
-.adTimeLeft {
-  font-style: italic;
 }
 
 .adStatisticsHeaderContainer,
@@ -92,11 +84,19 @@
   font-weight: 800;
 }
 
+.adJobDetail {
+  font-weight: 600;
+}
+
+.adTimeLeft {
+  font-style: italic;
+}
+
 /* ======================= MEDIA QUERIES ====================== */
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (max-width: 992px) {
-  .ad {
+  .adCardsContainer {
     min-width: 31%;
     max-width: 31%;
   }
@@ -104,7 +104,7 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
-  .ad {
+  .adCardsContainer {
     min-width: 46%;
     max-width: 46%;
   }
@@ -112,7 +112,7 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .ad {
+  .adCardsContainer {
     min-width: 98%;
     max-width: 98%;
   }

@@ -1,4 +1,3 @@
-/*  */
 header {
   background: var(--color-dark-1);
   grid-area: 1/1/3/13;
@@ -45,12 +44,9 @@ img {
 .talktext{
   padding: 1em;
 	text-align: center;
-  /* line-height: 1.5em; */
   
 }
 .talktext p{
-  /* remove webkit p margins */
   -webkit-margin-before: 0em;
   -webkit-margin-after: 0em;
-  /* display: block; */
 }

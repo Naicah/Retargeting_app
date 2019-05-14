@@ -1,4 +1,4 @@
-.filters {
+.filterContainer {
   background: var(--color-dark-1);
   grid-area: 5/2/7/10;
   -webkit-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
@@ -11,53 +11,58 @@
   flex-direction: column;
   justify-content: space-evenly;
 }
-.filters h3 {
-  /* font-family:; */
+
+.filterContainer h3 {
   font-weight: 800;
   margin: 0.5em 1em;
   color: var(--color-light-1);
 }
-.adFiltersHeaderContainer,
-.adFiltersSearchFieldContainer {
+
+.filterHeaderContainer,
+.filterInputContainer {
   margin-left: 1em;
 }
 
-.adFiltersHeaderContainer {
+.filterHeaderContainer {
   margin-top: 0.1em;
 }
 
-.adFiltersHeaderContainer ul li {
+.filterHeaderContainer ul li {
   width: 25%;
   font-weight: 200;
   color: var(--color-light-1);
   /* font: var(--font-stack-1); */
   font-size: 1.2vw;
 }
-.adFiltersHeaderContainer * {
+
+.filterHeaderContainer * {
   margin: 0;
   padding: 0;
 }
-.searchTitle {
+
+.searchTitleContainer {
   list-style: none;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
 }
 
-.adFiltersSearchFieldContainer * {
+.filterInputContainer * {
   margin: 0;
 }
-.adFiltersSearchFieldContainer div,
+
+.filterInputContainer div,
 .v-select {
   padding: 0.7em 0;
   width: 25%;
 }
-.adFiltersSearchFieldContainer {
+
+.filterInputContainer {
   display: flex;
 }
 
 input,
-.adFilterSelect {
+.filterInputSelect {
   background-color: #edf2f6;
   padding: 0.1em 0 0.1em 0.2em;
   border: none;

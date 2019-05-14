@@ -37,20 +37,26 @@
 }
 
 body {
-  font-family: "Montserrat", "Open Sans", sans-serif;
+  font-family: var(--font-stack-1);
   background: var(--color-light-2);
 }
 
-.container {
+#mainContainer {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
 }
 
-.adOngoingAndFinished:hover,
+.statusContainer:hover,
 .filterIcon:hover,
 .sortIcon:hover,
-.adFilterSelect:hover,
-.adSortButton:hover,
-.ad:hover {
+.filterInputSelect:hover,
+.sortButton:hover,
+.adsContainer:hover {
   cursor: pointer;
+}
+
+#id {
+  background-color: red;
+  width: 20vh;
+  height: 20vh;
 }
