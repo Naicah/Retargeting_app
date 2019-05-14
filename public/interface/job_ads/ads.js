@@ -1,12 +1,10 @@
-
-
 $.getJSON("/allAds", function(data) {
   new Vue({
     el: "#mainContainer",
     data: {
       title: "Workbuster",
       allAdsList: data,
-      adStats: [],
+      adStatistic: [],
       adsToShowList: [],
       sortContainerHidden: false,
       filterContainerHidden: false,
@@ -16,8 +14,10 @@ $.getJSON("/allAds", function(data) {
       filterCompany: "",
       showOngoing: false,
       showFinished: false,
-      showAll: false
+      showAll: false,
+      active_el: 0
     },
+
     mounted() {
       this.createChart();
     },
@@ -29,6 +29,9 @@ $.getJSON("/allAds", function(data) {
           );
           console.log("showOngoing true");
         }
+      },
+      adStatistic: function() {
+        this.createChart();
       },
       showFinished: function() {
         if (this.showOngoing) {
@@ -43,6 +46,7 @@ $.getJSON("/allAds", function(data) {
         }
       }
     },
+
     created() {
       const list = this.allAdsList;
       var i;
@@ -61,21 +65,34 @@ $.getJSON("/allAds", function(data) {
       console.log("created");
     },
     methods: {
-      adStatistic: function() {
-        // getAttribute
-        this.allAdsList.filter(ad => {
-          const data = this.adStats.push(ad.applies);
-        });
-        console.log(data.clicks);
+      getAdStatistics: function(ad) {
+        this.statApplies = ad.applies;
+        (this.statView = ad.views), (this.statClick = ad.clicks);
+
+        if (this.adStatistic.length < 3) {
+          this.adStatistic.push(
+            this.statApplies,
+            this.statView,
+            this.statClick
+          );
+        } else {
+          this.adStatistic = new Array();
+          this.adStatistic.push(
+            this.statApplies,
+            this.statView,
+            this.statClick
+          );
+        }
+        return this.adStatistic;
       },
       createChart: function() {
         new Chart("bar-chart", {
           type: "bar",
           data: {
-            labels: ["Ansökningar", "Visningar", "Klick"],
+            labels: ["Ansökningar", "Klick", "Visningar"],
             datasets: [
               {
-                data: [12, 16, 10],
+                data: this.adStatistic,
                 label: "Antal:",
                 backgroundColor: [
                   "rgba(45, 125, 210, 1)",
@@ -142,8 +159,7 @@ $.getJSON("/allAds", function(data) {
             },
             responsive: true,
             responsiveAnimationDuration: 0,
-            maintainAspectRatio: true,
-            aspectRatio: 1
+            maintainAspectRatio: false
           }
         });
       },
@@ -171,10 +187,13 @@ $.getJSON("/allAds", function(data) {
       getFilterCompany: function() {
         this.filterCompany = event.target.value;
       },
+      activate: function(el) {
+        this.active_el = el;
+      },
 
       // --------------- SORT --------------- //
       // SORT ADS BASED ON WHICH SORT BUTTON WAS CLICKED
-      sortAds(value) {
+      sort(value) {
         switch (value) {
           case "title":
             this.adsToShowList.sort((a, b) => (a.title > b.title ? 1 : -1));

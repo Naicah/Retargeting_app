@@ -46,12 +46,12 @@ body {
   grid-template-columns: repeat(12, 1fr);
 }
 
-.adOngoingAndFinished:hover,
+.statusContainer:hover,
 .filterIcon:hover,
 .sortIcon:hover,
-.adFilterSelect:hover,
-.adSortButton:hover,
-.ad:hover {
+.filterInputSelect:hover,
+.sortButton:hover,
+.adsContainer:hover {
   cursor: pointer;
 }
 
