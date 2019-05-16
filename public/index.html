@@ -78,19 +78,19 @@
                 <input type="text" value="" placeholder="Sök.." v-model="filterSearch" />
               </div>
               <div>
-                <select class="filterInputSelect" v-on:change="getFilterInput('Company')">
+                <select class="filterInputSelect" v-on:change="getFilterInput('Company'), getAdSetStatistics('company', 'Company')">
                   <option value="">Välj företag...</option>
-                  <option v-for="ad in adCompaniesList">{{ ad }}</option>
+                  <option v-for="ad in adCompaniesList" >{{ ad }}</option>
                 </select>
               </div>
               <div>
-                <select class="filterInputSelect" v-on:change="getFilterInput('Location')">
+                <select class="filterInputSelect" v-on:change="getFilterInput('Location'), getAdSetStatistics('city', 'Location')">
                   <option value="">Välj plats...</option>
                   <option v-for="ad in adLocationList">{{ ad }}</option>
                 </select>
               </div>
               <div>
-                <select class="filterInputSelect" v-on:change="getFilterInput('JobCategory')">
+                <select class="filterInputSelect" v-on:change="getFilterInput('JobCategory'), getAdSetStatistics('job_category', 'JobCategory')">
                   <option value="">Välj jobbkategori...</option>
                   <option v-for="ad in adJobCategoryList">{{ ad }}</option>
                 </select>
