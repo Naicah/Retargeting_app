@@ -25,7 +25,7 @@
       <img src="./interface/workbuster.png">
       <div class="talk-bubble tri-right left-in">
         <div class="talktext">
-          <p>Hej Workbuster!</p>
+          <p>Hej {{loggedInUser}}!</p>
         </div>
       </div>
     </header>
@@ -36,15 +36,15 @@
     <div class="filterAndSortContainer">
       <ul class="statusContainer">
         <li class="statusOngoing" @click="showAdsByStatus('ongoing')" :class="{ active : showStatus === 'ongoing'}">
-          <h3>8</h3>
+          <h3>{{ totalOngoing }}</h3>
           <p>Pågående</p>
         </li>
         <li class="statusFinished" @click="showAdsByStatus('finished')" :class="{ active : showStatus === 'finished' }">
-          <h3>10</h3>
-          <p>Avslutade</p>
+          <h3>{{ totalFinished }}</h3>
+          <p>Avlsutade</p>
         </li>
         <li class="statusAll" @click="showAdsByStatus('all')" :class="{ active : showStatus === 'all' }">
-          <h3>18</h3>
+          <h3>{{ totalAll }}</h3>
           <p>Alla</p>
         </li>
       </ul>
