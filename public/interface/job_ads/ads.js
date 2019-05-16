@@ -139,6 +139,23 @@ fetch(url)
 
           return this.adStatistics
         },
+        
+        getAdSetStatistics(theAds, parameter, value) {
+          
+          let adsetstatistics = [0,0,0];
+         
+          for (let index = 0; index < theAds.length; index++) {
+            if(theAds[index] == value) {
+              adsetstatistics[0] = adsetstatistics[0] + this.allAdsList[index].applies;
+              adsetstatistics[1] = adsetstatistics[1] + this.allAdsList[index].clicks;
+              adsetstatistics[2] = adsetstatistics[2] + this.allAdsList[index].views
+            }
+           this.adstatistics = adsetstatistics;
+           
+          }
+
+        },
+
         // CREATE CHART FOR STATISTICS
         createChart() {
           // Remove previous chart

@@ -80,13 +80,13 @@
               <div>
                 <select class="filterInputSelect" v-on:change="getFilterInput('Company')">
                   <option value="">Välj företag...</option>
-                  <option v-for="ad in adCompaniesList">{{ ad }}</option>
+                  <option v-for="ad in adCompaniesList" v-on:select="getAdSetStatistics(this.adsToShowList, company, ad)">{{ ad }}</option>
                 </select>
               </div>
               <div>
                 <select class="filterInputSelect" v-on:change="getFilterInput('Location')">
                   <option value="">Välj plats...</option>
-                  <option v-for="ad in adLocationList">{{ ad }}</option>
+                  <option v-for="ad in adLocationList" v-on:select="getAdSetStatistics(this.adsToShowList, company, ad)">{{ ad }}</option>
                 </select>
               </div>
               <div>
