@@ -48,6 +48,7 @@ fetch(url)
         adStatistics: function() {
           this.createChart();
         }
+
       }, // End watch
 
       methods: {
@@ -124,19 +125,36 @@ fetch(url)
           return this.adStatistics;
         },
         
-        getAdSetStatistics(theAds, parameter, value) {
-          
+        getAdSetStatistics(dataKey, value) {
+          this.adStatistics = [0,0,0]
+          console.log(this.adStatistics);
+          console.log(this.adsToShowList);
+
           let adsetstatistics = [0,0,0];
-         
-          for (let index = 0; index < theAds.length; index++) {
-            if(theAds[index] == value) {
-              adsetstatistics[0] = adsetstatistics[0] + this.allAdsList[index].applies;
-              adsetstatistics[1] = adsetstatistics[1] + this.allAdsList[index].clicks;
-              adsetstatistics[2] = adsetstatistics[2] + this.allAdsList[index].views
+          console.log(dataKey);
+          let theValue = "filter" + value;
+          console.log('theValue', theValue);
+        
+          for (let index = 0; index < this.adsToShowList.length; index++) {
+            console.log(this.adsToShowList[1].city);
+            console.log(this[theValue]);
+ 
+
+            if(this.adsToShowList[index][dataKey] === this[theValue]) {
+              console.log('same')
+              adsetstatistics[0] += this.adsToShowList[index].applies;
+              adsetstatistics[1] += this.adsToShowList[index].clicks;
+              adsetstatistics[2] += this.adsToShowList[index].views
+              console.log(adsetstatistics);
+              
             }
-           this.adstatistics = adsetstatistics;
            
           }
+          console.log(adsetstatistics);
+          
+          this.adStatistics = adsetstatistics;
+          console.log(this.adStatistics);
+          
 
         },
 
