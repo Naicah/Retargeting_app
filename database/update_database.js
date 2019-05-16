@@ -114,8 +114,7 @@ module.exports = ({ router }) => {
               apply_url: job.apply_url,
               image: job.image,
               company: job.company.name,
-              city:
-                job.location.city || job.location.name || "Ospecificerad stad",
+              city: job.location.city || job.location.name || null,
               job_category: job.department.name,
               applies: 0,
               clicks: 0,
