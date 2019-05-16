@@ -259,8 +259,12 @@ fetch(url)
         getFilterList(dataKey) {
           const filterList = [];
           this.adsToShowList.map(ad => {
-            if (!filterList.includes(ad[dataKey])) {
-              filterList.push(ad[dataKey]);
+            let value = ad[dataKey];
+            if (ad[dataKey] === null) {
+              value = "Ej angett";
+            }
+            if (!filterList.includes(value)) {
+              filterList.push(value);
             }
           });
           return filterList;

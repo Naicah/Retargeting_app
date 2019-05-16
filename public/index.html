@@ -138,9 +138,9 @@
       <div class="adCardsContainer" 
       @click="getAdStatistics(ad)" 
       v-show="
-            (filterLocation === '' || filterLocation === ad.city)
-              && (filterJobCategory === '' || filterJobCategory === ad.job_category)
-              && (filterCompany === '' || filterCompany === ad.company)"
+            (filterLocation === '' || filterLocation === ad.city || (filterLocation === 'Ej angett' && ad.city === null))
+              && (filterJobCategory === '' || filterJobCategory === ad.job_category || (filterJobCategory === 'Ej angett' && ad.job_category === null))
+              && (filterCompany === '' || filterCompany === ad.company || (filterCompany === 'Ej angett' && ad.company === null))"
               v-for="ad in filterSearchList">
         <div>
           <h3 class="highlightOnHover">{{ ad.company }}</h3>
