@@ -13,7 +13,6 @@
 }
 
 .filterContainer h3 {
-  /* font-family:; */
   font-weight: 800;
   margin: 0.5em 1em;
   color: var(--color-light-1);
@@ -41,7 +40,7 @@
   padding: 0;
 }
 
-.searchTitle {
+.searchTitleContainer {
   list-style: none;
   display: flex;
   flex-direction: row;

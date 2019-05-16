@@ -1,3 +1,11 @@
+.stickyContainer {
+  grid-area: 4/2/9/10;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 15;
+}
+
 .filterAndSortContainer {
   background: var(--color-light-2);
   grid-area: 4/2/5/10;
@@ -9,10 +17,8 @@
 
 .filterAndSortContainer * {
   text-align: center;
-
   display: flex;
   flex-direction: column;
-
   justify-content: space-around;
 }
 
@@ -51,7 +57,7 @@ ul {
 }
 
 .active {
-  box-shadow: inset 0 -4px 0 var(--color-dark-3);
+  box-shadow: inset 0 -4px 0 var(--color-dark-2);
   color: #225fa0;
 }
 

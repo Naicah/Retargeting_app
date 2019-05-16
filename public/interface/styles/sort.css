@@ -21,19 +21,17 @@
 
 .sortButtonContainer {
   display: flex;
-  /* margin: 0 0 0 1em; */
   justify-content: space-evenly;
-
   width: 100%;
   color: var(--color-dark-1);
   text-align: center;
   padding: 0 1% 0 1%;
   font-weight: 600;
+  border-bottom: none;
 }
 
 .sortButtonContainer div {
   border-radius: 3px;
-  /* border: solid black 0.5px; */
   background: white;
   padding: 0.5em 0.3em 0.5em 0.3em;
   min-width: 10%;
@@ -41,10 +39,6 @@
 
 .sortButtonContainer p {
   font-size: 0.8vw;
-}
-
-.sortButtonContainer {
-  border-bottom: none;
 }
 
 .sortButton:hover {

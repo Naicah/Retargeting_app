@@ -5,11 +5,10 @@
   border: none;
 }
 
-/* REMOVE LATER ON */
+/* REMOVE LATER ON - fråga Nina*/
 
 .adsContainer {
   display: flex;
-  /* justify-content: space-around; */
   flex-wrap: wrap;
   grid-area: 9/2/14/10;
 }
@@ -31,8 +30,12 @@
   transition: transform 0.2s;
 }
 
-.adCardsContainer:hover {
-  transform: scale(1.05);
+.adCardsContainer h4 {
+  color: var(--color-dark-2);
+  font: var(--font-stack-2);
+  font-weight: 600;
+  margin-bottom: 0.2em;
+  font-size: 0.9em;
 }
 
 .adCardsContainer h3 {
@@ -42,31 +45,21 @@
   margin-bottom: 0.2em;
 }
 
+.adCardsContainer:hover {
+  transform: scale(1.05);
+}
+
+
 .highlightOnHover:hover {
   color: var(--color-dark-3);
 }
 
-.adCardsContainer h4 {
-  color: var(--color-dark-2);
-  font: var(--font-stack-2);
-  font-weight: 600;
-  margin-bottom: 0.2em;
-  font-size: 0.9em;
-}
 
 .adCardsContainer p,
 .adStatisticsHeaderContainer div,
 .adStatisticsNumberContainer div {
   color: var(--color-dark-4);
   font-size: 0.7em;
-}
-
-.adJobDetail {
-  font-weight: 600;
-}
-
-.adTimeLeft {
-  font-style: italic;
 }
 
 .adStatisticsHeaderContainer,
@@ -89,6 +82,14 @@
 .adStatisticsNumberContainer div {
   font-size: 1.5em;
   font-weight: 800;
+}
+
+.adJobDetail {
+  font-weight: 600;
+}
+
+.adTimeLeft {
+  font-style: italic;
 }
 
 /* ======================= MEDIA QUERIES ====================== */

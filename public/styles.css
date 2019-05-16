@@ -37,11 +37,11 @@
 }
 
 body {
-  font-family: "Montserrat", "Open Sans", sans-serif;
+  font-family: var(--font-stack-1);
   background: var(--color-light-2);
 }
 
-.container {
+#mainContainer {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
 }
