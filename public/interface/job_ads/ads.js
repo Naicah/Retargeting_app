@@ -36,17 +36,22 @@ fetch(url)
       mounted() {
         this.showStatus = "ongoing"; // Display ongoing ads
         this.createChart(); // Display statistics
+
+
       }, // End mounted
       watch: {
         // SHOW ADS BASED ON STATUS
         showStatus: function() {
           this.adsToShowList = this.getAdsByStatus(this.showStatus);
+          this.getAdSetStatistics(this.adsToShowList)
+
         },
 
         // ===================== STATISTICS =============== //
         // DISPLAYS CHOSEN STATISTICS
         adStatistics: function() {
           this.createChart();
+
         }
 
       }, // End watch
