@@ -45,6 +45,7 @@ fetch(url)
         showStatus: function() {
           this.adsToShowList = this.getAdsByStatus(this.showStatus);
           this.getAdSetStatistics(this.adsToShowList)
+          this.changeChartTitle(this.showStatus);
 
         },
 
@@ -142,7 +143,8 @@ fetch(url)
             
             console.log("thevalue" + this[theValue]);
             
-            this.chartTitle = "Annonser " + this[theValue];
+            // this.chartTitle = "Annonser " + this[theValue];
+            this.changeChartTitle(this[theValue]);
 
             if(this.adsToShowList[index][dataKey] === this[theValue]) {
               console.log('same')
@@ -160,6 +162,22 @@ fetch(url)
           console.log(this.adStatistics);
           
 
+        },
+
+        // HANDLE CHANGES IN CHARTTITLE
+
+        changeChartTitle(value) {
+          let currentTitle = "";
+            if(value === "ongoing") {
+              currentTitle = "Pågående annonser"
+            } else if(value === "finished") {
+              currentTitle = "Avslutade annonser"
+            } else if(value === "all") {
+              currentTitle = "Alla annonser"
+            } else {
+              currentTitle = value;
+            }
+            this.chartTitle = currentTitle;
         },
 
         // CREATE CHART FOR STATISTICS
