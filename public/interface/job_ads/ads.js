@@ -16,6 +16,7 @@ fetch(url)
         filterJobCategory: "",
         filterCompany: "",
         statisticsChart: "",
+        chartTitle: "",
         adStatistics: [0, 0, 0]
       },
       //  CALCULATES AND SAVES STATUS FOR EACH AD IN allAdsList
@@ -123,6 +124,7 @@ fetch(url)
         // ====================== STATISTICS ==================== //
         // GET STATISTICS FOR GIVEN ADD
         getAdStatistics(ad) {
+          this.chartTitle = ad.title;
           this.adStatistics.length < 3
             ? this.adStatistics.push(ad.applies, ad.clicks, ad.views)
             : this.adStatistics.splice(0, 3, ad.applies, ad.clicks, ad.views);
@@ -132,18 +134,15 @@ fetch(url)
         
         getAdSetStatistics(dataKey, value) {
           this.adStatistics = [0,0,0]
-          console.log(this.adStatistics);
-          console.log(this.adsToShowList);
-
           let adsetstatistics = [0,0,0];
           console.log(dataKey);
-          let theValue = "filter" + value;
-          console.log('theValue', theValue);
+          let theValue = "filter" + value;         
         
           for (let index = 0; index < this.adsToShowList.length; index++) {
-            console.log(this.adsToShowList[1].city);
-            console.log(this[theValue]);
- 
+            
+            console.log("thevalue" + this[theValue]);
+            
+            this.chartTitle = "Annonser " + this[theValue];
 
             if(this.adsToShowList[index][dataKey] === this[theValue]) {
               console.log('same')
