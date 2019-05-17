@@ -16,7 +16,7 @@ fetch(url)
         filterJobCategory: "",
         filterCompany: "",
         statisticsChart: "",
-        chartTitle: "",
+        chartTitle: "Alla anonser",
         adStatistics: [0, 0, 0]
       },
       //  CALCULATES AND SAVES STATUS FOR EACH AD IN allAdsList
