@@ -16,6 +16,7 @@ fetch(url)
         filterJobCategory: "",
         filterCompany: "",
         statisticsChart: "",
+        chartTitle: "Alla anonser",
         adStatistics: [0, 0, 0]
       },
       //  CALCULATES AND SAVES STATUS FOR EACH AD IN allAdsList
@@ -42,6 +43,7 @@ fetch(url)
         showStatus: function() {
           this.adsToShowList = this.getAdsByStatus(this.showStatus);
           this.getAdSetStatistics(this.adsToShowList);
+          this.changeChartTitle(this.showStatus);
         },
 
         // ===================== STATISTICS =============== //
@@ -127,6 +129,7 @@ fetch(url)
         // ====================== STATISTICS ==================== //
         // GET STATISTICS FOR GIVEN ADD
         getAdStatistics(ad) {
+          this.chartTitle = ad.title;
           this.adStatistics.length < 3
             ? this.adStatistics.push(ad.applies, ad.clicks, ad.views)
             : this.adStatistics.splice(0, 3, ad.applies, ad.clicks, ad.views);
@@ -136,17 +139,15 @@ fetch(url)
 
         getAdSetStatistics(dataKey, value) {
           this.adStatistics = [0, 0, 0];
-          console.log(this.adStatistics);
-          console.log(this.adsToShowList);
-
           let adsetstatistics = [0, 0, 0];
           console.log(dataKey);
           let theValue = "filter" + value;
-          console.log("theValue", theValue);
 
           for (let index = 0; index < this.adsToShowList.length; index++) {
-            console.log(this.adsToShowList[1].city);
-            console.log(this[theValue]);
+            console.log("thevalue" + this[theValue]);
+
+            // this.chartTitle = "Annonser " + this[theValue];
+            this.changeChartTitle(this[theValue]);
 
             if (this.adsToShowList[index][dataKey] === this[theValue]) {
               console.log("same");
@@ -160,6 +161,22 @@ fetch(url)
 
           this.adStatistics = adsetstatistics;
           console.log(this.adStatistics);
+        },
+
+        // HANDLE CHANGES IN CHARTTITLE
+
+        changeChartTitle(value) {
+          let currentTitle = "";
+          if (value === "ongoing") {
+            currentTitle = "Pågående annonser";
+          } else if (value === "finished") {
+            currentTitle = "Avslutade annonser";
+          } else if (value === "all") {
+            currentTitle = "Alla annonser";
+          } else {
+            currentTitle = value;
+          }
+          this.chartTitle = currentTitle;
         },
 
         // CREATE CHART FOR STATISTICS
