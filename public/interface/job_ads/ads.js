@@ -36,24 +36,19 @@ fetch(url)
       mounted() {
         this.showStatus = "ongoing"; // Display ongoing ads
         this.createChart(); // Display statistics
-
-
       }, // End mounted
       watch: {
         // SHOW ADS BASED ON STATUS
         showStatus: function() {
           this.adsToShowList = this.getAdsByStatus(this.showStatus);
-          this.getAdSetStatistics(this.adsToShowList)
-
+          this.getAdSetStatistics(this.adsToShowList);
         },
 
         // ===================== STATISTICS =============== //
         // DISPLAYS CHOSEN STATISTICS
         adStatistics: function() {
           this.createChart();
-
         }
-
       }, // End watch
 
       methods: {
@@ -69,6 +64,15 @@ fetch(url)
         },
 
         // ==================== FILTER =================== //
+
+        // CLEAR ALL FILTERS
+        clearAllFilters() {
+          (this.filterSearch = ""),
+            (this.filterLocation = ""),
+            (this.filterJobCategory = ""),
+            (this.filterCompany = "");
+        },
+
         // GET VALUE TO FILTER ON FROM INPUT FIELD, STORE IN DATA
         getFilterInput(type) {
           this["filter" + type] = event.target.value;
@@ -129,38 +133,33 @@ fetch(url)
 
           return this.adStatistics;
         },
-        
+
         getAdSetStatistics(dataKey, value) {
-          this.adStatistics = [0,0,0]
+          this.adStatistics = [0, 0, 0];
           console.log(this.adStatistics);
           console.log(this.adsToShowList);
 
-          let adsetstatistics = [0,0,0];
+          let adsetstatistics = [0, 0, 0];
           console.log(dataKey);
           let theValue = "filter" + value;
-          console.log('theValue', theValue);
-        
+          console.log("theValue", theValue);
+
           for (let index = 0; index < this.adsToShowList.length; index++) {
             console.log(this.adsToShowList[1].city);
             console.log(this[theValue]);
- 
 
-            if(this.adsToShowList[index][dataKey] === this[theValue]) {
-              console.log('same')
+            if (this.adsToShowList[index][dataKey] === this[theValue]) {
+              console.log("same");
               adsetstatistics[0] += this.adsToShowList[index].applies;
               adsetstatistics[1] += this.adsToShowList[index].clicks;
-              adsetstatistics[2] += this.adsToShowList[index].views
+              adsetstatistics[2] += this.adsToShowList[index].views;
               console.log(adsetstatistics);
-              
             }
-           
           }
           console.log(adsetstatistics);
-          
+
           this.adStatistics = adsetstatistics;
           console.log(this.adStatistics);
-          
-
         },
 
         // CREATE CHART FOR STATISTICS

@@ -35,15 +35,15 @@
   <div class="stickyContainer">
     <div class="filterAndSortContainer">
       <ul class="statusContainer">
-        <li class="statusOngoing" @click="showAdsByStatus('ongoing')" :class="{ active : showStatus === 'ongoing'}">
+        <li class="statusOngoing" @click="showAdsByStatus('ongoing'), clearAllFilters()" :class="{ active : showStatus === 'ongoing'}">
           <h3>{{ totalOngoing }}</h3>
           <p>Pågående</p>
         </li>
-        <li class="statusFinished" @click="showAdsByStatus('finished')" :class="{ active : showStatus === 'finished' }">
+        <li class="statusFinished" @click="showAdsByStatus('finished'), clearAllFilters()" :class="{ active : showStatus === 'finished' }">
           <h3>{{ totalFinished }}</h3>
           <p>Avlsutade</p>
         </li>
-        <li class="statusAll" @click="showAdsByStatus('all')" :class="{ active : showStatus === 'all' }">
+        <li class="statusAll" @click="showAdsByStatus('all'), clearAllFilters()" :class="{ active : showStatus === 'all' }">
           <h3>{{ totalAll }}</h3>
           <p>Alla</p>
         </li>
@@ -63,8 +63,13 @@
     <!--                            FILTERS                               -->
     <!-- ================================================================ -->
     <div class="filterContainer" v-show="!filterContainerHidden">
-      <h3>Filter <h3>
-          <div class="filterHeaderContainer">
+      <div class="filterHeaderContainer">
+        <h3>Filter <h3>
+        <img @click="clearAllFilters" src="./interface/clear_filter.png" alt="Clear filter icon">
+        <a class="iconShoutout" href="https://icons8.com/icon/8313/clear-filters-filled">Clear Filters Filled icon by Icons8</a>
+      </div>
+     
+          <div class="filterLabelContainer">
             <ul class="searchTitleContainer">
               <li>JOBBTITEL</li>
               <li>FÖRETAG</li>
@@ -78,21 +83,22 @@
                 <input type="text" value="" placeholder="Sök.." v-model="filterSearch" />
               </div>
               <div>
-                <select class="filterInputSelect" v-on:change="getFilterInput('Company'), getAdSetStatistics('company', 'Company')">
+                
+                <select v-model="filterCompany" class="filterInputSelect" v-on:change="getFilterInput('Company'), getAdSetStatistics('company', 'Company')">
                   <option value="">Välj företag...</option>
-                  <option v-for="ad in adCompaniesList" >{{ ad }}</option>
+                  <option v-for="company in adCompaniesList" >{{ company }}</option>
                 </select>
               </div>
               <div>
-                <select class="filterInputSelect" v-on:change="getFilterInput('Location'), getAdSetStatistics('city', 'Location')">
+                <select v-model="filterLocation" class="filterInputSelect" v-on:change="getFilterInput('Location'), getAdSetStatistics('city', 'Location')">
                   <option value="">Välj plats...</option>
-                  <option v-for="ad in adLocationList">{{ ad }}</option>
+                  <option v-for="location in adLocationList">{{ location }}</option>
                 </select>
               </div>
               <div>
-                <select class="filterInputSelect" v-on:change="getFilterInput('JobCategory'), getAdSetStatistics('job_category', 'JobCategory')">
+                <select v-model="filterJobCategory" class="filterInputSelect" v-on:change="getFilterInput('JobCategory'), getAdSetStatistics('job_category', 'JobCategory')">
                   <option value="">Välj jobbkategori...</option>
-                  <option v-for="ad in adJobCategoryList">{{ ad }}</option>
+                  <option v-for="jobCategory in adJobCategoryList">{{ jobCategory }}</option>
                 </select>
               </div>
             </div>
