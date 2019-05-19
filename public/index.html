@@ -84,19 +84,19 @@
               </div>
               <div>
                 
-                <select v-model="filterCompany" class="filterInputSelect" v-on:change="getFilterInput('Company'), getAdSetStatistics('company', 'Company')">
+                <select v-model="filterCompany" class="filterInputSelect" v-on:change="getFilterInput('Company'), getAdSetStatistics()">
                   <option value="">Välj företag...</option>
                   <option v-for="company in adCompaniesList" >{{ company }}</option>
                 </select>
               </div>
               <div>
-                <select v-model="filterLocation" class="filterInputSelect" v-on:change="getFilterInput('Location'), getAdSetStatistics('city', 'Location')">
+                <select v-model="filterLocation" class="filterInputSelect" v-on:change="getFilterInput('Location'), getAdSetStatistics()">
                   <option value="">Välj plats...</option>
                   <option v-for="location in adLocationList">{{ location }}</option>
                 </select>
               </div>
               <div>
-                <select v-model="filterJobCategory" class="filterInputSelect" v-on:change="getFilterInput('JobCategory'), getAdSetStatistics('job_category', 'JobCategory')">
+                <select v-model="filterJobCategory" class="filterInputSelect" v-on:change="getFilterInput('JobCategory'), getAdSetStatistics()">
                   <option value="">Välj jobbkategori...</option>
                   <option v-for="jobCategory in adJobCategoryList">{{ jobCategory }}</option>
                 </select>

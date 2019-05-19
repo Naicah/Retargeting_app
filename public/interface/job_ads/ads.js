@@ -129,7 +129,9 @@ fetch(url)
         // ====================== STATISTICS ==================== //
         // GET STATISTICS FOR GIVEN ADD
         getAdStatistics(ad) {
-          this.chartTitle = ad.title;
+          console.log(ad);
+          
+          this.chartTitle = ad.company + " " + ad.title + " " + ad.city;
           this.adStatistics.length < 3
             ? this.adStatistics.push(ad.applies, ad.clicks, ad.views)
             : this.adStatistics.splice(0, 3, ad.applies, ad.clicks, ad.views);
@@ -138,30 +140,34 @@ fetch(url)
         },
 
         //PUTS STATISTICS FROM MULTUBLE ADS IN TO ADSTATISTICS
-        getAdSetStatistics(dataKey, value) {
-          this.adStatistics = [0, 0, 0];
-          let adsetstatistics = [0, 0, 0];
-          console.log(dataKey);
-          let theValue = "filter" + value;
-
-          for (let index = 0; index < this.adsToShowList.length; index++) {
-            console.log("thevalue" + this[theValue]);
-
-            // this.chartTitle = "Annonser " + this[theValue];
-            this.changeChartTitle(this[theValue]);
-
-            if (this.adsToShowList[index][dataKey] === this[theValue]) {
-              console.log("same");
-              adsetstatistics[0] += this.adsToShowList[index].applies;
-              adsetstatistics[1] += this.adsToShowList[index].clicks;
-              adsetstatistics[2] += this.adsToShowList[index].views;
-              console.log(adsetstatistics);
-            }
-          }
-          console.log(adsetstatistics);
-
-          this.adStatistics = adsetstatistics;
-          console.log(this.adStatistics);
+        getAdSetStatistics() { 
+          let adsetstatistics = [0, 0, 0];              
+          // THE IF ELSE BELOW SITWES BETWEEN showStatus AND FILTER INPUT
+          if (this.filterCompany === "" && this.filterLocation === "" && this.filterJobCategory === "") {     
+            for (let index = 0; index < this.adsToShowList.length; index++) {                                     
+                adsetstatistics[0] += this.adsToShowList[index].applies;
+                adsetstatistics[1] += this.adsToShowList[index].clicks;
+                adsetstatistics[2] += this.adsToShowList[index].views;                       
+            }  
+          } else {                        
+            this.chartTitle = this.filterCompany + " " +this.filterLocation + " " +this.filterJobCategory;
+            let chartFilterList = this.adsToShowList;
+            
+            //THE IF STATMENTS BELOW FILTERS THE INPUT DO USEFULL DATA THAT CAN BE SENT TO THE CHART
+            if (this.filterCompany != "" && this.filterCompany != "Ej angett") {chartFilterList = chartFilterList.filter(ads => ads.company === this.filterCompany)};    
+            if (this.filterCompany === "Ej angett") {chartFilterList = chartFilterList.filter(ads => ads.company === null)};
+            if (this.filterLocation != "" && this.filterLocation != "Ej angett") {chartFilterList = chartFilterList.filter(ads => ads.city === this.filterLocation)};
+            if (this.filterLocation === "Ej angett") {chartFilterList = chartFilterList.filter(ads => ads.city === null)};           
+            if (this.filterJobCategory != "" && this.filterJobCategory != "Ej angett") {chartFilterList = chartFilterList.filter(ads => ads.job_category === this.filterJobCategory)};
+            if (this.filterJobCategory === "Ej angett") {chartFilterList = chartFilterList.filter(ads => ads.job_category === null)};
+         
+            for (let index = 0; index < chartFilterList.length; index++) {                                     
+              adsetstatistics[0] += chartFilterList[index].applies;
+              adsetstatistics[1] += chartFilterList[index].clicks;
+              adsetstatistics[2] += chartFilterList[index].views;                       
+            }        
+          }               
+          this.adStatistics = adsetstatistics;       
         },
 
         // HANDLE CHANGES IN CHARTTITLE
