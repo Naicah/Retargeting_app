@@ -137,6 +137,7 @@ fetch(url)
           return this.adStatistics;
         },
 
+        //PUTS STATISTICS FROM MULTUBLE ADS IN TO ADSTATISTICS
         getAdSetStatistics(dataKey, value) {
           this.adStatistics = [0, 0, 0];
           let adsetstatistics = [0, 0, 0];
