@@ -110,28 +110,28 @@
     <div class="sortContainer" v-show="!sortContainerHidden">
       <h3>Sortering</h3>
       <div class="sortButtonContainer">
-        <div class="sortButton" @click="sort('title','string')">
+        <div class="sortButton" @click="sort('title','string'), showBySort('title')" :class="{ active  : showActive === 'title'}">
           <p>Jobbtitel</p>
         </div>
-        <div class="sortButton" @click="sort('company','string')">
+        <div class="sortButton" @click="sort('company','string'), showBySort('company')" :class="{ active  : showActive === 'company'}">
           <p>Företagsnamn</p>
         </div>
-        <div class="sortButton" @click="sort('city','string')">
+        <div class="sortButton" @click="sort('city','string'), showBySort('city')" :class="{ active  : showActive === 'city'}">
           <p>Plats</p>
         </div>
-        <div class="sortButton" @click="sort('job_category','string')">
+        <div class="sortButton" @click="sort('job_category','string'), showBySort('job_category')" :class="{ active  : showActive === 'job_category'}">
           <p>Kategori</p>
         </div>
-        <div class="sortButton" @click="sort('applies','integer')">
+        <div class="sortButton" @click="sort('applies','integer'), showBySort('applies')" :class="{ active  : showActive === 'applies'}">
           <p>Antal ansökningar</p>
         </div>
-        <div class="sortButton" @click="sort('views','integer')">
+        <div class="sortButton" @click="sort('views','integer'), showBySort('views')" :class="{ active  : showActive === 'views'}">
           <p>Antal visningar</p>
         </div>
-        <div class="sortButton" @click="sort('clicks','integer')">
+        <div class="sortButton" @click="sort('clicks','integer'), showBySort('clicks')" :class="{ active  : showActive === 'clicks'}">
           <p>Antal Klick</p>
         </div>
-        <div class="sortButton" @click="sort('last_application_timestamp','string')">
+        <div class="sortButton" @click="sort('last_application_timestamp','string'), showBySort('last_application_timestamp')" :class="{ active  : showActive === 'last_application_timestamp'}">
           <p>Antal dagar kvar</p>
         </div>
       </div>
@@ -142,12 +142,12 @@
     <!-- ================================================================ -->
     <div class="adsContainer">
       <div class="adCardsContainer" 
-      @click="getAdStatistics(ad)" 
+      @click="getAdStatistics(ad), selected = ad" 
       v-show="
             (filterLocation === '' || filterLocation === ad.city || (filterLocation === 'Ej angett' && ad.city === null))
               && (filterJobCategory === '' || filterJobCategory === ad.job_category || (filterJobCategory === 'Ej angett' && ad.job_category === null))
               && (filterCompany === '' || filterCompany === ad.company || (filterCompany === 'Ej angett' && ad.company === null))"
-              v-for="ad in filterSearchList">
+              v-for="ad in filterSearchList" :class="{highlight: selected === ad}" >
         <div>
           <h3 class="highlightOnHover">{{ ad.company }}</h3>
           <h4>{{ ad.title }}</h4>

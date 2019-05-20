@@ -17,7 +17,9 @@ fetch(url)
         filterCompany: "",
         statisticsChart: "",
         chartTitle: "Alla anonser",
-        adStatistics: [0, 0, 0]
+        adStatistics: [0, 0, 0],
+        selected: "",
+        showActive: ""
       },
       //  CALCULATES AND SAVES STATUS FOR EACH AD IN allAdsList
       created() {
@@ -63,6 +65,9 @@ fetch(url)
         // TOGGLE WHICH ADS THATS ARE SHOWED BASED ON STATUS
         showAdsByStatus(status) {
           this.showStatus = status;
+        },
+        showBySort(status){
+          this.showActive = status;
         },
 
         // ==================== FILTER =================== //
@@ -142,7 +147,7 @@ fetch(url)
         //PUTS STATISTICS FROM MULTUBLE ADS IN TO ADSTATISTICS
         getAdSetStatistics() { 
           let adsetstatistics = [0, 0, 0];              
-          // THE IF ELSE BELOW SITWES BETWEEN showStatus AND FILTER INPUT
+          // THE IF ELSE BELOW SWITCHES BETWEEN showStatus AND FILTER INPUT
           if (this.filterCompany === "" && this.filterLocation === "" && this.filterJobCategory === "") {     
             for (let index = 0; index < this.adsToShowList.length; index++) {                                     
                 adsetstatistics[0] += this.adsToShowList[index].applies;
@@ -153,7 +158,7 @@ fetch(url)
             this.chartTitle = this.filterCompany + " " +this.filterLocation + " " +this.filterJobCategory;
             let chartFilterList = this.adsToShowList;
             
-            //THE IF STATMENTS BELOW FILTERS THE INPUT DO USEFULL DATA THAT CAN BE SENT TO THE CHART
+            //THE IF STATMENTS BELOW FILTERS THE INPUT TO USEFULL DATA THAT CAN BE SENT TO THE CHART
             if (this.filterCompany != "" && this.filterCompany != "Ej angett") {chartFilterList = chartFilterList.filter(ads => ads.company === this.filterCompany)};    
             if (this.filterCompany === "Ej angett") {chartFilterList = chartFilterList.filter(ads => ads.company === null)};
             if (this.filterLocation != "" && this.filterLocation != "Ej angett") {chartFilterList = chartFilterList.filter(ads => ads.city === this.filterLocation)};

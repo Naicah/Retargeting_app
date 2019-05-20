@@ -117,3 +117,8 @@
     max-width: 98%;
   }
 }
+
+.highlight {
+  box-shadow: 0px 2px 5px 1px var(--color-dark-3);
+ 
+ }
