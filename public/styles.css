@@ -51,7 +51,8 @@ body {
 .sortIcon:hover,
 .filterInputSelect:hover,
 .sortButton:hover,
-.adsContainer:hover {
+.adsContainer:hover,
+.filterHeaderContainer img:hover {
   cursor: pointer;
 }
 

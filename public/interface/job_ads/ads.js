@@ -5,19 +5,21 @@ fetch(url)
     new Vue({
       el: "#mainContainer",
       data: {
+        loggedInUser: "Workbuster",
         allAdsList: data,
-        adStatistics: [0, 0, 0],
         adsToShowList: [],
+        showStatus: "",
         sortContainerHidden: false,
         filterContainerHidden: false,
         filterSearch: "",
         filterLocation: "",
         filterJobCategory: "",
         filterCompany: "",
-        showStatus: "",
-        showActive: "",
         statisticsChart: "",
-        selected: ""
+        chartTitle: "Alla anonser",
+        adStatistics: [0, 0, 0],
+        selected: "",
+        showActive: ""
       },
       //  CALCULATES AND SAVES STATUS FOR EACH AD IN allAdsList
       created() {
@@ -32,35 +34,18 @@ fetch(url)
             list[i].status = "finished";
           }
         }
-        this.showOngoing = true;
       },
 
       mounted() {
         this.showStatus = "ongoing"; // Display ongoing ads
         this.createChart(); // Display statistics
-      },
+      }, // End mounted
       watch: {
         // SHOW ADS BASED ON STATUS
         showStatus: function() {
-          let status;
-
-          if (this.showStatus === "all") {
-            this.adsToShowList = this.allAdsList;
-          } else {
-            switch (this.showStatus) {
-              case "ongoing":
-                status = "ongoing";
-                break;
-              case "finished":
-                status = "finished";
-                break;
-              case "all":
-                break;
-            }
-            this.adsToShowList = this.allAdsList.filter(
-              ad => ad.status === status
-            );
-          }
+          this.adsToShowList = this.getAdsByStatus(this.showStatus);
+          this.getAdSetStatistics(this.adsToShowList);
+          this.changeChartTitle(this.showStatus);
         },
 
         // ===================== STATISTICS =============== //
@@ -76,6 +61,7 @@ fetch(url)
           this[dataKey] = !this[dataKey];
         },
 
+        // ===================== STATUS ================== //
         // TOGGLE WHICH ADS THATS ARE SHOWED BASED ON STATUS
         showAdsByStatus(status) {
           this.showStatus = status;
@@ -84,14 +70,23 @@ fetch(url)
           this.showActive = status;
         },
 
-        // ============== FILTER ================ //
+        // ==================== FILTER =================== //
 
+        // CLEAR ALL FILTERS
+        clearAllFilters() {
+          (this.filterSearch = ""),
+            (this.filterLocation = ""),
+            (this.filterJobCategory = ""),
+            (this.filterCompany = "");
+        },
+
+        // GET VALUE TO FILTER ON FROM INPUT FIELD, STORE IN DATA
         getFilterInput(type) {
           this["filter" + type] = event.target.value;
         },
 
-        // ================ SORT ================ //
-        // SORT ADS BASED ON WHICH SORT BUTTON WAS CLICKED
+        // ======================= SORT =================== //
+        // SORT ADS BASED ON WHICH SORT BUTTON WAS CLIC1KED
         sort(value, type) {
           switch (type) {
             case "string":
@@ -139,12 +134,102 @@ fetch(url)
         // ====================== STATISTICS ==================== //
         // GET STATISTICS FOR GIVEN ADD
         getAdStatistics(ad) {
+          console.log(ad);
+
+          this.chartTitle = ad.company + " " + ad.title + " " + ad.city;
           this.adStatistics.length < 3
             ? this.adStatistics.push(ad.applies, ad.clicks, ad.views)
             : this.adStatistics.splice(0, 3, ad.applies, ad.clicks, ad.views);
 
           return this.adStatistics;
         },
+
+        //PUTS STATISTICS FROM MULTUBLE ADS IN TO ADSTATISTICS
+        getAdSetStatistics() {
+          let adsetstatistics = [0, 0, 0];
+          // THE IF ELSE BELOW SWITCHES BETWEEN showStatus AND FILTER INPUT
+          if (
+            this.filterCompany === "" &&
+            this.filterLocation === "" &&
+            this.filterJobCategory === ""
+          ) {
+            for (let index = 0; index < this.adsToShowList.length; index++) {
+              adsetstatistics[0] += this.adsToShowList[index].applies;
+              adsetstatistics[1] += this.adsToShowList[index].clicks;
+              adsetstatistics[2] += this.adsToShowList[index].views;
+            }
+          } else {
+            this.chartTitle =
+              this.filterCompany +
+              " " +
+              this.filterLocation +
+              " " +
+              this.filterJobCategory;
+            let chartFilterList = this.adsToShowList;
+
+            //THE IF STATMENTS BELOW FILTERS THE INPUT TO USEFULL DATA THAT CAN BE SENT TO THE CHART
+            if (this.filterCompany != "" && this.filterCompany != "Ej angett") {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.company === this.filterCompany
+              );
+            }
+            if (this.filterCompany === "Ej angett") {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.company === null
+              );
+            }
+            if (
+              this.filterLocation != "" &&
+              this.filterLocation != "Ej angett"
+            ) {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.city === this.filterLocation
+              );
+            }
+            if (this.filterLocation === "Ej angett") {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.city === null
+              );
+            }
+            if (
+              this.filterJobCategory != "" &&
+              this.filterJobCategory != "Ej angett"
+            ) {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.job_category === this.filterJobCategory
+              );
+            }
+            if (this.filterJobCategory === "Ej angett") {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.job_category === null
+              );
+            }
+
+            for (let index = 0; index < chartFilterList.length; index++) {
+              adsetstatistics[0] += chartFilterList[index].applies;
+              adsetstatistics[1] += chartFilterList[index].clicks;
+              adsetstatistics[2] += chartFilterList[index].views;
+            }
+          }
+          this.adStatistics = adsetstatistics;
+        },
+
+        // HANDLE CHANGES IN CHARTTITLE
+
+        changeChartTitle(value) {
+          let currentTitle = "";
+          if (value === "ongoing") {
+            currentTitle = "Pågående annonser";
+          } else if (value === "finished") {
+            currentTitle = "Avslutade annonser";
+          } else if (value === "all") {
+            currentTitle = "Alla annonser";
+          } else {
+            currentTitle = value;
+          }
+          this.chartTitle = currentTitle;
+        },
+
         // CREATE CHART FOR STATISTICS
         createChart() {
           // Remove previous chart
@@ -233,11 +318,25 @@ fetch(url)
             }
           });
         },
-        createFilterList(dataKey) {
+        // GET ARRAY OF ADS WITH THE GIVEN STATUS
+        getAdsByStatus(status) {
+          if (status === "all") {
+            ads = this.allAdsList;
+          } else {
+            ads = this.allAdsList.filter(ad => ad.status === status);
+          }
+          return ads;
+        },
+        // GET ARRAY OF KEYS IN AD TO BE ABLE TO FILTER ON (only unique values)
+        getFilterList(dataKey) {
           const filterList = [];
           this.adsToShowList.map(ad => {
-            if (!filterList.includes(ad[dataKey])) {
-              filterList.push(ad[dataKey]);
+            let value = ad[dataKey];
+            if (ad[dataKey] === null) {
+              value = "Ej angett";
+            }
+            if (!filterList.includes(value)) {
+              filterList.push(value);
             }
           });
           return filterList;
@@ -245,7 +344,20 @@ fetch(url)
       }, // End methods
 
       computed: {
-        // ================ FILTER ================== //
+        // ===================== STATUS ==================== //
+        // CALCULATE TOTAL ADS WITH STATUS ONGOING
+        totalOngoing: function() {
+          return this.getAdsByStatus("ongoing").length;
+        },
+        // CALCULATE TOTAL ADS WITH STATUS FINISHED
+        totalFinished: function() {
+          return this.getAdsByStatus("finished").length;
+        },
+        // CALCULATE TOTAL ADS
+        totalAll: function() {
+          return this.getAdsByStatus("all").length;
+        },
+        // ===================== FILTER ===================== //
         // SHOW ADS THAT MATCHES SEARCH
         filterSearchList() {
           return this.adsToShowList.filter(ad => {
@@ -254,27 +366,23 @@ fetch(url)
               .includes(this.filterSearch.toLowerCase());
           });
         },
-        // CREATES LIST OF ALL LOCATIONS
+        // CREATES FILTERLIST OF ALL COMPANIES
+        adCompaniesList: function() {
+          adCompany = this.getFilterList("company");
+          return adCompany;
+        },
+        // CREATES FILTERLIST OF ALL LOCATIONS
         adLocationList: function() {
-          adLocation = this.createFilterList("city");
+          adLocation = this.getFilterList("city");
           return adLocation;
         },
-        // CREATES LIST OF ALL JOB CATEGORIES
+        // CREATES FILTERLIST OF ALL JOB CATEGORIES
         adJobCategoryList: function() {
-          adJobCategory = this.createFilterList("job_category");
+          adJobCategory = this.getFilterList("job_category");
           return adJobCategory;
-        },
-        // CREATES LIST OF ALL COMPANIES
-        adCompaniesList: function() {
-          adCompany = this.createFilterList("company");
-          return adCompany;
         }
-      }
+      } // End computed
     });
-    // ========================================================= //
-    //               STATISTIC MENU                              //
-    //         INIT A CHART FOR STATISTIC                         //
-    // ========================================================= //
   })
   .catch(err => {
     throw err;

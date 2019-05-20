@@ -18,16 +18,34 @@
   color: var(--color-light-1);
 }
 
+.filterHeaderContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filterHeaderContainer img {
+  height: 3.5vh;
+  width: auto;
+  color: white;
+}
+
+.iconShoutout {
+  visibility: hidden;
+  font-size: 0.1vh;
+}
+
 .filterHeaderContainer,
+.filterLabelContainer,
 .filterInputContainer {
   margin-left: 1em;
 }
 
-.filterHeaderContainer {
+.filterLabelContainer {
   margin-top: 0.1em;
 }
 
-.filterHeaderContainer ul li {
+.filterLabelContainer ul li {
   width: 25%;
   font-weight: 200;
   color: var(--color-light-1);
@@ -35,7 +53,7 @@
   font-size: 1.2vw;
 }
 
-.filterHeaderContainer * {
+.filterLabelContainer * {
   margin: 0;
   padding: 0;
 }
