@@ -15,7 +15,9 @@ fetch(url)
         filterJobCategory: "",
         filterCompany: "",
         showStatus: "",
-        statisticsChart: ""
+        showActive: "",
+        statisticsChart: "",
+        selected: ""
       },
       //  CALCULATES AND SAVES STATUS FOR EACH AD IN allAdsList
       created() {
@@ -77,6 +79,9 @@ fetch(url)
         // TOGGLE WHICH ADS THATS ARE SHOWED BASED ON STATUS
         showAdsByStatus(status) {
           this.showStatus = status;
+        },
+        showBySort(status) {
+          this.showActive = status;
         },
 
         // ============== FILTER ================ //

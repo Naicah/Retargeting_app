@@ -49,6 +49,11 @@
   transform: scale(1.05);
 }
 
+.highlight {
+  box-shadow: 0px 2px 5px 1px var(--color-dark-3);
+
+}
+
 
 .highlightOnHover:hover {
   color: var(--color-dark-3);
