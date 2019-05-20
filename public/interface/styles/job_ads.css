@@ -43,6 +43,7 @@
   font: var(--font-stack-1);
   font-weight: 600;
   margin-bottom: 0.2em;
+  text-transform: uppercase;
 }
 
 .adCardsContainer:hover {

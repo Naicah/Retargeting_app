@@ -19,6 +19,8 @@
   text-align: center;
   margin: 0 0 0 0;
   color: var(--color-dark-4);
+  font-size: 1vw;
+  text-transform: uppercase;
 }
 
 #bar-chart {

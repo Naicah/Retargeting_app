@@ -15,7 +15,7 @@
 
 .sortContainer h3 {
   font-weight: 800;
-  margin: 0.5em 1em;
+  margin: 0 1em 0.5em 1em;
   color: var(--color-light-1);
 }
 
