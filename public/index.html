@@ -32,7 +32,7 @@
     <!-- ================================================================ -->
     <!--                      FILTER & SORTING                            -->
     <!-- ================================================================ -->
-  <div class="stickyContainer">
+  <!-- <div class="stickyContainer"> -->
     <div class="filterAndSortContainer">
       <ul class="statusContainer">
         <li class="statusOngoing" @click="showAdsByStatus('ongoing'), clearAllFilters()" :class="{ active : showStatus === 'ongoing'}">
@@ -64,9 +64,12 @@
     <!-- ================================================================ -->
     <div class="filterContainer" v-show="!filterContainerHidden">
       <div class="filterHeaderContainer">
-        <h3>Filter <h3>
-        <img @click="clearAllFilters" src="./interface/clear_filter.png" alt="Clear filter icon">
+        <h3>Filter </h3>
+          <div @click="clearAllFilters" class="clearFilterContainer">
+            <h3>Clear</h3>
+        <img src="./interface/clear_filter.png" alt="Clear filter icon">
         <a class="iconShoutout" href="https://icons8.com/icon/8313/clear-filters-filled">Clear Filters Filled icon by Icons8</a>
+          </div>
       </div>
      
           <div class="filterLabelContainer">
@@ -136,7 +139,7 @@
         </div>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
     <!-- ================================================================ -->
     <!--                              ADS                                 -->
     <!-- ================================================================ -->

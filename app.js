@@ -5,7 +5,7 @@ const app = new Koa();
 const knex = require("./knex/knex.js");
 
 const PORT = process.env.PORT || 3000;
-// export {default as jobObject} from './feed/jobs';
+
 
 const server = app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
@@ -36,34 +36,8 @@ app.use(async (ctx, next) => {
 
 const router = new Router();
 require("./database/update_database")({ router });
-// router.get("/ads", queries.getAllAds);
-// router.get("/ID", queries.getAllAdsID);
 app.use(router.routes());
 app.use(router.allowedMethods());
 
 app.use(require("koa-static-server")({ rootDir: "public" }));
 
-// ====================================================================================================== //
-//                                              DATABASE                                                  //
-// ====================================================================================================== //
-
-// server.get("/pets", (req, res) => {
-//   knex
-//     .select()
-//     .from("pets")
-//     .timeout(1000)
-//     .then(rows => {
-//       res.send(rows);
-//     });
-
-// use the knex variable above to create dynamic queries
-// });
-
-// ====================================================================================================== //
-//                                              INTERFACE                                                 //
-// ====================================================================================================== //
-
-// const vue = new Vue({
-//   el: "",
-//   data: {}
-// });

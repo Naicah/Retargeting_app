@@ -1,10 +1,10 @@
-.stickyContainer {
+/* .stickyContainer {
   grid-area: 4/2/9/10;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 15;
-}
+} */
 
 .filterAndSortContainer {
   background: var(--color-light-2);
