@@ -1,0 +1,29 @@
+{
+  "name": "projekt-3-backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "knex": "^0.16.5",
+    "koa": "^2.7.0",
+    "koa-cors": "0.0.16",
+    "koa-router": "^7.4.0",
+    "koa-static-server": "^1.4.0",
+    "migrate": "^1.6.2",
+    "nodemon": "^1.18.11",
+    "objection": "^1.6.8",
+    "pg": "^7.1.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.5.21"
+  }
+}

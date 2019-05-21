@@ -1,0 +1,62 @@
+/*
+=======================
+**** General styles ****
+======================
+*/
+:root {
+    --color-dark-1: #0e263f;
+    /* Dark blue - almost black*/
+    --color-dark-2: #225fa0;
+    /* Dark blue*/
+    --color-dark-3: #2d7dd2;
+    /* Medium blue*/
+    --color-dark-4: #848584;
+    /* Dark grey*/
+    --color-light-1: #d5e9f9;
+    /* Light blue*/
+    --color-light-2: #eaf2fa;
+    /* Super light blue*/
+    --color-light-3: #edf2f6;
+    /* Light grey*/
+    --color-light-4: #f8f8f8;
+    /* Super light blue*/
+    --color-light-5: #c4d5e2;
+    /* Light grey-blue*/
+  
+    --font-stack-1: "Montserrat", "Open Sans", Helvetica, sans-serif;
+    /* Headers */
+    --font-stack-2: "Source Sans Pro", "Open Sans", sans-serif;
+    /* Sub headers */
+    --font-stack-3: "Open Sans", Helvetica, sans-serif;
+    /* Text */
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  body {
+    font-family: var(--font-stack-1);
+    background: var(--color-light-2);
+  }
+  
+  #mainContainer {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  
+  .statusContainer:hover,
+  .filterIcon:hover,
+  .sortIcon:hover,
+  .filterInputSelect:hover,
+  .sortButton:hover,
+  .adsContainer:hover {
+    cursor: pointer;
+  }
+  
+  #id {
+    background-color: red;
+    width: 20vh;
+    height: 20vh;
+  }
