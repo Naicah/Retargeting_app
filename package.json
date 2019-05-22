@@ -27,6 +27,7 @@
     "objection": "^1.6.8",
     "pg": "^7.1.2",
     "superagent": "^5.0.2",
+    "sweetalert2": "^8.11.1",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.4.2",
     "vue-data-tables": "^3.4.4",

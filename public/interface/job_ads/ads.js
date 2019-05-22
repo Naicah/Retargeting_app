@@ -1,4 +1,4 @@
-const url = "allAds";
+const url = "allads";
 fetch(url)
   .then(res => res.json())
   .then(data => {
@@ -345,6 +345,24 @@ fetch(url)
       } // End computed
     });
   })
-  .catch(err => {
-    throw err;
-  });
+  .catch(error => {
+    Swal.fire({
+      imageUrl: '/interface/error-dog.png',
+      title: 'Something went wrong with the fetch!',
+      // text: "Ok, try new fetch!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Fetch again!'
+    }).then((result) => {
+      const hurl ='allAds'
+      fetch(hurl)
+        .then(res => res.json())
+        .then(data => {
+          this.allAds = data;
+          return data
+    })
+
+  })
+})
