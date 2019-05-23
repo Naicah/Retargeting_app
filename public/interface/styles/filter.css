@@ -1,0 +1,119 @@
+.filterContainer {
+  background: var(--color-dark-1);
+  grid-area: 5/2/7/10;
+  -webkit-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  margin: 0 1% 0 1%;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.filterContainer h3 {
+  font-weight: 800;
+  margin: 0.5em 0 0 0;
+  color: var(--color-light-1);
+}
+
+.filterHeaderContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filterHeaderContainer img {
+  height: 3.5vh;
+  width: auto;
+  color: white;
+}
+
+.clearFilterContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.clearFilterContainer h3 {
+  font-size: 1vw;
+  margin: 0.8em 0 0 0;
+}
+
+.clearFilterContainer img {
+  height: 2.8vh;
+  margin: 0.7em 0 0 0.5em;
+}
+
+.iconShoutout {
+  visibility: hidden;
+  font-size: 0.1vh;
+}
+
+.filterHeaderContainer,
+.filterLabelContainer,
+.filterInputContainer {
+  margin-left: 1em;
+}
+
+.filterLabelContainer {
+  margin-top: 0.1em;
+}
+
+.filterLabelContainer ul li {
+  width: 25%;
+  font-weight: 200;
+  color: var(--color-light-1);
+  font-size: 1vw;
+}
+
+.filterLabelContainer * {
+  margin: 0;
+  padding: 0;
+}
+
+.searchTitleContainer {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.filterInputContainer * {
+  margin: 0;
+}
+
+.filterInputContainer div,
+.v-select {
+  padding: 0.3em 0;
+  width: 25%;
+}
+
+.filterInputContainer {
+  display: flex;
+}
+
+input,
+.filterInputSelect {
+  background-color: #edf2f6;
+  padding: 0.1em 0 0.1em 0.2em;
+  border: none;
+  font-size: 0.8vw;
+  height: 2.2em;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 0px var(--color-light-2);
+  -moz-box-shadow: inset 0 1px 0px var(--color-light-2);
+  -o-box-shadow: inset 0 1px 0px var(--color-light-2);
+  -ms-box-shadow: inset 0 1px 0px var(--color-light-2);
+  box-shadow: inset 0 1px 0px var(--color-light-2);
+  -webkit-transition: 0.2s all;
+  -moz-transition: 0.2s all;
+  -o-transition: 0.2s all;
+  -ms-transition: 0.2s all;
+  transition: 0.2s all;
+  width: 80%;
+}
+
+input {
+  padding: 0 0.5em;
+}

@@ -3,9 +3,9 @@ const Router = require("koa-router");
 const app = new Koa();
 
 const knex = require("./knex/knex.js");
-const queries = require("./database/queries");
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4000;
+
 
 const server = app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
@@ -13,7 +13,7 @@ const server = app.listen(PORT, () => {
 
 module.exports = server;
 
-// ERROR HANDLING
+// ERROR HANDLING//
 app.use(async (ctx, next) => {
   try {
     await next();
@@ -23,6 +23,7 @@ app.use(async (ctx, next) => {
     ctx.app.emit("error", err, ctx);
   }
 });
+
 
 // ====================================================================================================== //
 //                                              ROUTES                                                    //
@@ -35,24 +36,13 @@ app.use(async (ctx, next) => {
 // just without instantiating a variable
 
 const router = new Router();
-require("./feed/jobs")({ router });
-// router.get("/ads", queries.getAllAds);
-// router.get("/ID", queries.getAllAdsID);
+require("./database/update_database")({ router });
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-// ====================================================================================================== //
-//                                              DATABASE                                                  //
-// ====================================================================================================== //
+app.use(require("koa-static-server")({ rootDir: "public" }));
 
-// server.get("/pets", (req, res) => {
-//   knex
-//     .select()
-//     .from("pets")
-//     .timeout(1000)
-//     .then(rows => {
-//       res.send(rows);
-//     });
 
-// use the knex variable above to create dynamic queries
-// });
+// ====================================================================================================== //
+//                                              VUE                                                       //
+// ====================================================================================================== //

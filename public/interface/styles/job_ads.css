@@ -1,0 +1,126 @@
+/* REMOVE LATER ON */
+.adCardsContainer *,
+.adsContainer,
+.adCardsContainer {
+  border: none;
+}
+
+/* REMOVE LATER ON - fråga Nina*/
+
+.adsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  grid-area: 9/2/14/10;
+}
+
+.adCardsContainer {
+  display: flex;
+  min-width: 23%;
+  max-width: 23%;
+  height: 25vh;
+  padding: 0.5em 0.8em 0.5em 0.8em;
+  margin: 1%;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--color-light-4);
+  -webkit-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  transition: transform 0.2s;
+}
+
+.adCardsContainer h4 {
+  color: var(--color-dark-2);
+  font: var(--font-stack-2);
+  font-weight: 600;
+  margin-bottom: 0.2em;
+  font-size: 0.9em;
+}
+
+.adCardsContainer h3 {
+  color: var(--color-dark-1);
+  font: var(--font-stack-1);
+  font-weight: 600;
+  margin-bottom: 0.2em;
+  text-transform: uppercase;
+  word-wrap: break-word;
+}
+
+.adCardsContainer:hover {
+  transform: scale(1.05);
+}
+
+
+.highlightOnHover:hover {
+  color: var(--color-dark-3);
+}
+
+
+.adCardsContainer p,
+.adStatisticsHeaderContainer div,
+.adStatisticsNumberContainer div {
+  color: var(--color-dark-4);
+  font-size: 0.7em;
+}
+
+.adStatisticsHeaderContainer,
+.adStatisticsNumberContainer {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.adStatisticsHeaderContainer div,
+.adStatisticsNumberContainer div {
+  width: 33%;
+}
+
+.adStatisticsHeaderContainer div {
+  text-align: center;
+  font-size: 0.6vw;
+}
+
+.adStatisticsNumberContainer div {
+  font-size: 1.5em;
+  font-weight: 800;
+}
+
+.adJobDetail {
+  font-weight: 600;
+}
+
+.adTimeLeft {
+  font-style: italic;
+}
+
+/* ======================= MEDIA QUERIES ====================== */
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+  .adCardsContainer {
+    min-width: 31%;
+    max-width: 31%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  .adCardsContainer {
+    min-width: 46%;
+    max-width: 46%;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .adCardsContainer {
+    min-width: 98%;
+    max-width: 98%;
+  }
+}
+
+.highlight {
+  box-shadow: 0px 2px 5px 1px var(--color-dark-3);
+ 
+ }
