@@ -361,6 +361,7 @@ fetch(url)
         .then(res => res.json())
         .then(data => {
           this.allAds = data;
+          location.reload() 
           return data
     })
 
