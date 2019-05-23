@@ -4,7 +4,7 @@ const app = new Koa();
 
 const knex = require("./knex/knex.js");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 
 const server = app.listen(PORT, () => {
