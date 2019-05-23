@@ -1,10 +1,13 @@
-#Workbuster retargeting
-##Purpose of the application
+# Workbuster retargeting
+
+## Purpose of the application
+
 The purpose of the application is to fetch data from a JSON feed and then use that data to automatically create ads on Facebook through their Business Manager with the help of a Facebook API. The application requires an approved Facebook App to generate Access tokens to be able to use this application. The application also consists of GUI that takes in data from a SQL database and lets you view important information and statistics about the ads, and provides an approachable overview of current and past ads you have created through the help of the application.
 
 The backend part of the application is constructed in Node.js, together with KNEX and KOA as a framework on top of that. The GUI is constructed with Vue.js.
 
-##How far we have come:
+## How far we have come:
+
 As the app currently stands, its capable of taking in data from a standing JSON feed and use that data to create and send a request to the Facebook Business SDK.
 
 It’s important to note that to be able to use this application you have to replace all current facebook authentication information in the code with your own. You have to have your own approved Facebook app and provide its acces token and authentication information to the application. The app is currently not able of fetching data from the Facebook Business SDK and writing it into the database.
@@ -14,7 +17,8 @@ Convert GUI to use VUE CLI.
 Create API calls that take in data from the facebook API and write it to the database.
 
 Add a login function, preferably a Google-login.
-##Dependencies
+
+## Dependencies
 
 "async-polling": "^0.2.1",
 "chart.js": "^2.8.0",
@@ -38,7 +42,8 @@ Add a login function, preferably a Google-login.
 "vue-data-tables": "^3.4.4",
 "vue-google-login": "^2.0.0"
 
-##How to run the application
+## How to run the application
+
 In the project directory, you can run:
 npm install
 Always run this command to install all dependencies first.
@@ -48,7 +53,8 @@ Open http://localhost:3000 to view it in the browser.
 The page will reload if you make edits.
 You will also see any lint errors in the console.
 
-##Original contributors:
+## Original contributors:
+
 Daniel Rydh
 Dessi Costa
 Jonathan Nilsson
