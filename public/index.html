@@ -53,158 +53,159 @@
           <h3>FILTER</h3>
           <i class="fas fa-filter"></i>
         </div>
+        <div class="sortIcon" @click="toggle('sortContainerHidden')">
+          <h3>SORTERING</h3>
+          <i class="fas fa-sort-amount-down"></i>
+        </div>
       </div>
-      <!-- ================================================================ -->
-      <!--                            FILTERS                               -->
-      <!-- ================================================================ -->
-      <div class="filterContainer" v-show="!filterContainerHidden">
+    </div>
+    <!-- ================================================================ -->
+    <!--                            FILTERS                               -->
+    <!-- ================================================================ -->
+    <div class="filterContainer" v-show="!filterContainerHidden">
+      <div class="filterHeaderContainer">
         <h3>Filter <h3>
-            <div class="filterHeaderContainer">
-              <ul class="searchTitleContainer">
-                <li>JOBBTITEL</li>
-                <li>FÖRETAG</li>
-                <li>PLATS</li>
-                <li>JOBBKATEGORI</li>
-              </ul>
+        <img @click="clearAllFilters" src="./interface/clear_filter.png" alt="Clear filter icon">
+        <a class="iconShoutout" href="https://icons8.com/icon/8313/clear-filters-filled">Clear Filters Filled icon by Icons8</a>
+      </div>
+     
+          <div class="filterLabelContainer">
+            <ul class="searchTitleContainer">
+              <li>JOBBTITEL</li>
+              <li>FÖRETAG</li>
+              <li>PLATS</li>
+              <li>JOBBKATEGORI</li>
+            </ul>
+          </div>
+          <div>
+            <div class="filterInputContainer">
+              <div>
+                <input type="text" value="" placeholder="Sök.." v-model="filterSearch" />
+              </div>
+              <div>
+                
+                <select v-model="filterCompany" class="filterInputSelect" v-on:change="getFilterInput('Company'), getAdSetStatistics()">
+                  <option value="">Välj företag...</option>
+                  <option v-for="company in adCompaniesList" >{{ company }}</option>
+                </select>
+              </div>
+              <div>
+                <select v-model="filterLocation" class="filterInputSelect" v-on:change="getFilterInput('Location'), getAdSetStatistics()">
+                  <option value="">Välj plats...</option>
+                  <option v-for="location in adLocationList">{{ location }}</option>
+                </select>
+              </div>
+              <div>
+                <select v-model="filterJobCategory" class="filterInputSelect" v-on:change="getFilterInput('JobCategory'), getAdSetStatistics()">
+                  <option value="">Välj jobbkategori...</option>
+                  <option v-for="jobCategory in adJobCategoryList">{{ jobCategory }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+    </div>
+    <!-- ================================================================ -->
+    <!--                              SORT                                -->
+    <!-- ================================================================ -->
+    <div class="sortContainer" v-show="!sortContainerHidden">
+      <h3>Sortering</h3>
+      <div class="sortButtonContainer">
+        <div class="sortButton" @click="sort('title','string'), showBySort('title')" :class="{ active  : showActive === 'title'}">
+          <p>Jobbtitel</p>
+        </div>
+        <div class="sortButton" @click="sort('company','string'), showBySort('company')" :class="{ active  : showActive === 'company'}">
+          <p>Företagsnamn</p>
+        </div>
+        <div class="sortButton" @click="sort('city','string'), showBySort('city')" :class="{ active  : showActive === 'city'}">
+          <p>Plats</p>
+        </div>
+        <div class="sortButton" @click="sort('job_category','string'), showBySort('job_category')" :class="{ active  : showActive === 'job_category'}">
+          <p>Kategori</p>
+        </div>
+        <div class="sortButton" @click="sort('applies','integer'), showBySort('applies')" :class="{ active  : showActive === 'applies'}">
+          <p>Antal ansökningar</p>
+        </div>
+        <div class="sortButton" @click="sort('views','integer'), showBySort('views')" :class="{ active  : showActive === 'views'}">
+          <p>Antal visningar</p>
+        </div>
+        <div class="sortButton" @click="sort('clicks','integer'), showBySort('clicks')" :class="{ active  : showActive === 'clicks'}">
+          <p>Antal Klick</p>
+        </div>
+        <div class="sortButton" @click="sort('last_application_timestamp','string'), showBySort('last_application_timestamp')" :class="{ active  : showActive === 'last_application_timestamp'}">
+          <p>Antal dagar kvar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- ================================================================ -->
+    <!--                              ADS                                 -->
+    <!-- ================================================================ -->
+    <div class="adsContainer">
+      <div class="adCardsContainer" 
+      @click="getAdStatistics(ad), selected = ad" 
+      v-show="
+            (filterLocation === '' || filterLocation === ad.city || (filterLocation === 'Ej angett' && ad.city === null))
+              && (filterJobCategory === '' || filterJobCategory === ad.job_category || (filterJobCategory === 'Ej angett' && ad.job_category === null))
+              && (filterCompany === '' || filterCompany === ad.company || (filterCompany === 'Ej angett' && ad.company === null))"
+              v-for="ad in filterSearchList" :class="{highlight: selected === ad}" >
+        <div>
+          <h3 class="highlightOnHover">{{ ad.company }}</h3>
+          <h4>{{ ad.title }}</h4>
+          <p class="adJobDetail">
+            <span class="highlightOnHover">{{ ad.city }}{{ ifJobCategory(ad) }}</span>
+            <span class="highlightOnHover">{{ ad.job_category }}</span>
+          </p>
+        </div>
+        <p class="adTimeLeft">
+          {{ getStatus(ad.last_application_timestamp) }}
+        </p>
+        <!-- ====================== AD STATISCICS ======================= -->
+        <div>
+          <!-- ============= AD STATISCICS HEADERS ================= -->
+          <div class="adStatisticsHeaderContainer">
+            <div>
+              ANSÖKNINGAR
             </div>
             <div>
-              <div class="filterInputContainer">
-                <div>
-                  <input type="text" value="" placeholder="Sök.." v-model="filterSearch" />
-                </div>
-                <div>
-                  <select class="filterInputSelect" v-on:change="getFilterInput('Company')">
-                    <option value="">Välj företag...</option>
-                    <option v-for="ad in adCompaniesList">{{ ad }}</option>
-                  </select>
-                </div>
-                <div>
-                  <select class="filterInputSelect" v-on:change="getFilterInput('Location')">
-                    <option value="">Välj plats...</option>
-                    <option v-for="ad in adLocationList">{{ ad }}</option>
-                  </select>
-                </div>
-                <div>
-                  <select class="filterInputSelect" v-on:change="getFilterInput('JobCategory')">
-                    <option value="">Välj jobbkategori...</option>
-                    <option v-for="ad in adJobCategoryList">{{ ad }}</option>
-                  </select>
-                </div>
-              </div>
+              KLICK
             </div>
-      </div>
-      <!-- ================================================================ -->
-      <!--                              SORT                                -->
-      <!-- ================================================================ -->
-
-      <div class="sortContainer" v-show="!sortContainerHidden">
-        <h3>Sortering</h3>
-        <div class="sortButtonContainer">
-          <div class="sortButton" @click="sort('title','string'), showBySort('title')"
-            :class="{ active  : showActive === 'title'}">
-            <p>Jobbtitel</p>
+            <div>
+              VISNINGAR
+            </div>
           </div>
-          <div class="sortButton" @click="sort('company','string'), showBySort('company')"
-            :class="{ active  : showActive === 'company'}">
-            <p>Företagsnamn</p>
+          <!-- ============= AD STATISCICS NUMBERS ================ -->
+          <div class="adStatisticsNumberContainer">
+            <div>
+              {{ ad.applies }}
+            </div>
+            <div>
+              {{ ad.clicks }}
+             
+            </div>
+            <div>
+              {{ ad.views }}
+            </div>
           </div>
-          <div class="sortButton" @click="sort('city','string'), showBySort('city')"
-            :class="{ active  : showActive === 'city'}">
-            <p>Plats</p>
-          </div>
-          <div class="sortButton" @click="sort('job_category','string'), showBySort('job_category')"
-            :class="{ active  : showActive === 'job_category'}">
-            <p>Kategori</p>
-          </div>
-          <div class="sortButton" @click="sort('applies','integer'),showBySort('applies')"
-            :class="{ active  : showActive === 'applies'}">
-            <p>Antal ansökningar</p>
-          </div>
-          <div class="sortButton" @click="sort('views','integer'), showBySort('views')"
-            :class="{ active  : showActive === 'views'}">
-            <p>Antal visningar</p>
-          </div>
-          <div class="sortButton" @click="sort('clicks','integer'), showBySort('clicks')"
-            :class="{ active  : showActive === 'clicks'}">
-            <p>Antal Klick</p>
-          </div>
-          <div class="sortButton"
-            @click="sort('last_application_timestamp','string'), showBySort('last_application_timestamp')"
-            :class="{ active  : showActive === 'last_application_timestamp'}">
-            <p>Antal dagar kvar</p>
-          </div>
-
         </div>
+        <!-- END STATISTICS-->
       </div>
-      <!-- ================================================================ -->
-      <!--                              ADS                                 -->
-      <!-- ================================================================ -->
-      <div class="adsContainer">
-        <div class="adCardsContainer" @click="getAdStatistics(ad), selected =  ad" v-show="
-            (filterLocation === '' || filterLocation === ad.city)
-              && (filterJobCategory === '' || filterJobCategory === ad.job_category)
-              && (filterCompany === '' || filterCompany === ad.company)" v-for="ad in filterSearchList"
-          :class="{highlight : selected === ad}">
-      
-          <div>
-            <h3 class="highlightOnHover">{{ ad.company }}</h3>
-            <h4>{{ ad.title }}</h4>
-            <p class="adJobDetail">
-              <span class="highlightOnHover">{{ ad.city }}{{ ifJobCategory(ad) }}</span>
-              <span class="highlightOnHover">{{ ad.job_category }}</span>
-            </p>
-          </div>
-          <p class="adTimeLeft">
-            {{ getStatus(ad.last_application_timestamp) }}
-          </p>
-          <!-- ====================== AD STATISCICS ======================= -->
-          <div>
-            <!-- ============= AD STATISCICS HEADERS ================= -->
-            <div class="adStatisticsHeaderContainer">
-              <div>
-                ANSÖKNINGAR
-              </div>
-              <div>
-                KLICK
-              </div>
-              <div>
-                VISNINGAR
-              </div>
-            </div>
-            <!-- ============= AD STATISCICS NUMBERS ================ -->
-            <div class="adStatisticsNumberContainer">
-              <div>
-                {{ ad.applies }}
-              </div>
-              <div>
-                {{ ad.clicks }}
-
-              </div>
-              <div>
-                {{ ad.views }}
-              </div>
-            </div>
-          </div>
-          <!-- END STATISTICS-->
-        </div>
-        <!-- END AD -->
-      </div>
-      <!-- END ADS-->
-      <!-- ================================================================ -->
-      <!--                            STATISTICS                            -->
-      <!-- ================================================================ -->
-      <div class="statisticsContainer">
-
-        <canvas id="bar-chart"></canvas>
+      <!-- END AD -->
+    </div>
+    <!-- END ADS-->
+    <!-- ================================================================ -->
+    <!--                            STATISTICS                            -->
+    <!-- ================================================================ -->
+    <div class="statisticsContainer">
 
       <canvas id="bar-chart"></canvas> 
      
       <h3 class="statisticsTitle">{{ chartTitle }}</h3>
     </div>
   </div>
-  <!-- ================================================================ -->
-  <!--                              SCRIPTS                             -->
-  <!-- ================================================================ -->
+
+    <!-- ================================================================ -->
+    <!--                              SCRIPTS                             -->
+    <!-- ================================================================ -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
   <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.5.0"></script>
