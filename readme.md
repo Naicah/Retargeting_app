@@ -1,5 +1,9 @@
 # Workbuster retargeting
 
+![Alt text](gif/sort.gif?raw=true "Title")
+![Alt text](gif/filter.gif?raw=true "Title")
+![Alt text](gif/ads.gif?raw=true "Title")
+
 ## Purpose of the application
 
 The purpose of the application is to fetch data from a JSON feed and then use that data to automatically create ads on Facebook through their Business Manager with the help of a Facebook API. The application requires an approved Facebook App to generate Access tokens to be able to use this application. The application also consists of GUI that takes in data from a SQL database and lets you view important information and statistics about the ads, and provides an approachable overview of current and past ads you have created through the help of the application.
