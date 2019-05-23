@@ -6,7 +6,7 @@ The purpose of the application is to fetch data from a JSON feed and then use th
 
 The backend part of the application is constructed in Node.js, together with KNEX and KOA as a framework on top of that. The GUI is constructed with Vue.js.
 
-## How far we have come:
+## How far we have come
 
 As the app currently stands, its capable of taking in data from a standing JSON feed and use that data to create and send a request to the Facebook Business SDK.
 
@@ -44,10 +44,14 @@ Add a login function, preferably a Google-login.
 
 ## How to run the application
 
-In the project directory, you can run:
-npm install
+### In the project directory, you can run:
+
+#### npm install
+
 Always run this command to install all dependencies first.
-npm start
+
+#### npm start
+
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in the browser.
 The page will reload if you make edits.
@@ -55,8 +59,4 @@ You will also see any lint errors in the console.
 
 ## Original contributors:
 
-Daniel Rydh
-Dessi Costa
-Jonathan Nilsson
-Nina Hedman
-Oliver Brian Barra Vasquez.
+Daniel Rydh, Dessi Costa, Jonathan Nilsson, Nina Hedman, Oliver Brian Barra Vasquez.
