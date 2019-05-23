@@ -30,6 +30,14 @@
   color: white;
 }
 
+.clearFilterContainer {
+  display: flex;
+  flex-direction: row;
+}
+.clearFilterContainer img {
+  height: 2.8vh;
+  margin: 0.7em 0 0 0.5em;
+}
 .iconShoutout {
   visibility: hidden;
   font-size: 0.1vh;

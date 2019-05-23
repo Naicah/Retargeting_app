@@ -47,10 +47,10 @@ body {
 }
 
 .statusContainer:hover,
-.filterIcon:hover,
 .sortIcon:hover,
 .filterInputSelect:hover,
 .sortButton:hover,
+.clearFilterContainer:hover,
 .adsContainer:hover,
 .filterHeaderContainer img:hover {
   cursor: pointer;
