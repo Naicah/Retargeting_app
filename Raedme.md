@@ -59,4 +59,8 @@ You will also see any lint errors in the console.
 
 ## Original contributors:
 
-Daniel Rydh, Dessi Costa, Jonathan Nilsson, Nina Hedman, Oliver Brian Barra Vasquez.
+| Daniel Rydh | https://github.com/danielrydh |
+| Dessi Costa | https://github.com/DessiC |
+| Jonathan Nilsson | https://github.com/joni43 |
+| Nina Hedman | https://github.com/Naicah%7C
+| Oliver Brian Barra Vasquez | https://github.com/OliverBrian |
