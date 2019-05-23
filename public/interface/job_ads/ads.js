@@ -346,6 +346,8 @@ fetch(url)
     });
   })
   .catch(error => {
+    // ===================== Pop UP ===================== //
+    // Swal fires an pop up. User able to make a new fetch to fetch ads.
     Swal.fire({
       imageUrl: '/interface/error-dog.png',
       title: 'Something went wrong with the fetch!',
