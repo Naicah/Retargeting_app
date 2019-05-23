@@ -24,27 +24,33 @@ Add a login function, preferably a Google-login.
 
 ## Dependencies
 
-“async-polling”: “^0.2.1",
-“chart.js”: “^2.8.0",
-“chartjs-plugin-datalabels”: “^0.6.0",
-“dotenv”: “^7.0.0",
-“express”: “^4.16.4",
-“facebook-nodejs-ads-sdk”: “^2.11.4",
-“facebook-nodejs-business-sdk”: “^3.2.11",
-“gulp”: “^4.0.0",
-“knex”: “^0.16.5",
-“koa”: “^2.7.0",
-“koa-router”: “^7.4.0",
-“koa-static-server”: “^1.4.0",
-“migrate”: “^1.6.2",
-“nodemon”: “^1.18.11",
-“objection”: “^1.6.8",
-“pg”: “^7.1.2",
-“superagent”: “^5.0.2",
-“vue”: “^2.6.10",
-“vue-chartjs”: “^3.4.2",
-“vue-data-tables”: “^3.4.4",
-“vue-google-login”: “^2.0.0"
+`package.json`.
+
+    ...
+      "dependencies": {
+        "async-polling": "^0.2.1",
+        "chart.js": "^2.8.0",
+        "chartjs-plugin-datalabels": "^0.6.0",
+        "dotenv": "^7.0.0",
+        "express": "^4.16.4",
+        "facebook-nodejs-ads-sdk": "^2.11.4",
+        "facebook-nodejs-business-sdk": "^3.2.11",
+        "gulp": "^4.0.0",
+        "knex": "^0.16.5",
+        "koa": "^2.7.0",
+        "koa-router": "^7.4.0",
+        "koa-static-server": "^1.4.0",
+        "migrate": "^1.6.2",
+        "nodemon": "^1.18.11",
+        "objection": "^1.6.8",
+        "pg": "^7.1.2",
+        "superagent": "^5.0.2",
+        "vue": "^2.6.10",
+        "vue-chartjs": "^3.4.2",
+        "vue-data-tables": "^3.4.4",
+        "vue-google-login": "^2.0.0"
+      },
+    ...
 
 ## How to run the application
 
@@ -61,10 +67,14 @@ Open http://localhost:3000 to view it in the browser.
 The page will reload if you make edits.
 You will also see any lint errors in the console.
 
-## Original contributors:
+## Contributors
+The developers who have created the application.
 
-| Daniel Rydh | https://github.com/danielrydh |
-| Dessi Costa | https://github.com/DessiC |
-| Jonathan Nilsson | https://github.com/joni43 |
-| Nina Hedman | https://github.com/Naicah%7C
-| Oliver Brian Barra Vasquez | https://github.com/OliverBrian |
+| Developers  | Github repo |
+| ------------- | ------------- |
+| Daniel Rydh  | https://github.com/danielrydh  |
+| Dessi Costa  | https://github.com/DessiC  |
+| Jonathan Nilsson  | https://github.com/joni43  |
+| Nina Hedman  | https://github.com/Naicah|
+| Oliver Brian Barra Vasquez  | https://github.com/OliverBrian  |
+|
