@@ -135,8 +135,13 @@ fetch(url)
         // GET STATISTICS FOR GIVEN ADD
         getAdStatistics(ad) {
           console.log(ad);
-          
-          this.chartTitle = ad.company + " " + ad.title + " " + ad.city;
+          let location = ""
+          let company = ""
+          let title =""
+          if (ad.company != null ){company = ad.company};
+          if (ad.title != null ){title = ad.title; company += ", "};
+          if (ad.city != null ){location = ad.city; title += ", "};
+          this.chartTitle = company + title + location;
           this.adStatistics.length < 3
             ? this.adStatistics.push(ad.applies, ad.clicks, ad.views)
             : this.adStatistics.splice(0, 3, ad.applies, ad.clicks, ad.views);
@@ -154,8 +159,14 @@ fetch(url)
                 adsetstatistics[1] += this.adsToShowList[index].clicks;
                 adsetstatistics[2] += this.adsToShowList[index].views;                       
             }  
-          } else {                        
-            this.chartTitle = this.filterCompany + " " +this.filterLocation + " " +this.filterJobCategory;
+          } else {
+            let company = "";
+            let location = "";
+            let jobCategory = "";
+            if (this.filterCompany != "") {company = this.filterCompany}; 
+            if (this.filterLocation != "") {location = this.filterLocation; company += ", "};
+            if (this.filterJobCategory != "") {jobCategory = this.filterJobCategory; location += ", "}      
+            this.chartTitle = company +location +jobCategory;
             let chartFilterList = this.adsToShowList;
             
             //THE IF STATMENTS BELOW FILTERS THE INPUT TO USEFULL DATA THAT CAN BE SENT TO THE CHART

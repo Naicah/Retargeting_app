@@ -48,6 +48,7 @@ body {
 
 .statusContainer:hover,
 .sortIcon:hover,
+.filterIcon:hover,
 .filterInputSelect:hover,
 .sortButton:hover,
 .clearFilterContainer:hover,
@@ -56,8 +57,3 @@ body {
   cursor: pointer;
 }
 
-#id {
-  background-color: red;
-  width: 20vh;
-  height: 20vh;
-}

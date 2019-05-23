@@ -1,8 +1,9 @@
 # Workbuster retargeting
 
-![Alt text](gif/sort.gif?raw=true "Sort")
-![Alt text](gif/filter.gif?raw=true "Filter")
-![Alt text](gif/adstat.gif?raw=true "Filter")
+![Alt text](./interface/assets/gif/sort.gif?raw=true "Sort")
+![Alt text](./interface/assets/gif/filter.gif?raw=true "Filter")
+![Alt text](./interface/assets/gif/adstat.gif?raw=true "Filter")
+
 
 
 ## Purpose of the application

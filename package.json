@@ -1,18 +1,19 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "name": "projekt-3",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "async-polling": "^0.2.1",
     "chart.js": "^2.8.0",
     "chartjs-plugin-datalabels": "^0.6.0",
+    "core-js": "^2.6.5",
+    "dns": "^0.2.2",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "facebook-nodejs-ads-sdk": "^2.11.4",
@@ -23,14 +24,28 @@
     "koa-router": "^7.4.0",
     "koa-static-server": "^1.4.0",
     "migrate": "^1.6.2",
+    "mssql": "^5.1.0",
+    "node-gyp": "^4.0.0",
     "nodemon": "^1.18.11",
     "objection": "^1.6.8",
     "pg": "^7.1.2",
+    "rebuilder": "^1.2.1",
     "superagent": "^5.0.2",
-    "sweetalert2": "^8.11.1",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.4.2",
     "vue-data-tables": "^3.4.4",
-    "vue-google-login": "^2.0.0"
+    "vue-google-login": "^2.0.0",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.5.21"
   }
 }

@@ -44,6 +44,7 @@
   font-weight: 600;
   margin-bottom: 0.2em;
   text-transform: uppercase;
+  word-wrap: break-word;
 }
 
 .adCardsContainer:hover {

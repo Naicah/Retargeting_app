@@ -15,14 +15,14 @@
   <link href="./interface/styles/filter.css" rel="stylesheet" />
   <link href="./interface/styles/job_ads.css" rel="stylesheet" />
   <link href="./interface/styles/statistics.css" rel="stylesheet" />
-  <link href="./interface/workbuster.png" rel="stylesheet" />
+  <link href="./interface/assets/workbuster.png" rel="stylesheet" />
   <title>Workbuster</title>
 </head>
 
 <body>
   <div id="mainContainer">
     <header>
-      <img src="./interface/workbuster.png">
+      <img src="./interface/assets/workbuster.png">
       <div class="talk-bubble tri-right left-in">
         <div class="talktext">
           <p>Hej {{loggedInUser}}!</p>
@@ -67,11 +67,11 @@
         <h3>Filter </h3>
           <div @click="clearAllFilters" class="clearFilterContainer">
             <h3>Clear</h3>
-        <img src="./interface/clear_filter.png" alt="Clear filter icon">
+        <img src="./interface/assets/clear_filter.png" alt="Clear filter icon">
         <a class="iconShoutout" href="https://icons8.com/icon/8313/clear-filters-filled">Clear Filters Filled icon by Icons8</a>
           </div>
       </div>
-     
+    <div>
           <div class="filterLabelContainer">
             <ul class="searchTitleContainer">
               <li>JOBBTITEL</li>
@@ -106,6 +106,7 @@
               </div>
             </div>
           </div>
+        </div>
     </div>
     <!-- ================================================================ -->
     <!--                              SORT                                -->
@@ -215,7 +216,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.5.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
   <!-- <script src="app.js"></script> -->
-  <script src="./interface/job_ads/ads.js"></script>
+  <script src="./interface/main.js"></script>
 </body>
 
 </html>
