@@ -1,8 +1,8 @@
 # Workbuster retargeting
 
-![Alt text](./interface/assets/readme/sort.gif?raw=true "Sort")
-![Alt text](./interface/assets/readme/filter.gif?raw=true "Filter")
-![Alt text](./interface/assets/readme/adstat.gif?raw=true "Filter")
+![Alt text](./public/interface/assets/readme/sort.gif?raw=true "Sort")
+![Alt text](./interface/public/assets/readme/filter.gif?raw=true "Filter")
+![Alt text](./interface/public/assets/readme/adstat.gif?raw=true "Filter")
 
 
 
