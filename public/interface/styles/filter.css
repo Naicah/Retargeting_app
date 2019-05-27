@@ -35,9 +35,10 @@
   flex-direction: row;
 }
 
-.clearFilterContainer h3 {
+.clearFilterContainer p {
   font-size: 1vw;
   margin: 0.8em 0 0 0;
+  color: var(--color-light-1);
 }
 
 .clearFilterContainer img {

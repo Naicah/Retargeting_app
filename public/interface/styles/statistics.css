@@ -1,12 +1,12 @@
 .statisticsContainer {
   background: var(--color-light-2);
-  grid-area: 4/10/13/13;
+  grid-area: 8/10/9/13;
   margin: 0 2em 0 0.5em;
   position: -webkit-sticky;
   position: sticky;
   top: 25vh;
   width: auto;
-  height: 65vh;
+  height: 60vh;
   margin: 0;
 }
 

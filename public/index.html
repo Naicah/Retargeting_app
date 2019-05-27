@@ -1,222 +1,309 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+    <link href="./interface/styles/header.css" rel="stylesheet" />
+    <link href="./interface/styles/filter_sort.css" rel="stylesheet" />
+    <link href="./interface/styles/sort.css" rel="stylesheet" />
+    <link href="./interface/styles/filter.css" rel="stylesheet" />
+    <link href="./interface/styles/job_ads.css" rel="stylesheet" />
+    <link href="./interface/styles/statistics.css" rel="stylesheet" />
+    <title>Workbuster</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <link href="styles.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  <link href="./interface/styles/header.css" rel="stylesheet" />
-  <link href="./interface/styles/filter_sort.css" rel="stylesheet" />
-  <link href="./interface/styles/sort.css" rel="stylesheet" />
-  <link href="./interface/styles/filter.css" rel="stylesheet" />
-  <link href="./interface/styles/job_ads.css" rel="stylesheet" />
-  <link href="./interface/styles/statistics.css" rel="stylesheet" />
-  <link href="./interface/assets/workbuster.png" rel="stylesheet" />
-  <title>Workbuster</title>
-</head>
-
-<body>
-  <div id="mainContainer">
-    <header>
-      <img src="./interface/assets/workbuster.png">
-      <div class="talk-bubble tri-right left-in">
-        <div class="talktext">
-          <p>Hej {{loggedInUser}}!</p>
-        </div>
-      </div>
-    </header>
-    <!-- ================================================================ -->
-    <!--                      FILTER & SORTING                            -->
-    <!-- ================================================================ -->
-  <!-- <div class="stickyContainer"> -->
-    <div class="filterAndSortContainer">
-      <ul class="statusContainer">
-        <li class="statusOngoing" @click="showAdsByStatus('ongoing'), clearAllFilters()" :class="{ active : showStatus === 'ongoing'}">
-          <h3>{{ totalOngoing }}</h3>
-          <p>Pågående</p>
-        </li>
-        <li class="statusFinished" @click="showAdsByStatus('finished'), clearAllFilters()" :class="{ active : showStatus === 'finished' }">
-          <h3>{{ totalFinished }}</h3>
-          <p>Avlsutade</p>
-        </li>
-        <li class="statusAll" @click="showAdsByStatus('all'), clearAllFilters()" :class="{ active : showStatus === 'all' }">
-          <h3>{{ totalAll }}</h3>
-          <p>Alla</p>
-        </li>
-      </ul>
-      <div class="filterAndSortIconsContainer">
-        <div class="filterIcon" @click="toggle('filterContainerHidden')">
-          <h3>FILTER</h3>
-          <i class="fas fa-filter"></i>
-        </div>
-        <div class="sortIcon" @click="toggle('sortContainerHidden')">
-          <h3>SORTERING</h3>
-          <i class="fas fa-sort-amount-down"></i>
-        </div>
-      </div>
-    </div>
-    <!-- ================================================================ -->
-    <!--                            FILTERS                               -->
-    <!-- ================================================================ -->
-    <div class="filterContainer" v-show="!filterContainerHidden">
-      <div class="filterHeaderContainer">
-        <h3>Filter </h3>
-          <div @click="clearAllFilters" class="clearFilterContainer">
-            <h3>Clear</h3>
-        <img src="./interface/assets/clear_filter.png" alt="Clear filter icon">
-        <a class="iconShoutout" href="https://icons8.com/icon/8313/clear-filters-filled">Clear Filters Filled icon by Icons8</a>
+  <body>
+    <div id="mainContainer">
+      <header>
+        <img src="./interface/assets/workbuster.png" alt="logoWorkbuster" />
+        <div class="talkBubble triRight leftIn">
+          <div class="talkText">
+            <p>Hej {{ loggedInUser }}!</p>
           </div>
+        </div>
+      </header>
+      <!-- ================================================================ -->
+      <!--                      FILTER & SORTING                            -->
+      <!-- ================================================================ -->
+      <div class="filterAndSortContainer">
+        <ul class="statusContainer">
+          <li
+            class="statusOngoing"
+            @click="showAdsByStatus('ongoing'), clearAllFilters()"
+            :class="{ active : showStatus === 'ongoing'}"
+          >
+            <h3>{{ totalOngoing }}</h3>
+            <p>Pågående</p>
+          </li>
+          <li
+            class="statusFinished"
+            @click="showAdsByStatus('finished'), clearAllFilters()"
+            :class="{ active : showStatus === 'finished' }"
+          >
+            <h3>{{ totalFinished }}</h3>
+            <p>Avlsutade</p>
+          </li>
+          <li
+            class="statusAll"
+            @click="showAdsByStatus('all'), clearAllFilters()"
+            :class="{ active : showStatus === 'all' }"
+          >
+            <h3>{{ totalAll }}</h3>
+            <p>Alla</p>
+          </li>
+        </ul>
+        <div class="filterAndSortIconsContainer">
+          <div class="filterIcon" @click="toggle('filterContainerHidden')">
+            <h3>FILTER</h3>
+            <i class="fas fa-filter"></i>
+          </div>
+          <div class="sortIcon" @click="toggle('sortContainerHidden')">
+            <h3>SORTERING</h3>
+            <i class="fas fa-sort-amount-down"></i>
+          </div>
+        </div>
       </div>
-    <div>
-          <div class="filterLabelContainer">
-            <ul class="searchTitleContainer">
-              <li>JOBBTITEL</li>
-              <li>FÖRETAG</li>
-              <li>PLATS</li>
-              <li>JOBBKATEGORI</li>
-            </ul>
+
+      <!-- ================================================================ -->
+      <!--                            FILTERS                               -->
+      <!-- ================================================================ -->
+      <div class="filterSortCollapser">
+        <div class="filterContainer" v-show="!filterContainerHidden">
+          <div class="filterHeaderContainer">
+            <h3>Filter</h3>
+            <div @click="clearAllFilters" class="clearFilterContainer">
+              <P>Clear</P>
+              <img
+                src="./interface/assets/clear_filter.png"
+                alt="Clear filter icon"
+              />
+              <a
+                class="iconShoutout"
+                href="https://icons8.com/icon/8313/clear-filters-filled"
+              >
+                Clear Filters Filled icon by Icons
+              </a>
+            </div>
           </div>
           <div>
+            <div class="filterLabelContainer">
+              <ul class="searchTitleContainer">
+                <li>JOBBTITEL</li>
+                <li>FÖRETAG</li>
+                <li>PLATS</li>
+                <li>JOBBKATEGORI</li>
+              </ul>
+            </div>
+            <!-- END FILTER LABEL CONTAINER-->
             <div class="filterInputContainer">
               <div>
-                <input type="text" value="" placeholder="Sök.." v-model="filterSearch" />
+                <input
+                  type="text"
+                  value=""
+                  placeholder="Sök.."
+                  v-model="filterSearch"
+                  @change="getStatistics()"
+                />
               </div>
               <div>
-                
-                <select v-model="filterCompany" class="filterInputSelect" v-on:change="getFilterInput('Company'), getAdSetStatistics()">
+                <select
+                  v-model="filterCompany"
+                  class="filterInputSelect"
+                  @change="getFilterInput('Company'), getStatistics()"
+                >
                   <option value="">Välj företag...</option>
-                  <option v-for="company in adCompaniesList" >{{ company }}</option>
+                  <option v-for="company in adCompaniesList">{{
+                    company
+                  }}</option>
                 </select>
               </div>
               <div>
-                <select v-model="filterLocation" class="filterInputSelect" v-on:change="getFilterInput('Location'), getAdSetStatistics()">
+                <select
+                  v-model="filterLocation"
+                  class="filterInputSelect"
+                  @change="getFilterInput('Location'), getStatistics()"
+                >
                   <option value="">Välj plats...</option>
-                  <option v-for="location in adLocationList">{{ location }}</option>
+                  <option v-for="location in adLocationList">{{
+                    location
+                  }}</option>
                 </select>
               </div>
               <div>
-                <select v-model="filterJobCategory" class="filterInputSelect" v-on:change="getFilterInput('JobCategory'), getAdSetStatistics()">
+                <select
+                  v-model="filterJobCategory"
+                  class="filterInputSelect"
+                  @change="getFilterInput('JobCategory'), getStatistics()"
+                >
                   <option value="">Välj jobbkategori...</option>
-                  <option v-for="jobCategory in adJobCategoryList">{{ jobCategory }}</option>
+                  <option v-for="jobCategory in adJobCategoryList">{{
+                    jobCategory
+                  }}</option>
                 </select>
               </div>
             </div>
+            <!-- END FILTER INPUT CONTAINER-->
+          </div>
+          <!-- END CONTAINER FOR FILTER LABEL & INPUT CONTAINERS-->
+        </div>
+        <!-- END FILTER CONTAINER-->
+
+        <!-- ================================================================ -->
+        <!--                              SORT                                -->
+        <!-- ================================================================ -->
+        <div class="sortContainer" v-show="!sortContainerHidden">
+          <h3>Sortering</h3>
+          <div class="sortButtonContainer">
+            <div
+              class="sortButton"
+              @click="sort('title','string'), setSortBy('title')"
+              :class="{ active  : sortBy === 'title'}"
+            >
+              <p>Jobbtitel</p>
+            </div>
+            <div
+              class="sortButton"
+              @click="sort('company','string'), setSortBy('company')"
+              :class="{ active  : sortBy === 'company'}"
+            >
+              <p>Företagsnamn</p>
+            </div>
+            <div
+              class="sortButton"
+              @click="sort('city','string'), setSortBy('city')"
+              :class="{ active  : sortBy === 'city'}"
+            >
+              <p>Plats</p>
+            </div>
+            <div
+              class="sortButton"
+              @click="sort('job_category','string'), setSortBy('job_category')"
+              :class="{ active  : sortBy === 'job_category'}"
+            >
+              <p>Kategori</p>
+            </div>
+            <div
+              class="sortButton"
+              @click="sort('applies','integer'), setSortBy('applies')"
+              :class="{ active  : sortBy === 'applies'}"
+            >
+              <p>Antal ansökningar</p>
+            </div>
+            <div
+              class="sortButton"
+              @click="sort('views','integer'), setSortBy('views')"
+              :class="{ active  : sortBy === 'views'}"
+            >
+              <p>Antal visningar</p>
+            </div>
+            <div
+              class="sortButton"
+              @click="sort('clicks','integer'), setSortBy('clicks')"
+              :class="{ active  : sortBy === 'clicks'}"
+            >
+              <p>Antal Klick</p>
+            </div>
+            <div
+              class="sortButton"
+              @click="sort('last_application_timestamp','string'), setSortBy('last_application_timestamp')"
+              :class="{ active  : sortBy === 'last_application_timestamp'}"
+            >
+              <p>Antal dagar kvar</p>
+            </div>
           </div>
         </div>
-    </div>
-    <!-- ================================================================ -->
-    <!--                              SORT                                -->
-    <!-- ================================================================ -->
-    <div class="sortContainer" v-show="!sortContainerHidden">
-      <h3>Sortering</h3>
-      <div class="sortButtonContainer">
-        <div class="sortButton" @click="sort('title','string'), showBySort('title')" :class="{ active  : showActive === 'title'}">
-          <p>Jobbtitel</p>
-        </div>
-        <div class="sortButton" @click="sort('company','string'), showBySort('company')" :class="{ active  : showActive === 'company'}">
-          <p>Företagsnamn</p>
-        </div>
-        <div class="sortButton" @click="sort('city','string'), showBySort('city')" :class="{ active  : showActive === 'city'}">
-          <p>Plats</p>
-        </div>
-        <div class="sortButton" @click="sort('job_category','string'), showBySort('job_category')" :class="{ active  : showActive === 'job_category'}">
-          <p>Kategori</p>
-        </div>
-        <div class="sortButton" @click="sort('applies','integer'), showBySort('applies')" :class="{ active  : showActive === 'applies'}">
-          <p>Antal ansökningar</p>
-        </div>
-        <div class="sortButton" @click="sort('views','integer'), showBySort('views')" :class="{ active  : showActive === 'views'}">
-          <p>Antal visningar</p>
-        </div>
-        <div class="sortButton" @click="sort('clicks','integer'), showBySort('clicks')" :class="{ active  : showActive === 'clicks'}">
-          <p>Antal Klick</p>
-        </div>
-        <div class="sortButton" @click="sort('last_application_timestamp','string'), showBySort('last_application_timestamp')" :class="{ active  : showActive === 'last_application_timestamp'}">
-          <p>Antal dagar kvar</p>
-        </div>
-      </div>
-    </div>
-  <!-- </div> -->
-    <!-- ================================================================ -->
-    <!--                              ADS                                 -->
-    <!-- ================================================================ -->
-    <div class="adsContainer">
-      <div class="adCardsContainer" 
-      @click="getAdStatistics(ad), selected = ad" 
-      v-show="
+
+        <!-- ================================================================ -->
+        <!--                              ADS                                 -->
+        <!-- ================================================================ -->
+        <div class="adsContainer">
+          <div
+            class="adCardsContainer"
+            @click="getStatisticsChosenAd(ad), selectedAd = ad"
+            v-show="
             (filterLocation === '' || filterLocation === ad.city || (filterLocation === 'Ej angett' && ad.city === null))
               && (filterJobCategory === '' || filterJobCategory === ad.job_category || (filterJobCategory === 'Ej angett' && ad.job_category === null))
               && (filterCompany === '' || filterCompany === ad.company || (filterCompany === 'Ej angett' && ad.company === null))"
-              v-for="ad in filterSearchList" :class="{highlight: selected === ad}" >
-        <div>
-          <h3 class="highlightOnHover">{{ ad.company }}</h3>
-          <h4>{{ ad.title }}</h4>
-          <p class="adJobDetail">
-            <span class="highlightOnHover">{{ ad.city }}{{ ifJobCategory(ad) }}</span>
-            <span class="highlightOnHover">{{ ad.job_category }}</span>
-          </p>
-        </div>
-        <p class="adTimeLeft">
-          {{ getStatus(ad.last_application_timestamp) }}
-        </p>
-        <!-- ====================== AD STATISCICS ======================= -->
-        <div>
-          <!-- ============= AD STATISCICS HEADERS ================= -->
-          <div class="adStatisticsHeaderContainer">
+            v-for="ad in filterSearchList"
+            :class="{highlight: selectedAd === ad}"
+          >
             <div>
-              ANSÖKNINGAR
+              <h3 class="highlightOnHover">{{ ad.company }}</h3>
+              <h4>{{ ad.title }}</h4>
+              <p class="adJobDetail">
+                <span class="highlightOnHover"
+                  >{{ ad.city }}{{ ifJobCategory(ad) }}</span
+                >
+                <span class="highlightOnHover">{{ ad.job_category }}</span>
+              </p>
             </div>
+            <p class="adTimeLeft">
+              {{ getStatus(ad.last_application_timestamp) }}
+            </p>
+            <!-- ====================== AD STATISTICS ======================= -->
             <div>
-              KLICK
+              <!-- ============= AD STATISTICS HEADERS ================= -->
+              <div class="adStatisticsHeaderContainer">
+                <div>
+                  ANSÖKNINGAR
+                </div>
+                <div>
+                  KLICK
+                </div>
+                <div>
+                  VISNINGAR
+                </div>
+              </div>
+              <!-- ============= AD STATISCICS NUMBERS ================ -->
+              <div class="adStatisticsNumberContainer">
+                <div>
+                  {{ ad.applies }}
+                </div>
+                <div>
+                  {{ ad.clicks }}
+                </div>
+                <div>
+                  {{ ad.views }}
+                </div>
+              </div>
             </div>
-            <div>
-              VISNINGAR
-            </div>
+            <!-- END AD STATISTICS-->
           </div>
-          <!-- ============= AD STATISCICS NUMBERS ================ -->
-          <div class="adStatisticsNumberContainer">
-            <div>
-              {{ ad.applies }}
-            </div>
-            <div>
-              {{ ad.clicks }}
-             
-            </div>
-            <div>
-              {{ ad.views }}
-            </div>
-          </div>
+          <!-- END AD -->
         </div>
-        <!-- END STATISTICS-->
+        <!-- END ADS-->
       </div>
-      <!-- END AD -->
-    </div>
-    <!-- END ADS-->
-    <!-- ================================================================ -->
-    <!--                            STATISTICS                            -->
-    <!-- ================================================================ -->
-    <div class="statisticsContainer">
+      <!-- END FILTER SORT COLLAPSER-->
 
-      <canvas id="bar-chart"></canvas> 
-     
-      <h3 class="statisticsTitle">{{ chartTitle }}</h3>
+      <!-- ================================================================ -->
+      <!--                            STATISTICS                            -->
+      <!-- ================================================================ -->
+      <div class="statisticsContainer">
+        <canvas id="bar-chart"></canvas>
+
+        <h3 class="statisticsTitle">{{ chartTitle }}</h3>
+      </div>
     </div>
-  </div>
 
     <!-- ================================================================ -->
     <!--                              SCRIPTS                             -->
     <!-- ================================================================ -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-  <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.5.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-  <!-- <script src="app.js"></script> -->
-  <script src="./interface/main.js"></script>
-</body>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.5.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="./interface/main.js"></script>
+  </body>
 </html>

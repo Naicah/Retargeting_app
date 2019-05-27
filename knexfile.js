@@ -11,8 +11,6 @@ module.exports = {
     seeds: {
       directory: __dirname + "/knex/seeds"
     }
-    //migrate-make init
-    //ENV FIL connection = process database:dsn
   },
 
   production: {

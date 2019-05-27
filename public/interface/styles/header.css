@@ -15,11 +15,12 @@ img {
   width: 20vh;
   margin: 0.2em 0 0.2em 0.2em;
 }
-.talk-bubble {
+
+.talkBubble {
   display: inline-block;
   position: relative;
-	width: fit-content;
-	height: fit-content;
+  width: fit-content;
+  height: fit-content;
   background-color: white;
   font-size: 1.2vw;
   color: black;
@@ -28,25 +29,26 @@ img {
   border-radius: 8px;
   margin: 0.5em 0 0 0;
 }
-.tri-right.left-in:after{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
+
+.triRight.leftIn:after {
+  content: " ";
+  position: absolute;
+  width: 0;
+  height: 0;
   left: -3vh;
-	right: auto;
+  right: auto;
   top: 4vh;
-	bottom: auto;
-	border: 12px solid;
-	border-color: white white transparent transparent;
+  bottom: auto;
+  border: 12px solid;
+  border-color: white white transparent transparent;
 }
 
-.talktext{
+.talkText {
   padding: 1em;
-	text-align: center;
-  
+  text-align: center;
 }
-.talktext p{
+
+.talkText p {
   -webkit-margin-before: 0em;
   -webkit-margin-after: 0em;
 }

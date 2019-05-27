@@ -1,6 +1,5 @@
 .sortContainer {
   background: var(--color-dark-1);
-  grid-area: 7/2/9/10;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
