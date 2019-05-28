@@ -14,8 +14,6 @@ let allNewJobsIndex = []; // All jobs that are in feed but not in database
 let allAds = [];
 let allAdsID = []; // ID's of all ads in database
 let allJobsID = [];
-let allResults = []; // Array with allJobsID, allAds, AllAdsID, allNewJobsIndex // REMOVE LATER ON
-let pollingRuns = 0; // REMOVE LATER ON
 let lastFetchError;
 
 module.exports = ({ router }) => {
@@ -25,13 +23,7 @@ module.exports = ({ router }) => {
   // ========================================================= //
 
   async function getAllAds(end) {
-    pollingRuns++; // REMOVE LATER ON
-    console.log(pollingRuns); // REMOVE LATER ON
-
     lastFetchError = null;
-
-    allResults = [];
-
     // ======================= //
     //     GET ALL JOBS ID     // GET ID OF EACH JOB IN FEED, SAVE TO ARRAY allJobsID
     // ======================= //
@@ -41,13 +33,7 @@ module.exports = ({ router }) => {
       .get(feed)
       .then(res => {
         const jobs = res.body.jobs;
-
-        var i;
-        for (i = 0; i < jobs.length; i++) {
-          let jobId = jobs[i].id;
-          allJobsID.push(jobId);
-        }
-        allResults.push(allJobsID); // REMOVE LATER ON
+        allJobsID = jobs.map(job => job.id);
       })
       .catch(err => {
         lastFetchError = "no data to get the api,";
@@ -59,33 +45,24 @@ module.exports = ({ router }) => {
 
     allAds = await knex("ads");
 
-    allResults.push(allAds); // REMOVE LATER ON
-
     // ======================= //
     //     GET ALL ADS ID      // GET ID OF EACH AD IN DATABASE, SAVE TO ARRAY allAdsID
     // ======================= //
 
     allAdsList = await knex.select("id").from("ads");
     allAdsID = []; // Epmty array to get a fresh one
-    for (i = 0; i < allAdsList.length; i++) {
-      let adID = allAdsList[i].id;
-      allAdsID.push(adID);
-    }
-    allResults.push(allAdsID); // REMOVE LATER ON
+    allAdsID = allAdsList.map(ad => ad.id);
 
     // =========================== //
     //    GET ALL NEW JOBS INDEX   // GET INDEX OF UNSAVED JOBS (exists in feed but not in database), SAVE TO ARRAY allNewJobsIndex
     // =========================== //
 
     allNewJobsIndex = []; // Epmty array to get a fresh one
-    for (i = 0; i < allJobsID.length; i++) {
-      let id = allJobsID[i];
-      if (!allAdsID.includes(id)) {
-        allNewJobsIndex.push(i);
+    allNewJobsIndex = allJobsID.map(job => {
+      if (!allAdsID.includes(job.id)) {
+        allJobsID.indexOf(job);
       }
-    }
-
-    allResults.push(allNewJobsIndex); // REMOVE LATER ON
+    });
 
     // =========================== //
     //    IF THERE ARE NEW JOBS    //
@@ -137,7 +114,6 @@ module.exports = ({ router }) => {
           lastFetchError = "no data to get the api,";
         });
     }
-
     end();
   } // End getAllAds
 
