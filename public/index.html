@@ -53,7 +53,7 @@
             :class="{ active : showStatus === 'finished' }"
           >
             <h3>{{ totalFinished }}</h3>
-            <p>Avlsutade</p>
+            <p>Avslutade</p>
           </li>
           <li
             class="statusAll"
@@ -131,7 +131,7 @@
               </div>
               <div>
                 <select
-                  v-model="filterLocation"
+                  v-model="filterCity"
                   class="filterInputSelect"
                   @change="getFilterInput('Location'), getStatistics()"
                 >
@@ -143,7 +143,7 @@
               </div>
               <div>
                 <select
-                  v-model="filterJobCategory"
+                  v-model="filterJob_category"
                   class="filterInputSelect"
                   @change="getFilterInput('JobCategory'), getStatistics()"
                 >
@@ -233,8 +233,8 @@
             class="adCardsContainer"
             @click="getStatisticsChosenAd(ad), selectedAd = ad"
             v-show="
-            (filterLocation === '' || filterLocation === ad.city || (filterLocation === 'Ej angett' && ad.city === null))
-              && (filterJobCategory === '' || filterJobCategory === ad.job_category || (filterJobCategory === 'Ej angett' && ad.job_category === null))
+            (filterCity === '' || filterCity === ad.city || (filterCity === 'Ej angett' && ad.city === null))
+              && (filterJob_category === '' || filterJob_category === ad.job_category || (filterJob_category === 'Ej angett' && ad.job_category === null))
               && (filterCompany === '' || filterCompany === ad.company || (filterCompany === 'Ej angett' && ad.company === null))"
             v-for="ad in filterSearchList"
             :class="{highlight: selectedAd === ad}"
@@ -250,7 +250,7 @@
               </p>
             </div>
             <p class="adTimeLeft">
-              {{ getStatus(ad.last_application_timestamp) }}
+              {{ getDaysLeft(ad.last_application_timestamp) }}
             </p>
             <!-- ====================== AD STATISTICS ======================= -->
             <div>
