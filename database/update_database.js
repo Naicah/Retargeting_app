@@ -14,8 +14,6 @@ let allNewJobsIndex = []; // All jobs that are in feed but not in database
 let allAds = [];
 let allAdsID = []; // ID's of all ads in database
 let allJobsID = [];
-let allResults = []; // Array with allJobsID, allAds, AllAdsID, allNewJobsIndex // REMOVE LATER ON
-let pollingRuns = 0; // REMOVE LATER ON
 let lastFetchError;
 
 module.exports = ({ router }) => {
@@ -25,8 +23,6 @@ module.exports = ({ router }) => {
   // ========================================================= //
 
   async function getAllAds(end) {
-    pollingRuns++; // REMOVE LATER ON
-    console.log(pollingRuns); // REMOVE LATER ON
 
     lastFetchError = null;
 
@@ -47,7 +43,6 @@ module.exports = ({ router }) => {
           let jobId = jobs[i].id;
           allJobsID.push(jobId);
         }
-        allResults.push(allJobsID); // REMOVE LATER ON
       })
       .catch(err => {
         lastFetchError = "no data to get the api,";
@@ -59,7 +54,6 @@ module.exports = ({ router }) => {
 
     allAds = await knex("ads");
 
-    allResults.push(allAds); // REMOVE LATER ON
 
     // ======================= //
     //     GET ALL ADS ID      // GET ID OF EACH AD IN DATABASE, SAVE TO ARRAY allAdsID
@@ -71,7 +65,6 @@ module.exports = ({ router }) => {
       let adID = allAdsList[i].id;
       allAdsID.push(adID);
     }
-    allResults.push(allAdsID); // REMOVE LATER ON
 
     // =========================== //
     //    GET ALL NEW JOBS INDEX   // GET INDEX OF UNSAVED JOBS (exists in feed but not in database), SAVE TO ARRAY allNewJobsIndex
@@ -85,7 +78,6 @@ module.exports = ({ router }) => {
       }
     }
 
-    allResults.push(allNewJobsIndex); // REMOVE LATER ON
 
     // =========================== //
     //    IF THERE ARE NEW JOBS    //
@@ -128,7 +120,6 @@ module.exports = ({ router }) => {
               .insert(jobObject)
               .then(function(result) {
                 // .then required so that promise is executed
-                // console.log("hej");
               });
           });
         })
