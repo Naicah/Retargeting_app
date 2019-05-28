@@ -105,7 +105,6 @@ module.exports = ({ router }) => {
               .insert(jobObject)
               .then(function(result) {
                 // .then required so that promise is executed
-                // console.log("hej");
               });
           });
         })
