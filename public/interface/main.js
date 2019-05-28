@@ -1,4 +1,4 @@
-const url = "allads";
+const url = "allAds";
 fetch(url)
   .then(res => res.json())
   .then(data => {
@@ -12,8 +12,8 @@ fetch(url)
         sortContainerHidden: false,
         filterContainerHidden: false,
         filterSearch: "",
-        filterLocation: "",
-        filterJobCategory: "",
+        filterCity: "",
+        filterJob_category: "",
         filterCompany: "",
         statisticsChart: "",
         chartTitle: "Alla annonser",
@@ -66,17 +66,22 @@ fetch(url)
         showAdsByStatus(status) {
           this.showStatus = status;
         },
-        setSortBy(status) {
-          this.sortBy = status;
-        },
 
         // ==================== FILTER =================== //
-        // CLEAR ALL FILTERS
-        clearAllFilters() {
-          (this.filterSearch = ""),
-            (this.filterLocation = ""),
-            (this.filterJobCategory = ""),
-            (this.filterCompany = "");
+
+        // GET ARRAY OF GIVEN DATA KEY IN AD TO BE ABLE TO FILTER ON (only unique values)
+        getFilterList(dataKey) {
+          const filterList = [];
+          this.adsToShowList.map(ad => {
+            let value = ad[dataKey];
+            if (ad[dataKey] === null) {
+              value = "Ej angett";
+            }
+            if (!filterList.includes(value)) {
+              filterList.push(value);
+            }
+          });
+          return filterList;
         },
 
         // GET VALUE TO FILTER ON FROM INPUT FIELD, STORE IN DATA
@@ -84,8 +89,25 @@ fetch(url)
           this["filter" + type] = event.target.value;
         },
 
+        // CLEAR ALL FILTERS
+        clearAllFilters() {
+          (this.filterSearch = ""),
+            (this.filterCity = ""),
+            (this.filterJob_category = ""),
+            (this.filterCompany = "");
+
+          this.adsToShowList = this.getAdsByStatus(this.showStatus);
+        },
+
         // ======================= SORT =================== //
-        // SORT ADS BASED ON WHICH SORT BUTTON WAS CLICKED
+        // SET WHAT VALUE TO SORT ADS BY
+        setSortBy(value) {
+          this.sortBy = value;
+        },
+
+        // SORT ADS BASED ON WHICH SORT BUTTON WAS CLICKED: value = dataKey, type = 'string' or 'integer'
+        // OR
+        // SORT GIVEN LIST: value = list, type ='givenList'
         sort(value, type) {
           switch (type) {
             case "string":
@@ -96,10 +118,21 @@ fetch(url)
             case "integer":
               this.filterSearchList.sort((a, b) => b[value] - a[value]);
               break;
+            case "givenList":
+              return value.sort((a, b) => (a > b ? 1 : -1));
           }
         },
 
         // ======================== ADS ======================= //
+        // GET ARRAY OF ADS WITH THE GIVEN STATUS
+        getAdsByStatus(status) {
+          if (status === "all") {
+            ads = this.allAdsList;
+          } else {
+            ads = this.allAdsList.filter(ad => ad.status === status);
+          }
+          return ads;
+        },
 
         // --------------- JOB CATEGORY --------------- //
         // CREATES COMMA IF AD HAS A JOB CATEGORY
@@ -121,8 +154,9 @@ fetch(url)
             millisecondsLeft / 1000 / 60 / 60 / 24
           ));
         },
+
         // RETURNS HOW MANY DAYS LEFT TO APPLY, OR SAYS THAT AD IS FINISHED
-        getStatus(date) {
+        getDaysLeft(date) {
           const daysLeft = this.calcDaysLeft(date);
 
           if (daysLeft > 0) {
@@ -133,137 +167,6 @@ fetch(url)
         },
 
         // ====================== STATISTICS ==================== //
-        // GET STATISTICS FOR GIVEN AD
-        getStatisticsChosenAd(ad) {
-          console.log(ad);
-          let location = "";
-          let company = "";
-          let title = "";
-          if (ad.company !== null) {
-            company = ad.company;
-          }
-          if (ad.title !== null) {
-            title = ad.title;
-            company += ", ";
-          }
-          if (ad.city !== null) {
-            location = ad.city;
-            title += ", ";
-          }
-          this.chartTitle = company + title + location;
-          this.statistics.length < 3
-            ? this.statistics.push(ad.applies, ad.clicks, ad.views)
-            : this.statistics.splice(0, 3, ad.applies, ad.clicks, ad.views);
-
-          return this.statistics;
-        },
-
-        // GET STATISTICS FROM GIVEN FILTERS AND STATUS
-        getStatistics() {
-          let statistics = [0, 0, 0];
-          // THE IF ELSE BELOW SWITCHES BETWEEN showStatus AND FILTER INPUT
-          if (
-            this.filterCompany === "" &&
-            this.filterLocation === "" &&
-            this.filterJobCategory === ""
-          ) {
-            for (let index = 0; index < this.adsToShowList.length; index++) {
-              statistics[0] += this.adsToShowList[index].applies;
-              statistics[1] += this.adsToShowList[index].clicks;
-              statistics[2] += this.adsToShowList[index].views;
-            }
-          } else {
-            let company = "";
-            let location = "";
-            let jobCategory = "";
-            if (this.filterCompany !== "") {
-              company = this.filterCompany;
-            }
-            if (this.filterLocation !== "") {
-              location = this.filterLocation;
-              if (this.filterCompany !== "") {
-                company += ", ";
-              }
-            }
-            if (this.filterJobCategory !== "") {
-              jobCategory = this.filterJobCategory;
-              if (this.filterLocation !== "") {
-                location += ", ";
-              }
-            }
-            this.chartTitle = company + location + jobCategory;
-            let chartFilterList = this.adsToShowList;
-
-            //THE IF STATEMENTS BELOW FILTERS THE INPUT TO USEFUL DATA THAT CAN BE SENT TO THE CHART
-            if (
-              this.filterCompany !== "" &&
-              this.filterCompany !== "Ej angett"
-            ) {
-              chartFilterList = chartFilterList.filter(
-                ads => ads.company === this.filterCompany
-              );
-            }
-            if (this.filterCompany === "Ej angett") {
-              chartFilterList = chartFilterList.filter(
-                ads => ads.company === null
-              );
-            }
-            if (
-              this.filterLocation !== "" &&
-              this.filterLocation !== "Ej angett"
-            ) {
-              chartFilterList = chartFilterList.filter(
-                ads => ads.city === this.filterLocation
-              );
-            }
-            if (this.filterLocation === "Ej angett") {
-              chartFilterList = chartFilterList.filter(
-                ads => ads.city === null
-              );
-            }
-            if (
-              this.filterJobCategory !== "" &&
-              this.filterJobCategory !== "Ej angett"
-            ) {
-              chartFilterList = chartFilterList.filter(
-                ads => ads.job_category === this.filterJobCategory
-              );
-            }
-            if (this.filterJobCategory === "Ej angett") {
-              chartFilterList = chartFilterList.filter(
-                ads => ads.job_category === null
-              );
-            }
-
-            for (let index = 0; index < chartFilterList.length; index++) {
-              statistics[0] += chartFilterList[index].applies;
-              statistics[1] += chartFilterList[index].clicks;
-              statistics[2] += chartFilterList[index].views;
-            }
-          }
-          this.statistics = statistics;
-        },
-
-        // CHANGE TEXT UNDER STATISTICS TO DESCRIBE WHAT IS SHOWN IN CHART
-        changeChartTitle(value) {
-          let currentTitle;
-          switch (value) {
-            case "ongoing":
-              currentTitle = "Pågående annonser";
-              break;
-            case "finished":
-              currentTitle = "Avslutade annonser";
-              break;
-            case "all":
-              currentTitle = "Alla annonser";
-              break;
-            default:
-              currentTitle = value;
-          }
-
-          this.chartTitle = currentTitle;
-        },
-
         // CREATE CHART FOR STATISTICS
         createChart() {
           // Remove previous chart
@@ -353,29 +256,132 @@ fetch(url)
           });
         },
 
-        // GET ARRAY OF ADS WITH THE GIVEN STATUS
-        getAdsByStatus(status) {
-          if (status === "all") {
-            ads = this.allAdsList;
-          } else {
-            ads = this.allAdsList.filter(ad => ad.status === status);
+        // CHANGE TEXT UNDER STATISTICS TO DESCRIBE WHAT IS SHOWN IN CHART
+        changeChartTitle(value) {
+          let currentTitle;
+          switch (value) {
+            case "ongoing":
+              currentTitle = "Pågående annonser";
+              break;
+            case "finished":
+              currentTitle = "Avslutade annonser";
+              break;
+            case "all":
+              currentTitle = "Alla annonser";
+              break;
+            default:
+              currentTitle = value;
           }
-          return ads;
+
+          this.chartTitle = currentTitle;
         },
 
-        // GET ARRAY OF KEYS IN AD TO BE ABLE TO FILTER ON (only unique values)
-        getFilterList(dataKey) {
-          const filterList = [];
-          this.adsToShowList.map(ad => {
-            let value = ad[dataKey];
-            if (ad[dataKey] === null) {
-              value = "Ej angett";
+        // GET STATISTICS FOR GIVEN AD
+        getStatisticsChosenAd(ad) {
+          console.log(ad);
+          let location = "";
+          let company = "";
+          let title = "";
+          if (ad.company !== null) {
+            company = ad.company;
+          }
+          if (ad.title !== null) {
+            title = ad.title;
+            company += ", ";
+          }
+          if (ad.city !== null) {
+            location = ad.city;
+            title += ", ";
+          }
+          this.chartTitle = company + title + location;
+          this.statistics.length < 3
+            ? this.statistics.push(ad.applies, ad.clicks, ad.views)
+            : this.statistics.splice(0, 3, ad.applies, ad.clicks, ad.views);
+
+          return this.statistics;
+        },
+
+        // GET STATISTICS FROM GIVEN FILTERS AND STATUS
+        getStatistics() {
+          let statistics = [0, 0, 0];
+          // THE IF ELSE BELOW SWITCHES BETWEEN showStatus AND FILTER INPUT
+          if (
+            this.filterCompany === "" &&
+            this.filterCity === "" &&
+            this.filterJob_category === ""
+          ) {
+            for (let index = 0; index < this.adsToShowList.length; index++) {
+              statistics[0] += this.adsToShowList[index].applies;
+              statistics[1] += this.adsToShowList[index].clicks;
+              statistics[2] += this.adsToShowList[index].views;
             }
-            if (!filterList.includes(value)) {
-              filterList.push(value);
+          } else {
+            let company = "";
+            let location = "";
+            let jobCategory = "";
+            if (this.filterCompany !== "") {
+              company = this.filterCompany;
             }
-          });
-          return filterList;
+            if (this.filterCity !== "") {
+              location = this.filterCity;
+              if (this.filterCompany !== "") {
+                company += ", ";
+              }
+            }
+            if (this.filterJob_category !== "") {
+              jobCategory = this.filterJob_category;
+              if (this.filterCity !== "") {
+                location += ", ";
+              }
+            }
+            this.chartTitle = company + location + jobCategory;
+            let chartFilterList = this.adsToShowList;
+
+            //THE IF STATEMENTS BELOW FILTERS THE INPUT TO USEFUL DATA THAT CAN BE SENT TO THE CHART
+            if (
+              this.filterCompany !== "" &&
+              this.filterCompany !== "Ej angett"
+            ) {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.company === this.filterCompany
+              );
+            }
+            if (this.filterCompany === "Ej angett") {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.company === null
+              );
+            }
+            if (this.filterCity !== "" && this.filterCity !== "Ej angett") {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.city === this.filterCity
+              );
+            }
+            if (this.filterCity === "Ej angett") {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.city === null
+              );
+            }
+            if (
+              this.filterJob_category !== "" &&
+              this.filterJob_category !== "Ej angett"
+            ) {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.job_category === this.filterJob_category
+              );
+            }
+            if (this.filterJob_category === "Ej angett") {
+              chartFilterList = chartFilterList.filter(
+                ads => ads.job_category === null
+              );
+            }
+
+            for (let index = 0; index < chartFilterList.length; index++) {
+              statistics[0] += chartFilterList[index].applies;
+              statistics[1] += chartFilterList[index].clicks;
+              statistics[2] += chartFilterList[index].views;
+            }
+          }
+          this.statistics = statistics;
         }
       }, // End methods
 
@@ -405,17 +411,17 @@ fetch(url)
         // CREATES FILTERLIST OF ALL COMPANIES
         adCompaniesList: function() {
           adCompany = this.getFilterList("company");
-          return adCompany;
+          return this.sort(adCompany, "givenList");
         },
         // CREATES FILTERLIST OF ALL LOCATIONS
         adLocationList: function() {
           adLocation = this.getFilterList("city");
-          return adLocation;
+          return this.sort(adLocation, "givenList");
         },
         // CREATES FILTERLIST OF ALL JOB CATEGORIES
         adJobCategoryList: function() {
           adJobCategory = this.getFilterList("job_category");
-          return adJobCategory;
+          return this.sort(adJobCategory, "givenList");
         }
       } // End computed
     });
