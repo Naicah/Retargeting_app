@@ -1,8 +1,8 @@
 # Workbuster retargeting
 
 ![Alt text](https://media.giphy.com/media/SYWxVGEyCW8xWXAHYk/giphy.gif "Sort")
-![Alt text](./public/interface/assets/readme/filter.gif?raw=true "Filter")
-![Alt text](./public/interface/assets/readme/adstat.gif?raw=true "Filter")
+![Alt text](https://media.giphy.com/media/l3TuAyBhhxKwhPaDGy/giphy.gif "Filter")
+![Alt text](https://media.giphy.com/media/jUWkx0b7p1KrKDc4sy/giphy.gif "Ads")
 
 
 
