@@ -10,10 +10,21 @@ header {
   align-items: center;
 }
 
-img {
+.racoon {
+  height: 15vh;
+  width: 15vh;
+  
+}
+
+.racoonBg {
   height: 20vh;
   width: 20vh;
-  margin: 0.2em 0 0.2em 0.2em;
+  background: white;
+  margin: 0.5em 0 0.5em 0.5em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .talkBubble {
@@ -27,7 +38,7 @@ img {
   padding: 0.5em 0.5em 0.5em 0.5em;
   font-weight: 800;
   border-radius: 8px;
-  margin: 0.5em 0 0 0;
+  margin: 0.5em 0 0 1em;
 }
 
 .triRight.leftIn:after {

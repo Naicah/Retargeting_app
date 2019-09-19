@@ -5,7 +5,7 @@ fetch(url)
     new Vue({
       el: "#mainContainer",
       data: {
-        loggedInUser: "Workbuster",
+        loggedInUser: "kund",
         allAdsList: data,
         adsToShowList: [],
         showStatus: "",
